@@ -68,9 +68,14 @@ function pickSeed(pools: Pools): string {
   return crypto.randomUUID().slice(0, 8);
 }
 
-export function resolveMove(move: Move, pools: Pools): ResolvedMove {
-  const resolved_variables = resolveVariables(move.frontmatter.variables, pools);
-  const seed = pickSeed(pools);
+export interface ResolveOptions {
+  seed?: string;
+  variables?: Record<string, string[]>;
+}
+
+export function resolveMove(move: Move, pools: Pools, opts?: ResolveOptions): ResolvedMove {
+  const resolved_variables = opts?.variables ?? resolveVariables(move.frontmatter.variables, pools);
+  const seed = opts?.seed ?? pickSeed(pools);
   const instanceId = `${move.frontmatter.id}-${crypto.randomUUID().slice(0, 6)}`;
 
   const sub = (text: string) => substituteTemplate(text, resolved_variables);
@@ -91,4 +96,36 @@ export function resolveMove(move: Move, pools: Pools): ResolvedMove {
     pairs_with: move.frontmatter.pairs_with ?? [],
     resolved_variables,
   };
+}
+
+// Build query string from a resolved move for shareable URLs
+export function resolvedMoveToQuery(resolved: ResolvedMove): string {
+  const params = new URLSearchParams();
+  params.set("seed", resolved._seed);
+  for (const [name, values] of Object.entries(resolved.resolved_variables)) {
+    for (let i = 0; i < values.length; i++) {
+      params.set(`${name}.${i + 1}`, values[i]);
+    }
+  }
+  return params.toString();
+}
+
+// Parse query string back into ResolveOptions
+export function queryToResolveOptions(query: Record<string, string>): ResolveOptions | null {
+  const seed = query["seed"];
+  if (!seed) return null;
+
+  const variables: Record<string, string[]> = {};
+  for (const [key, value] of Object.entries(query)) {
+    if (key === "seed" || key === "format") continue;
+    const match = key.match(/^(\w+)\.(\d+)$/);
+    if (match) {
+      const name = match[1];
+      const idx = parseInt(match[2], 10) - 1;
+      if (!variables[name]) variables[name] = [];
+      variables[name][idx] = value;
+    }
+  }
+
+  return { seed, variables: Object.keys(variables).length > 0 ? variables : undefined };
 }

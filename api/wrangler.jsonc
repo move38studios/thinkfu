@@ -1,0 +1,46 @@
+{
+  "name": "thinkfu-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "account_id": "a7b1e373a9581b6f04e2a48d3abc9aa3", // move38 account
+  "workers_dev": true,
+
+  "build": {
+    "command": "cd .. && pnpm build:catalog"
+  },
+
+  "routes": [
+    { "pattern": "think-fu.org", "custom_domain": true },
+    { "pattern": "api.think-fu.org", "custom_domain": true }
+  ],
+
+  "alias": {
+    "@thinkfu/lib": "../lib/src"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "thinkfu-ratings",
+      "database_id": "0b985caa-d27b-4801-afd5-0bd44a96f323"
+    }
+  ],
+
+  // Rate limiting: 60 reads/min, 10 writes/min per IP
+  "unsafe": {
+    "bindings": [
+      {
+        "type": "ratelimit",
+        "name": "RATE_LIMIT_READ",
+        "namespace_id": "0",
+        "simple": { "limit": 60, "period": 60 }
+      },
+      {
+        "type": "ratelimit",
+        "name": "RATE_LIMIT_WRITE",
+        "namespace_id": "1",
+        "simple": { "limit": 10, "period": 60 }
+      }
+    ]
+  }
+}

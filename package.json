@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "validate": "pnpm tsx scripts/validate-catalog.ts",
-    "build:catalog": "node --experimental-strip-types scripts/build-catalog-bundle.ts"
+    "build:catalog": "pnpm tsx scripts/build-catalog-bundle.ts"
   },
   "devDependencies": {
     "tsx": "^4.21.0",

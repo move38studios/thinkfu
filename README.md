@@ -407,7 +407,7 @@ Herbert Simon's distinction between choosing the first acceptable option (satisf
 
 ### Oblique Strategies as Cognitive Perturbation (Eno & Schmidt 1975)
 
-Random perturbation breaks fixation. When stuck in a local optimum, even an irrelevant nudge can push into a new search space. This justifies keeping the `/random` endpoint even after building a smart router. Sometimes the *wrong* card is more useful than the *right* one.
+Random perturbation breaks fixation. When stuck in a local optimum, even an irrelevant nudge can push into a new search space. This justifies keeping the `/random` endpoint even after building a smart router. Sometimes the *wrong* move is more useful than the *right* one.
 
 ---
 

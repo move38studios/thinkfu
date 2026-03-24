@@ -1,17 +1,16 @@
-import { parseFrontmatter } from "@thinkfu/lib/parser.js";
-import type { Move, Pools } from "@thinkfu/lib/types.js";
+import type { Move, MoveFrontmatter, Pools } from "@thinkfu/lib/types.js";
 import catalogBundle from "../catalog-bundle.json";
 
-const moves: Move[] = [];
-for (const entry of (catalogBundle as any).cards) {
-  try {
-    const { frontmatter, body } = parseFrontmatter(entry.raw);
-    moves.push({ frontmatter, body, raw: entry.raw });
-  } catch (e) {
-    console.error(`Failed to parse move: ${e}`);
-  }
-}
+// Frontmatter is pre-parsed at build time by the full yaml package.
+// No runtime parsing needed.
+const bundle = catalogBundle as { moves: Array<{ frontmatter: MoveFrontmatter; body: string }>; pools: Pools };
 
-const pools: Pools = (catalogBundle as any).pools;
+const moves: Move[] = bundle.moves.map((m) => ({
+  frontmatter: m.frontmatter,
+  body: m.body,
+  raw: "", // not needed at runtime
+}));
+
+const pools: Pools = bundle.pools;
 
 export { moves, pools };

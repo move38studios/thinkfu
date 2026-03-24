@@ -46,7 +46,7 @@ Two test conversations completed:
 **Key findings:**
 - Seeds are doing real creative work — not just perturbation, but building metaphorical coherence across chains
 - ThinkFu works better as a sharpening tool for existing thinking than as a generative engine from scratch
-- Agent tends to card-hop (draw many, apply shallowly) rather than apply deeply — SKILL.md updated to address this
+- Agent tends to move-hop (draw many, apply shallowly) rather than apply deeply — SKILL.md updated to address this
 - Agent doesn't rate moves — SKILL.md updated to strengthen this
 - `plan` and `stuck` modes underused — needs more testing
 
@@ -63,9 +63,9 @@ Two test conversations completed:
 
 **Goal:** ThinkFu live on Cloudflare and installable as a Claude Code plugin.
 
-**Status: BUILT, NOT YET DEPLOYED**
+**Status: API DEPLOYED, PLUGIN NOT YET PUBLISHED**
 
-### 2.1 Cloudflare Worker API ✅ (built, not deployed)
+### 2.1 Cloudflare Worker API ✅ (deployed)
 Hono + D1, all endpoints working locally:
 - `GET /random` — random resolved move
 - `GET /move/:id` — specific move
@@ -76,13 +76,13 @@ Hono + D1, all endpoints working locally:
 
 Catalog bundled at build time. Variable resolution + seed injection at serve time.
 
-### 2.2 Deploy to Cloudflare
-- [ ] `wrangler d1 create thinkfu-ratings`
-- [ ] Update `wrangler.toml` with real database_id
-- [ ] `wrangler d1 execute thinkfu-ratings --file=schema.sql`
-- [ ] Configure think-fu.org domain route
-- [ ] `pnpm wrangler deploy` from `api/`
-- [ ] Verify all endpoints on production
+### 2.2 Deploy to Cloudflare ✅
+- [x] D1 database created (thinkfu-ratings)
+- [x] Schema migrated (ratings table + indexes)
+- [x] think-fu.org + api.think-fu.org custom domains configured
+- [x] Deployed via `pnpm wrangler deploy`
+- [x] Website live: landing, /humans, /agents, /random, /move/:id
+- [x] API live: all endpoints returning JSON on api.think-fu.org
 
 ### 2.3 Claude Code Plugin ✅ (built, not published)
 Plugin structure complete:
