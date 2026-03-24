@@ -8,16 +8,23 @@ tags: [analogy, cross-domain, transfer, creativity, lateral-thinking]
 effort: deep
 origin: TRIZ (Principle 40) / de Bono lateral thinking / forced association
 problem_signatures:
-  - "tried all the obvious approaches within this domain"
-  - "need a creative leap"
-  - "domain experts all suggest the same thing"
-  - "solution feels over-specialized"
-  - "incremental improvements aren't enough"
+  - "every expert in this field suggests the same approach"
+  - "I wonder how a completely different industry would handle this"
+  - "the solution feels over-specialized and domain-locked"
+  - "I've exhausted the obvious approaches within this field"
+  - "we need a paradigm from outside our world"
 variables:
   domain:
     type: pick
     count: 3
     pool: domains
+pairs_with:
+  - id: TF-008
+    why: "identifies who else has solved this problem before you import their pattern"
+  - id: TF-021
+    why: "merge contradictions when cross-domain analogies surface conflicting approaches"
+  - id: TF-009
+    why: "alternative when you want random lateral input instead of structured domain transfer"
 ---
 
 ## The Move

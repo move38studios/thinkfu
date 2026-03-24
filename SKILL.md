@@ -56,11 +56,41 @@ get_thinkfu_move({
 })
 ```
 
-When you receive a card, **actually apply the move**. Don't just acknowledge it — work through it step by step and let it change your approach if warranted.
+When you receive a card, **apply it fully before drawing another**. Work through the move's procedure step by step and produce output from it. Don't collect multiple cards like inspiration — use one, show your work, then decide if you need another.
+
+### Working with seeds
+
+Every card response includes a **seed** — a random concrete noun (e.g., "dam", "rust", "spine"). This is not decoration. It's creative raw material.
+
+When you receive a seed:
+- Notice it. Name its physical properties — what does it look like, how does it work, where do you find it?
+- Let it pull your interpretation of the card in an unexpected direction
+- When chaining multiple draws, **accumulate your seeds**. After 3-5 draws, look at the set. What pattern do they form? What metaphor emerges? The seeds are random individually, but your pattern-matching will find a thread — and that thread often points somewhere your deliberate thinking hasn't gone.
+
+Seed chains have produced some of the best ThinkFu outcomes. Don't discard them.
+
+### Working with pairs
+
+Every card includes a `pairs_with` field — suggestions for what to draw next. These are served in the response. Use them:
+- **After applying a move successfully**: the follow-up suggestion deepens the insight
+- **After a move doesn't quite land**: the alternative suggestion attacks from a different angle
+- **When you want a complement**: the complement suggestion fills a gap the current move doesn't cover
+
+You can request a paired card by including its ID, or let the router choose.
+
+### Chaining moves
+
+For creative and strategic tasks, a single card is rarely enough. Chain 3-8 draws to build real intellectual momentum. A good chain:
+1. **Opens** with an explore or plan move to break the default framing
+2. **Develops** with 2-4 more explore/stuck moves, each building on what the previous one surfaced
+3. **Converges** with a meta or evaluate move to crystallize the insight
+4. **Stress-tests** with an evaluate move before delivering
+
+Between draws, feed your growing context back into the `current_approach` and `context` fields. Include seed words. Use `exclude` to prevent re-draws. The system is stateless — you carry the thread.
 
 ### Rating a move
 
-After applying a move, report back:
+After applying a move and producing output from it, rate it:
 
 ```
 submit_thinkfu_rating({
@@ -71,7 +101,7 @@ submit_thinkfu_rating({
 })
 ```
 
-Set `retry: true` to get a different move if the first one didn't help.
+This is how the system learns. Rate every move you draw — even if briefly. Set `retry: true` to get a different move if the first one didn't help.
 
 ## When to Use ThinkFu Proactively
 
@@ -91,4 +121,7 @@ A ThinkFu-aware agent doesn't just solve problems. It:
 2. **Names what it's doing** — "I'm satisficing" or "I'm anchored on my first idea"
 3. **Deliberately intervenes** — calls ThinkFu with the right mode and context
 4. **Applies the move honestly** — actually changes approach, doesn't just acknowledge the card
-5. **Reports back** — rates the move so the system learns
+5. **Works the seeds** — treats seed words as creative material, accumulates them across draws, names the emerging pattern
+6. **Chains deliberately** — builds on previous draws rather than starting fresh each time, feeds growing context back into each call
+7. **Knows when to converge** — after 3-8 explore draws, shifts to evaluate mode and crystallizes the insight before it gets lost in the exploration
+8. **Reports back** — rates the move so the system learns

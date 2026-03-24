@@ -5,14 +5,20 @@ one_liner: Instead of solving for success, work backwards from guaranteed failur
 mode: [stuck, evaluate]
 category: Unsticking
 tags: [reframing, failure-analysis, goals, constraint]
-effort: quick
+effort: snap
 origin: TRIZ (Principle 13 — "The Other Way Round") / General
 problem_signatures:
-  - "stuck approaching directly"
-  - "goal feels vague or overwhelming"
-  - "know more about what's wrong than what's right"
-  - "solution feels obvious but unexciting"
-  - "can't define success but can define failure"
+  - "I can list everything wrong but can't describe what good looks like"
+  - "the goal is too vague to act on directly"
+  - "I know what failure looks like better than success"
+  - "I keep trying to define the ideal outcome and getting nowhere"
+pairs_with:
+  - id: TF-012
+    why: "if the inverted failure list is also vague, reduce to the simplest case first"
+  - id: TF-046
+    why: "steel man the opposite extends inversion into structured adversarial evaluation"
+  - id: TF-032
+    why: "pre-mortem applies inversion specifically to project planning and risk"
 ---
 
 ## The Move

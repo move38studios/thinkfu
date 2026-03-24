@@ -18,6 +18,13 @@ variables:
     type: pick
     count: 1
     pool: personas
+pairs_with:
+  - id: TF-016
+    why: "shift the audience after stripping familiar language to double-test for default thinking"
+  - id: TF-046
+    why: "steel man the opposite framing that emerged from the redescription"
+  - id: TF-005
+    why: "name your current strategy first so the redescription has a clear baseline to compare against"
 ---
 
 ## The Move

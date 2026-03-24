@@ -1,0 +1,44 @@
+# Creative constraints for the "Add a Constraint" move and similar cards.
+# Each should be specific, actionable, and force a different approach.
+# Bad: "think harder". Good: "you can only use 3 components".
+
+- you must solve it without any technology
+- the solution must work for exactly one person
+- the solution must work for one million people simultaneously
+- you have only 5 minutes to implement it
+- you cannot use any words to explain it
+- the budget is zero
+- it must be reversible in under 10 seconds
+- a child must be able to operate it
+- it must work in complete darkness
+- you can only add things, never remove
+- you can only remove things, never add
+- it must fit on a single index card
+- every component must serve at least two purposes
+- it must work identically offline
+- you cannot use the most obvious tool for the job
+- it must be explainable in one sentence
+- the solution must produce no waste
+- it must work the same way in any culture
+- you must build it from materials in this room
+- the user must never need instructions
+- it must be silent
+- it must degrade gracefully when half the parts are removed
+- you cannot use any existing solution as a starting point
+- it must be completed in a single sitting with no breaks
+- the solution must be beautiful
+- it must work even if your core assumption is wrong
+- you can only use analog methods
+- it must be testable by someone who knows nothing about the domain
+- every step must be visible to an observer
+- the entire solution must be stateless
+- it must still work in 100 years
+- you must use the least powerful tool that could work
+- the solution must teach something to the person using it
+- it must work on the first try with no iteration
+- you can only communicate through drawings
+- it must be completable by a team of strangers with no leader
+- remove the step you think is most important and solve without it
+- the output must be exactly half the size of what you planned
+- it must use no more than three moving parts
+- you cannot use any jargon or technical terms

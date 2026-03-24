@@ -13,6 +13,13 @@ problem_signatures:
   - "jumping straight to solution mode"
   - "only see one way to interpret the brief"
   - "treating the problem as already defined"
+pairs_with:
+  - id: TF-019
+    why: "after generating three framings, map the assumptions behind each to decide which framing fits best"
+  - id: TF-001
+    why: "if three framings still feel too similar, invert the problem to force a radically different perspective"
+  - id: TF-034
+    why: "use What Would Have to Be True to stress-test each framing before committing to one"
 ---
 
 ## The Move

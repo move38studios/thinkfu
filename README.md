@@ -422,36 +422,17 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 ---
 
-## Milestones
+## Development Plan
 
-### Phase 0 — Format & Seed Catalog
-- [ ] Finalize card format (YAML frontmatter + markdown body)
-- [ ] Write 30–50 seed cards drawing from TRIZ, Oblique Strategies, Design Thinking
-- [ ] Set up git repo with catalog folder structure
-- [ ] Validate cards with a script
+See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for the full phased plan. Summary:
 
-### Phase 1 — API + MCP v0 (random)
-- [ ] Cloudflare Worker with REST API (`/random`, `/move/:id`, `/suggest`, `/rate`, `/catalog`)
-- [ ] MCP server wrapping the API
-- [ ] Rating storage in D1
-- [ ] System prompt snippet documented
-- [ ] End-to-end test with a real agent task
+- **Phase 0** — Catalog & local tooling (30+ cards, pools, CLI tool, validation)
+- **Phase 1** — Validate with real agents (does ThinkFu actually change output quality?)
+- **Phase 2** — API + MCP on Cloudflare
+- **Phase 3** — Website (thinkfu.org)
+- **Phase 4** — Smart routing (LLM-based, then classifier)
 
-### Phase 2 — Website
-- [ ] Landing page with random card draw
-- [ ] Card browser with filtering
-- [ ] Individual card pages with shareable URLs
-- [ ] Served from the same Worker
-
-### Phase 3 — Smart Router (prompted)
-- [ ] LLM-based move selection replacing random in `/suggest`
-- [ ] Use `problem_signatures` + context for matching
-- [ ] Tune selection prompt using early rating data
-- [ ] Retry logic with exclusion
-
-### Phase 4 — Classifier
-- [ ] Train lightweight classifier on rating data
-- [ ] Replace prompted router
+We are currently in **Phase 0**.
 
 ---
 

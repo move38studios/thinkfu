@@ -5,7 +5,7 @@ one_liner: If you can't name what you're doing, you're on autopilot.
 mode: [plan, explore, stuck, evaluate]
 category: Meta
 tags: [metacognition, awareness, autopilot, reflection, self-monitoring]
-effort: quick
+effort: snap
 origin: Metacognitive regulation (Schraw & Dennison 1994) / Reflective practice (Schon 1983)
 problem_signatures:
   - "been working for a while without stepping back"
@@ -14,6 +14,13 @@ problem_signatures:
   - "not sure why I chose this direction"
   - "on autopilot"
   - "working hard but unsure if it's the right work"
+pairs_with:
+  - id: TF-013
+    why: "backtrack to the fork if naming your strategy reveals you drifted from a better path"
+  - id: TF-020
+    why: "zoom in/out to check if your named strategy is operating at the right level"
+  - id: TF-049
+    why: "name the tradeoff your current strategy is implicitly making"
 ---
 
 ## The Move
