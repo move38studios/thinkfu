@@ -13,6 +13,11 @@ problem_signatures:
   - "we keep adding services but never retiring them"
   - "the architecture diagram needs a legend"
   - "onboarding new developers takes weeks because of all the pieces"
+variables:
+  count:
+    type: number
+    min: 1
+    max: 3
 pairs_with:
   - id: TF-022
     why: "Remove the Most Expensive Part targets the costliest piece; Trimming systematically checks ALL pieces for absorption"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Draw a table with three columns: Component, Function, and Can Another Component Do This? List every component in your system — every service, module, library, middleware, queue, and config file. For each one, write its primary function in plain language. Then ask: could an existing, remaining component absorb this function, either as-is or with a small modification? If the answer is yes, mark it for trimming. Remove the trimmed components and reassign their functions. Repeat until no more trimming is possible. The result is the simplest system that preserves all necessary functions.
+Find {{count}} components whose function can be absorbed by another. Draw a table with three columns: Component, Function, and Can Another Component Do This? List every component in your system — every service, module, library, middleware, queue, and config file. For each one, write its primary function in plain language. Then ask: could an existing, remaining component absorb this function, either as-is or with a small modification? If the answer is yes, mark it for trimming. Remove the trimmed components and reassign their functions. Repeat until no more trimming is possible. The result is the simplest system that preserves all necessary functions.
 
 ## When to Use
 

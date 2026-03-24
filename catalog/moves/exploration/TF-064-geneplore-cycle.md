@@ -13,6 +13,11 @@ problem_signatures:
   - "every idea I come up with feels half-baked"
   - "I'm stuck between brainstorming and building"
   - "I have vague intuitions but can't turn them into concrete solutions"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-063
     why: "diverge before you converge generates the raw material that Geneplore cycles can refine"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Alternate between two phases. GENERATE: produce a "pre-inventive structure" — a rough, ambiguous, half-formed concept. It can be a sketch, a sentence fragment, a data flow with blanks, an interface with no implementation. Do not try to make it good or useful yet. Just make it concrete enough to examine.
+Alternate between two phases. GENERATE: produce a "pre-inventive structure" — a rough, ambiguous, half-formed concept. It can be a sketch, a sentence fragment, a data flow with blanks, an interface with no implementation. Seed your pre-inventive structure with the shape/feel of {{word.1}}. Do not try to make it good or useful yet. Just make it concrete enough to examine.
 
 EXPLORE: take that structure and interrogate it. What properties does it have? What could it become? What problems might it accidentally solve? What is interesting about it, even if it was not what you intended?
 

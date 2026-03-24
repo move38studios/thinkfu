@@ -13,6 +13,11 @@ problem_signatures:
   - "I have a vague idea of the approach but not the details"
   - "I keep searching Stack Overflow mid-implementation"
   - "I'm spending more time figuring out how to solve it than actually solving it"
+variables:
+  count:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-151
     why: "Repertoire Search finds structural analogs from experience; Study Before Solving finds concrete solved examples to learn from"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before you start solving, stop. Find 2-3 solved examples of problems similar to yours. Read them carefully — not to copy, but to STUDY. For each example, answer: "What was their approach? What decisions did they make and why? What would I have done differently?" Sweller's research showed that when you are not yet expert in a domain, the problem-solving process itself creates extraneous cognitive load: your brain is simultaneously searching for the goal, managing sub-goals, and tracking state — a means-ends analysis that crowds out actual understanding. Studying solved examples lets you build a mental model without the overhead of search. Study first. Solve second. You will be faster at both.
+Find and study {{count}} solved examples before starting. Before you start solving, stop. Find 2-3 solved examples of problems similar to yours. Read them carefully — not to copy, but to STUDY. For each example, answer: "What was their approach? What decisions did they make and why? What would I have done differently?" Sweller's research showed that when you are not yet expert in a domain, the problem-solving process itself creates extraneous cognitive load: your brain is simultaneously searching for the goal, managing sub-goals, and tracking state — a means-ends analysis that crowds out actual understanding. Studying solved examples lets you build a mental model without the overhead of search. Study first. Solve second. You will be faster at both.
 
 ## When to Use
 

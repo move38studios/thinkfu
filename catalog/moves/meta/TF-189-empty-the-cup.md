@@ -13,6 +13,11 @@ problem_signatures:
   - "my experience tells me one thing but the evidence says another"
   - "I dismissed an idea quickly and now I'm wondering if I was too hasty"
   - "I'm the domain expert but I'm the one who's stuck"
+variables:
+  koan:
+    type: pick
+    count: 1
+    pool: koans
 pairs_with:
   - id: TF-006
     why: "What Would a Beginner Do plays a role; Empty the Cup genuinely suspends expertise rather than simulating inexperience"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Write down the three things you are MOST CERTAIN about regarding this problem. Your strongest assumptions, your deepest prior knowledge, the patterns you've been applying without questioning. Now: deliberately set them aside. Not "challenge" them — suppress them. Approach the problem as if encountering it for the first time with zero context. Look at the raw evidence — the code, the data, the user behavior — without letting prior patterns pre-filter what you see. What do you notice that your existing model was rendering invisible?
+Your cup overflows. Your koan: **{{koan.1}}** Write down the three things you are MOST CERTAIN about regarding this problem. Your strongest assumptions, your deepest prior knowledge, the patterns you've been applying without questioning. Now: deliberately set them aside. Not "challenge" them — suppress them. Approach the problem as if encountering it for the first time with zero context. Look at the raw evidence — the code, the data, the user behavior — without letting prior patterns pre-filter what you see. What do you notice that your existing model was rendering invisible?
 
 This is not role-playing ignorance. This is recognizing that your mental model, however good, is a filter — and filters block as well as clarify.
 

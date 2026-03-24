@@ -13,6 +13,11 @@ problem_signatures:
   - "I can't figure out where to start because everything is connected"
   - "my draft keeps growing but none of it feels right"
   - "I know something about this problem but I can't articulate what"
+variables:
+  koan:
+    type: pick
+    count: 1
+    pool: koans
 pairs_with:
   - id: TF-012
     why: "if you can't write even one true sentence, the problem is too big — reduce to the simplest case first"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Stop trying to solve, plan, or design. Write one sentence about this problem that you are certain is true. Not clever, not comprehensive — factually correct and non-trivial. Something you would bet money on. Then write another. Then another. After three to five true sentences, re-read them: the shape of the problem will have emerged, and you will know where to go next.
+Hold this while writing: **{{koan.1}}** Stop trying to solve, plan, or design. Write one sentence about this problem that you are certain is true. Not clever, not comprehensive — factually correct and non-trivial. Something you would bet money on. Then write another. Then another. After three to five true sentences, re-read them: the shape of the problem will have emerged, and you will know where to go next.
 
 The discipline is truthfulness. Most stuckness comes from trying to write something good before you have written anything true. Hemingway used this technique every morning to break through the blank page. The act of committing to a single true claim forces you to separate what you know from what you are guessing.
 

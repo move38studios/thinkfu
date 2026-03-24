@@ -13,6 +13,11 @@ problem_signatures:
   - "one part is fast and the other is slow and they can't work together"
   - "we need to integrate with a third-party API that keeps changing"
   - "the producer and consumer have different data formats"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-070
     why: "after adding an intermediary, use Trim the System to check whether it made other components redundant"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Identify two components that need to interact but can't do so cleanly. Name the specific friction: incompatible formats? Different speeds? Coupling that makes changes risky? Different lifecycles? Now design an intermediary — a third component whose only job is to sit between the two and resolve that friction. The intermediary can translate (adapter), buffer (queue), protect (circuit breaker), aggregate (gateway), or simplify (facade). Pick the intermediary type that matches your friction. The key principle: the intermediary is disposable and replaceable. Neither side should know or care about its internals.
+Identify two components that need to interact but can't do so cleanly. Name the specific friction: incompatible formats? Different speeds? Coupling that makes changes risky? Different lifecycles? What intermediary does {{domain.1}} use for similar problems? Now design an intermediary — a third component whose only job is to sit between the two and resolve that friction. The intermediary can translate (adapter), buffer (queue), protect (circuit breaker), aggregate (gateway), or simplify (facade). Pick the intermediary type that matches your friction. The key principle: the intermediary is disposable and replaceable. Neither side should know or care about its internals.
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm too deep in the problem to see my own blind spots"
   - "I suspect my approach is biased but I can't see how"
   - "I've been at this for hours and I'm not sure my judgment is still reliable"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-005
     why: "Name Your Current Strategy labels what you're doing; Observe the Observer watches HOW you're doing it and why"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Stop working on the problem. Examine your own processing patterns by answering these four questions in writing: (1) What pattern does my approach keep falling into? What am I repeating? (2) What do I keep returning to — and why? (3) What am I systematically avoiding or not looking at? (4) What is driving my choices right now — and is it the problem's structure or my own defaults?
+Stop working on the problem. If {{thinker.1}} observed your thinking process, what pattern would they name? Examine your own processing patterns by answering these four questions in writing: (1) What pattern does my approach keep falling into? What am I repeating? (2) What do I keep returning to — and why? (3) What am I systematically avoiding or not looking at? (4) What is driving my choices right now — and is it the problem's structure or my own defaults?
 
 The patterns you discover are invisible from inside the work. Stepping back to examine them reveals what working-on-the-problem never will — because the patterns ARE the approach.
 

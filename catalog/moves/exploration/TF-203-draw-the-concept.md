@@ -13,6 +13,11 @@ problem_signatures:
   - "I keep losing track of how the parts connect"
   - "the text description is getting longer but not clearer"
   - "I need to see the shape of this problem"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-081
     why: "see the whole thing at once — a diagram is the fastest way to achieve that overview"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Pick a specific visual grammar for your problem. Do not just "draw a diagram" — commit to one of these structures: **(a) Mind map** — concepts radiate from a center, showing hierarchy and association. **(b) Flow diagram** — boxes and arrows showing sequence, branching, and loops. **(c) 2x2 matrix** — two dimensions creating four quadrants that force classification. **(d) Venn diagram** — overlapping sets showing what is shared and what is unique. **(e) Force diagram** — arrows showing pushes and pulls, tensions and supports. Now: pick the grammar that feels LEAST natural for your problem. That discomfort means it will force you to commit to relationships you have been leaving vague. Draw it. Every element must be labeled. Every connection must be named. If you cannot place something, that is the finding.
+Pick a specific visual grammar for your problem. Do not just "draw a diagram" — commit to one of these structures: **(a) Mind map** — concepts radiate from a center, showing hierarchy and association. **(b) Flow diagram** — boxes and arrows showing sequence, branching, and loops. **(c) 2x2 matrix** — two dimensions creating four quadrants that force classification. **(d) Venn diagram** — overlapping sets showing what is shared and what is unique. **(e) Force diagram** — arrows showing pushes and pulls, tensions and supports. Now: pick the grammar that feels LEAST natural for your problem. That discomfort means it will force you to commit to relationships you have been leaving vague. Draw it. Every element must be labeled. Every connection must be named. Or try drawing it in the style of {{genre.1}}. If you cannot place something, that is the finding.
 
 ## When to Use
 

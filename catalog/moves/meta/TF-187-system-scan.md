@@ -13,6 +13,11 @@ problem_signatures:
   - "problems keep popping up in unexpected places"
   - "I'm not sure where the real pain is in this codebase"
   - "I jump to solutions before understanding the full landscape"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-020
     why: "Zoom In/Out changes magnification at a single point; System Scan maintains one magnification but covers every point"
@@ -26,7 +31,7 @@ pairs_with:
 
 Start at the entry point of your system — the user's first interaction, the API gateway, the main() function. Move your attention through each component in the order a request or action flows through the system. At each stop, answer three questions: (1) What is the current state here? (2) Is there tension — anything that feels fragile, slow, unclear, or over-complicated? (3) What am I assuming about this component that I haven't verified?
 
-Do not fix anything. Do not open a ticket. Do not start refactoring. Complete the entire scan first. Write one line per component: name, state, tension (if any). The completed scan is a map of where attention is needed — and that map is more valuable than any single fix.
+As you scan, use {{word.1}} as a lens — which component resonates with it? Do not fix anything. Do not open a ticket. Do not start refactoring. Complete the entire scan first. Write one line per component: name, state, tension (if any). The completed scan is a map of where attention is needed — and that map is more valuable than any single fix.
 
 ## When to Use
 

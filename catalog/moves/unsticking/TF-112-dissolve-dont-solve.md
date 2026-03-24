@@ -13,6 +13,11 @@ problem_signatures:
   - "this problem is a symptom of a deeper structural issue"
   - "every solution feels like a patch, not a resolution"
   - "the problem exists because of how the system is designed"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-022
     why: "Remove the Most Expensive Part is one specific dissolution technique — eliminate the component that creates the problem"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-State the problem. Now ask: "In what redesign of the surrounding system would this problem simply not arise?" You are not looking for a solution — you are looking for a system in which the question has no meaning. Describe that system concretely. Then evaluate: is it cheaper to keep solving the problem, or to rebuild toward the dissolution?
+How has {{domain.1}} dissolved this class of problem entirely? State the problem. Now ask: "In what redesign of the surrounding system would this problem simply not arise?" You are not looking for a solution — you are looking for a system in which the question has no meaning. Describe that system concretely. Then evaluate: is it cheaper to keep solving the problem, or to rebuild toward the dissolution?
 
 Ackoff distinguished three responses to problems: resolve (good enough), solve (optimal answer), and dissolve (change the system so the problem disappears). Most people stop at solving. Dissolution is the highest-leverage move.
 

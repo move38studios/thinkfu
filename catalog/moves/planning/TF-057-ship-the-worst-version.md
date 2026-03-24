@@ -13,6 +13,11 @@ problem_signatures:
   - "I keep adding requirements before I've built anything"
   - "I can describe the vision but not a concrete first step"
   - "we're planning instead of shipping"
+variables:
+  timeframe:
+    type: pick
+    count: 1
+    pool: timeframes
 pairs_with:
   - id: TF-045
     why: "two minute version is even more extreme — try if the weekend version is still too ambitious"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-You have a concept. Describe the version you could build in ONE WEEKEND. Not a plan for a weekend — the actual, embarrassingly minimal thing a person could use or experience by Sunday night. What's the cheapest, ugliest, most cut-down version that still lets someone experience the core idea?
+Describe the version you could ship by {{timeframe.1}}. You have a concept. Describe the version you could build in ONE WEEKEND. Not a plan for a weekend — the actual, embarrassingly minimal thing a person could use or experience by Sunday night. What's the cheapest, ugliest, most cut-down version that still lets someone experience the core idea?
 
 If you can't describe a weekend version, your concept is too abstract — you need to keep decomposing until you can. If you can, you now know what the core actually is, because you had to choose what survives the cut.
 

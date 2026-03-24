@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm patching around something that shouldn't need patching"
   - "I can't remember why I chose this path over the alternative"
   - "sunk cost is the only reason I'm still on this branch"
+variables:
+  count:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-019
     why: "map the assumptions to surface forks you didn't realize were choices"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Stop working forward. List the decisions you made to get here — framework choice, data model, algorithm, architecture, scope, even the problem framing itself. For each one, ask: "Did I choose this, or did I assume it?" Find the most recent genuine fork — a point where another option existed. Go back to that fork and try the other branch. Spend 10 minutes exploring it before deciding which path is actually better.
+List the last {{count}} decisions you made. Try the other branch of the most recent one. Stop working forward. List the decisions you made to get here — framework choice, data model, algorithm, architecture, scope, even the problem framing itself. For each one, ask: "Did I choose this, or did I assume it?" Find the most recent genuine fork — a point where another option existed. Go back to that fork and try the other branch. Spend 10 minutes exploring it before deciding which path is actually better.
 
 ## When to Use
 

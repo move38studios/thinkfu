@@ -13,6 +13,11 @@ problem_signatures:
   - "never questioned what happens by default"
   - "opt-in rate is suspiciously low"
   - "the design assumes users will take action"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-051
     why: "flip the ratio to explore what happens when the minority behavior becomes the majority"
@@ -26,7 +31,7 @@ pairs_with:
 
 Identify the **default** in your design — the thing that happens if the user, system, or process does nothing. The path of least resistance. The pre-selected option. The behavior when no one intervenes.
 
-Now flip it. Make the opposite the default.
+What default would {{persona.1}} expect — and is it the one you built? Now flip it. Make the opposite the default.
 
 If notifications are off by default, make them on. If the data is public by default, make it private. If the advanced settings are hidden by default, make them visible. If deploys require manual approval, make them auto-deploy. (Or vice versa for any of these.)
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "we've always done it this way"
   - "that's a hard requirement"
   - "the problem feels impossibly boxed in"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-019
     why: "map the assumptions to dig deeper into constraints classified as assumptions"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List every constraint on your problem — technical, organizational, temporal, budgetary, all of them. Now classify each one into exactly one of three categories: **LAW** (physics, mathematics, regulation — truly immovable), **POLICY** (an organizational or team decision — movable with authority or persuasion), or **ASSUMPTION** (something you believe is fixed but haven't actually verified). Be ruthless: most things that feel like laws are policies, and most things that feel like policies are assumptions. Pick one assumption and ask: "What would the solution look like if this constraint didn't exist?" Relaxing even one false constraint can unlock the entire problem.
+List every constraint on your problem — technical, organizational, temporal, budgetary, all of them. Now classify each one into exactly one of three categories: **LAW** (physics, mathematics, regulation — truly immovable), **POLICY** (an organizational or team decision — movable with authority or persuasion), or **ASSUMPTION** (something you believe is fixed but haven't actually verified). Be ruthless: most things that feel like laws are policies, and most things that feel like policies are assumptions. How would {{thinker.1}} classify these constraints? Pick one assumption and ask: "What would the solution look like if this constraint didn't exist?" Relaxing even one false constraint can unlock the entire problem.
 
 ## When to Use
 

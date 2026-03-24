@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm over-optimizing one dimension at the expense of shipping"
   - "I don't know when to stop looking for a better solution"
   - "the team can't agree because everyone has a different implicit quality bar"
+variables:
+  criteria_count:
+    type: number
+    min: 3
+    max: 7
 pairs_with:
   - id: TF-049
     why: "name the tradeoff makes explicit what you're giving up; aspiration levels make explicit what you'll accept"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before you search for solutions, write down every criterion that matters: speed, cost, quality, maintainability, time-to-ship, whatever applies. For EACH criterion, set an explicit aspiration level — the threshold below which you will not accept a solution and above which you will stop optimizing. Search until you find something that meets ALL thresholds. If nothing qualifies, lower the aspiration on the LEAST important criterion by one notch and search again. Stop the moment a candidate clears every bar.
+Set explicit 'good enough' levels for {{criteria_count}} criteria. Before you search for solutions, write down every criterion that matters: speed, cost, quality, maintainability, time-to-ship, whatever applies. For EACH criterion, set an explicit aspiration level — the threshold below which you will not accept a solution and above which you will stop optimizing. Search until you find something that meets ALL thresholds. If nothing qualifies, lower the aspiration on the LEAST important criterion by one notch and search again. Stop the moment a candidate clears every bar.
 
 ## When to Use
 

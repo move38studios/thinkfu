@@ -12,6 +12,11 @@ problem_signatures:
   - "I made a mistake and my instinct is to undo it — but should I?"
   - "the prototype does the wrong thing but users actually like it"
   - "this bug produced a surprisingly useful side effect"
+variables:
+  koan:
+    type: pick
+    count: 1
+    pool: koans
 pairs_with:
   - id: TF-023
     why: "complement: use the problem as the solution takes the same judo logic to structural obstacles"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-You got an unintended result — a bug, a wrong output, a mistake. Before you hit undo: stop. Describe exactly what happened, not what was supposed to happen. Now ask three questions: (1) What is this result actually good at? (2) What problem would this be the right answer to? (3) What assumption of mine does this error contradict?
+You got an unintended result — a bug, a wrong output, a mistake. Before analyzing the error, hold this: **{{koan.1}}** Before you hit undo: stop. Describe exactly what happened, not what was supposed to happen. Now ask three questions: (1) What is this result actually good at? (2) What problem would this be the right answer to? (3) What assumption of mine does this error contradict?
 
 Write down the answers. If any of them point somewhere interesting, follow that thread before reverting to the original plan.
 

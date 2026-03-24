@@ -13,6 +13,11 @@ problem_signatures:
   - "scope keeps growing and nobody pushes back"
   - "if I had to ship tomorrow, I wouldn't know what to cut"
   - "every feature has a champion so nothing gets prioritized"
+variables:
+  percent:
+    type: number
+    min: 30
+    max: 70
 pairs_with:
   - id: TF-018
     why: "kill your darlings to handle the emotional cuts that delete-half surfaced"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Count the components, features, steps, or pieces in your solution. Now remove exactly half. Not "trim a little" — cut the count in half. You must choose which half survives. Write down the kept half and the cut half in two columns. The kept column is your actual priority ranking made visible. If you agonize over a particular cut, that tension is information: it means you've found two things competing for the same importance tier. If cutting something feels easy, it was already dead weight.
+Count the components, features, steps, or pieces in your solution. Now remove exactly {{percent}}%. Not "trim a little" — cut the count in half. You must choose which half survives. Write down the kept half and the cut half in two columns. The kept column is your actual priority ranking made visible. If you agonize over a particular cut, that tension is information: it means you've found two things competing for the same importance tier. If cutting something feels easy, it was already dead weight.
 
 ## When to Use
 

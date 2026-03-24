@@ -13,6 +13,11 @@ problem_signatures:
   - "reviewers focus on the wrong part of my proposal"
   - "my PR description is three paragraphs before it gets to the point"
   - "the executive summary is neither executive nor summary"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-016
     why: "Change the Audience helps you see where the lede is buried — different audiences have different ledes"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Take your solution, document, PR, proposal, or plan. Read it from the top. Ask: if the reader stopped after the first sentence, would they know the most important thing? If not, find where the most important thing actually lives — paragraph three, bullet seven, the appendix — and move it to the first sentence. Restructure everything else as supporting detail in descending order of importance.
+Take your solution, document, PR, proposal, or plan. Read it from the top. Ask: if the reader stopped after the first sentence, would they know the most important thing? If not, find where the most important thing actually lives — paragraph three, bullet seven, the appendix — and move it to the first sentence. Restructure everything else as supporting detail in descending order of importance. If this were a {{genre.1}}, where would the lede be?
 
 Journalists call this the inverted pyramid: lead with the conclusion, then supporting facts, then background. Readers (and code reviewers, and stakeholders) can stop at any point and still have the most important information.
 

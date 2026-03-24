@@ -13,6 +13,11 @@ problem_signatures:
   - "someone else set the terms and we are reacting"
   - "we keep arguing about solutions but disagree on what the problem is"
   - "the framing of the question has already eliminated the best answers"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-003
     why: "Three Framings generates alternative frames — Frame the Frame is the meta-move of choosing which frame to operate in"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before you present an argument, proposal, or solution, stop. Write down the frame you are currently operating in — what coordinates, time horizon, stakeholders, and definition of success are assumed. Then write two alternative frames: a different time horizon, a different stakeholder's perspective, a different definition of success. For each frame, note what solutions become obvious and what solutions become invisible. Choose the frame deliberately, then proceed.
+Before you present an argument, proposal, or solution, stop. Write down the frame you are currently operating in — what coordinates, time horizon, stakeholders, and definition of success are assumed. What if this conversation were a {{genre.1}}? What frame does that genre impose? Then write two alternative frames: a different time horizon, a different stakeholder's perspective, a different definition of success. For each frame, note what solutions become obvious and what solutions become invisible. Choose the frame deliberately, then proceed.
 
 The person who sets the frame controls the conversation before a word is spoken. If you let someone else frame it, you are playing their game.
 

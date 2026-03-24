@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm reasoning about behavior I've never directly observed"
   - "the algorithm is correct on paper but wrong in practice and I don't know where"
   - "I'm debugging by guessing instead of seeing"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-026
     why: "find the bottleneck becomes trivial once you can see the flow — make it visible first, then find what's slow"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Identify the thing in your system you cannot currently see: the data flowing between services, the state transitions in a workflow, the decision points in an algorithm, the timing of concurrent operations. Now make it visible. Add a structured log that you can scan. Draw a state diagram and mark where you are in it. Build a throwaway dashboard. Print every intermediate value. Dump the call tree. The technique doesn't matter — what matters is converting invisible runtime behavior into something your eyes can process. Victor's principle: creators need immediate connection to what they create. If you can't see the effect of a change in real time, you're working blind.
+Identify the thing in your system you cannot currently see: the data flowing between services, the state transitions in a workflow, the decision points in an algorithm, the timing of concurrent operations. How does {{domain.1}} make hidden dynamics visible? Now make it visible. Add a structured log that you can scan. Draw a state diagram and mark where you are in it. Build a throwaway dashboard. Print every intermediate value. Dump the call tree. The technique doesn't matter — what matters is converting invisible runtime behavior into something your eyes can process. Victor's principle: creators need immediate connection to what they create. If you can't see the effect of a change in real time, you're working blind.
 
 ## When to Use
 

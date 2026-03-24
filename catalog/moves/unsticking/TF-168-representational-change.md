@@ -13,6 +13,11 @@ problem_signatures:
   - "the solution feels like it should be obvious but I can't reach it"
   - "I'm stuck in one way of thinking about this"
   - "I've been staring at this code and the answer won't come"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-001
     why: "inversion is a specific form of representational change — flipping the problem around"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-You're at impasse — not because the problem is impossible, but because your mental representation blocks the path. Try three specific operations in order. (a) CONSTRAINT RELAXATION: List every assumption or rule you're following. Cross out one that seems mandatory and ask "what if this weren't true?" (b) CHUNK DECOMPOSITION: Find a concept you're treating as a single unit and break it into its parts. A "user" might be an account, a session, and a profile. A "request" might be a header, a body, and a context. (c) ELABORATION: List three features of the problem you've been ignoring because they seemed irrelevant. The solution often hides in what you dismissed.
+Try representing the problem as {{genre.1}} — which of the three operations does the new representation unlock? You're at impasse — not because the problem is impossible, but because your mental representation blocks the path. Try three specific operations in order. (a) CONSTRAINT RELAXATION: List every assumption or rule you're following. Cross out one that seems mandatory and ask "what if this weren't true?" (b) CHUNK DECOMPOSITION: Find a concept you're treating as a single unit and break it into its parts. A "user" might be an account, a session, and a profile. A "request" might be a header, a body, and a context. (c) ELABORATION: List three features of the problem you've been ignoring because they seemed irrelevant. The solution often hides in what you dismissed.
 
 ## When to Use
 

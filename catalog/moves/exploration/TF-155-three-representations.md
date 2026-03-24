@@ -13,6 +13,11 @@ problem_signatures:
   - "the team keeps talking past each other about the same issue"
   - "I understand the code but I can't see the system"
   - "I've been looking at metrics but I don't have a story for what's happening"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-154
     why: "Epistemic Action provides the principle; Three Representations is the structured method"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Express your current problem in three different formats. (1) WORDS: write a one-paragraph narrative explaining the problem as if telling a colleague. (2) PICTURES: draw a diagram — boxes and arrows, a flowchart, a state diagram, a timeline, whatever fits. (3) NUMBERS: quantify it — how many, how often, how large, what ratio, what threshold. Now compare: what is obvious in the diagram that was hidden in the narrative? What does the quantified version reveal that neither words nor pictures showed? Each representation makes different structural features salient. The insight you are missing almost always lives in the representation you have not tried yet.
+Express your current problem in three different formats. (1) WORDS: write a one-paragraph narrative explaining the problem as if telling a colleague. (2) PICTURES: draw a diagram — boxes and arrows, a flowchart, a state diagram, a timeline, whatever fits. (3) NUMBERS: quantify it — how many, how often, how large, what ratio, what threshold. Now compare: what is obvious in the diagram that was hidden in the narrative? What does the quantified version reveal that neither words nor pictures showed? Each representation makes different structural features salient. Fourth representation: express it as {{genre.1}}. The insight you are missing almost always lives in the representation you have not tried yet.
 
 ## When to Use
 

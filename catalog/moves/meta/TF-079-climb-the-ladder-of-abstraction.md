@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm stuck choosing between a concrete fix and a general solution"
   - "my thinking is trapped at one altitude and I can't shift perspective"
   - "I need to see both the forest and the trees but I keep seeing only one"
+variables:
+  levels:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-020
     why: "zoom in / zoom out is a spatial version of the same principle — combine them for full perspective mobility"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Pick the level you're currently thinking at: concrete (one specific input, one user, one bug) or abstract (the general pattern, the architecture, the family of behaviors). Now deliberately move to the OTHER level. If you're debugging one request, ask: what's the general pattern across all failing requests? If you're designing an abstract architecture, ask: what happens when User A sends Payload B at Time C? Write your problem at three rungs: one concrete instance, the pattern it belongs to, and the space of all possible patterns. The insight almost always lives at a different rung than where you're stuck.
+Pick the level you're currently thinking at: concrete (one specific input, one user, one bug) or abstract (the general pattern, the architecture, the family of behaviors). Now deliberately move to the OTHER level. If you're debugging one request, ask: what's the general pattern across all failing requests? If you're designing an abstract architecture, ask: what happens when User A sends Payload B at Time C? Draw your problem at {{levels}} distinct levels. Write your problem at three rungs: one concrete instance, the pattern it belongs to, and the space of all possible patterns. The insight almost always lives at a different rung than where you're stuck.
 
 ## When to Use
 

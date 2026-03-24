@@ -17,14 +17,7 @@ variables:
   operation:
     type: pick
     count: 3
-    pool:
-      - "Substitute: what component could be swapped for something else?"
-      - "Combine: what two parts could be merged into one?"
-      - "Adapt: what could be borrowed from a different domain?"
-      - "Modify: what could be made bigger, smaller, faster, or slower?"
-      - "Put to other use: what else could this solution serve?"
-      - "Eliminate: what could be removed entirely?"
-      - "Reverse: what could be flipped, inverted, or reordered?"
+    pool: scamper
 pairs_with:
   - id: TF-063
     why: "diverge before you converge to generate the initial solution that SCAMPER then mutates"

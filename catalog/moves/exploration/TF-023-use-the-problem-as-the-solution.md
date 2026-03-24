@@ -13,6 +13,11 @@ problem_signatures:
   - "users keep doing the 'wrong' thing no matter what we do"
   - "there's a force we can't control — maybe we should harness it instead"
   - "the harder we push against it, the worse it gets"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-037
     why: "complement: honor the error treats accidents as signal, this treats obstacles as resources"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Name the specific thing causing your problem. Write it down as a factual statement: "X is happening." Now reframe X as a resource by asking three questions. First: what information does X carry? (Every problem is also a signal.) Second: what energy or momentum does X have that you could redirect? Third: if you had deliberately designed X into your system, what would it be good for? Pick the most promising reframe and design a solution that uses X as an input rather than treating it as an obstacle to eliminate.
+Name the specific thing causing your problem. Write it down as a factual statement: "X is happening." Now reframe X as a resource by asking three questions. First: what information does X carry? (Every problem is also a signal.) Second: what energy or momentum does X have that you could redirect? Third: if you had deliberately designed X into your system, what would it be good for? What if the obstacle had the properties of {{word.1}}? Which properties make it useful? Pick the most promising reframe and design a solution that uses X as an input rather than treating it as an obstacle to eliminate.
 
 ## When to Use
 

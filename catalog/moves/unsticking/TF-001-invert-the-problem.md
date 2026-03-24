@@ -12,6 +12,11 @@ problem_signatures:
   - "the goal is too vague to act on directly"
   - "I know what failure looks like better than success"
   - "I keep trying to define the ideal outcome and getting nowhere"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-012
     why: "if the inverted failure list is also vague, reduce to the simplest case first"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Instead of asking "How do I achieve X?", ask "How would I guarantee X fails?" List every way to make the outcome terrible. Then systematically avoid or reverse each failure cause.
+Seed your inversion with {{word.1}} — what kind of failure does it evoke? Instead of asking "How do I achieve X?", ask "How would I guarantee X fails?" List every way to make the outcome terrible. Then systematically avoid or reverse each failure cause.
 
 This works because failure modes are concrete and specific, while success is often vague. Your brain (or model) can enumerate what's wrong more easily than what's right.
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "teams are gaming the numbers"
   - "the dashboard is green but users are unhappy"
   - "we need to choose what to measure"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-032
     why: "Pre-mortem imagines project failure — Goodhart Check imagines metric corruption, a specific failure mode"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List every metric or KPI your solution tracks. For each one, complete the sentence: "If someone optimized ONLY for this number, ignoring everything else, they would..." If the resulting behavior is perverse, the metric is gameable and will eventually be gamed. Either replace it with a metric that is harder to corrupt, or pair it with a counter-metric that creates productive tension (e.g., speed paired with error rate).
+List every metric or KPI your solution tracks. If {{persona.1}} were gaming this metric, what would they do? For each one, complete the sentence: "If someone optimized ONLY for this number, ignoring everything else, they would..." If the resulting behavior is perverse, the metric is gameable and will eventually be gamed. Either replace it with a metric that is harder to corrupt, or pair it with a counter-metric that creates productive tension (e.g., speed paired with error rate).
 
 ## When to Use
 

@@ -114,9 +114,9 @@ The `style` field controls the routing strategy:
 - **`oblique`** — deliberately tangential. Returns a move from a *different* mode or category than expected. Designed to break fixation through surprise.
 
 Returns a ThinkFu move. Backend logic for `matched` (progressive):
-- v0: Random selection (mode-filtered)
-- v1: Prompt-based router — pass context to an LLM with the catalog and ask it to select the most relevant move
-- v2: Fine-tuned classifier trained on usage data
+- **v0 (current):** Random selection (mode-filtered)
+- **v1:** Embed context → top 3 by vector similarity + 2 random → 1B LLM picks the most *unexpectedly useful* one. All on Cloudflare edge, ~250ms, no external API calls.
+- **v2:** Fine-tuned classifier trained on rating data
 
 #### `POST /rate`
 
@@ -419,7 +419,7 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 - **MCP server:** FastMCP (TypeScript) — local stdio server for Claude Code
 - **Plugin:** Claude Code plugin — bundles MCP server + catalog for one-command install
 - **Rating storage:** Cloudflare D1 (remote, opt-in) + local JSONL (default)
-- **Router/classifier:** Random (v0) → prompted LLM (v1) → fine-tuned classifier (v2)
+- **Router:** Random (v0) → embedding similarity + tiny LLM tiebreaker on Cloudflare edge (v1) → fine-tuned classifier (v2). All Cloudflare-native, no external API calls.
 - **Website:** HTML rendered by the Worker (planned)
 - **Domain:** think-fu.org
 - **License:** PolyForm Small Business 1.0.0

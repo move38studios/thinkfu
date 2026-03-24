@@ -13,6 +13,11 @@ problem_signatures:
   - "every solution I try feels like it's fighting the problem statement"
   - "the requirements have been through so many layers of translation I don't trust them"
   - "I inherited this problem definition and I'm not sure I agree with it"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-165
     why: "sit with the felt difficulty detects the mismatch; return to the raw situation investigates it"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Identify who formulated the problem you're working on and how many layers of translation it passed through. Then go upstream: read the original user complaint, the raw support ticket, the unedited customer interview, the actual error log. Not the summary. Not the Jira ticket. Not the product spec that summarized the spec that summarized the interview. Ask: "What do I see in the raw situation that the problem statement left out?" Write down at least three things present in the raw situation that are absent from your current problem formulation. Any of those omissions might be the key.
+Identify who formulated the problem you're working on and how many layers of translation it passed through. Then go upstream: read the original user complaint, the raw support ticket, the unedited customer interview, the actual error log. Not the summary. Not the Jira ticket. Not the product spec that summarized the spec that summarized the interview. Ask: "What would {{persona.1}} see in the raw situation that the formulation left out?" Write down at least three things present in the raw situation that are absent from your current problem formulation. Any of those omissions might be the key.
 
 ## When to Use
 

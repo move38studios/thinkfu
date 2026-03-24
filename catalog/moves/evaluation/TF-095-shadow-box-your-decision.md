@@ -13,6 +13,11 @@ problem_signatures:
   - "this decision feels important enough to double-check my thinking"
   - "I might be missing something an experienced person would catch"
   - "I'm operating outside my area of deepest expertise"
+variables:
+  thinker:
+    type: pick
+    count: 2
+    pool: thinkers
 pairs_with:
   - id: TF-046
     why: "steel man the opposite to strengthen the expert perspective you most disagree with"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Describe your situation in two sentences. Now convene an imaginary expert panel — three people with relevant expertise (name specific archetypes: "a database reliability engineer," "a product manager who's launched 20 features," "the original architect of this system"). For each expert, write down: (1) what they would prioritize in this situation, (2) what they would worry about, and (3) what action they would take. Compare these to your actual plan. Where do you agree with the panel? Where do you diverge? Divergence is not automatically wrong — but it should be deliberate. For each divergence, write one sentence explaining why your approach is better than the expert's for this specific context.
+Describe your situation in two sentences. Your expert panel includes {{thinker.1}} and {{thinker.2}}. Now convene an imaginary expert panel — three people with relevant expertise (name specific archetypes: "a database reliability engineer," "a product manager who's launched 20 features," "the original architect of this system"). For each expert, write down: (1) what they would prioritize in this situation, (2) what they would worry about, and (3) what action they would take. Compare these to your actual plan. Where do you agree with the panel? Where do you diverge? Divergence is not automatically wrong — but it should be deliberate. For each divergence, write one sentence explaining why your approach is better than the expert's for this specific context.
 
 ## When to Use
 

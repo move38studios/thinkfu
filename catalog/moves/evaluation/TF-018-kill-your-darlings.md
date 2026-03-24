@@ -13,6 +13,11 @@ problem_signatures:
   - "solution feels complex but I can't see what to cut"
   - "defending a piece of the design more than others"
   - "this clever bit is what makes it special"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-052
     why: "delete half forces broader cuts after kill your darlings targets the emotional favorite"
@@ -28,7 +33,7 @@ Identify the part of your solution you are **most proud of** — the clever abst
 
 Now remove it entirely. Cross it out. Delete the file. Comment out the function.
 
-Ask two questions: (1) Is the solution still good without it? (2) Is the solution *simpler* without it?
+Ask two questions: (1) Is the solution still good without it? (2) Is the solution *simpler* without it? Would {{thinker.1}} also kill this darling, or would they say it's load-bearing?
 
 If yes to both: your darling was decoration. Ship without it. If the solution collapses: you've found the load-bearing element. Make sure it's *solid*, not just *clever* — cleverness and reliability are different things.
 

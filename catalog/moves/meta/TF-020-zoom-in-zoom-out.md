@@ -13,6 +13,11 @@ problem_signatures:
   - "stuck in the details"
   - "too abstract, need to get concrete"
   - "not sure if this is the right level to work at"
+variables:
+  levels:
+    type: number
+    min: 2
+    max: 4
 pairs_with:
   - id: TF-031
     why: "find the leverage point at the zoom level where the real constraint lives"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Name the level of abstraction you are currently working at. Then move **two levels in each direction**.
+Name the level of abstraction you are currently working at. Zoom {{levels}} levels in, then {{levels}} levels out.
 
 **Zoom in** — What does this problem look like at the level of a single user? A single request? A single line of code? A single moment in time? Get concrete. Touch the atoms.
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "the problem feels like a balancing act and I can't see it any other way"
   - "I'm stuck in one spatial metaphor for this system"
   - "I need a structural reframe, not just a new idea"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-144
     why: "excavate the metaphor finds the surface language; image schema shift operates on the deeper spatial structure"
@@ -33,7 +38,7 @@ Identify which **image schema** structures your current understanding of the pro
 - **SCALE** — more/less, bigger/smaller, ranking, degree
 - **LINK** — connection, disconnection, binding, dependency
 
-Name yours. Then deliberately switch to a different schema and redescribe the problem. If you see CONTAINER (what's inside/outside the system boundary?), try PATH (where are we trying to get to?). If PATH (we're stuck on the route), try BALANCE (what's out of equilibrium?). If FORCE (too much pressure), try LINK (what's connected that shouldn't be?). Each schema generates different questions and different solutions.
+Name yours. {{word.1}} suggests which schema to shift to — is it a CONTAINER, a PATH, a FORCE? Then deliberately switch to a different schema and redescribe the problem. If you see CONTAINER (what's inside/outside the system boundary?), try PATH (where are we trying to get to?). If PATH (we're stuck on the route), try BALANCE (what's out of equilibrium?). If FORCE (too much pressure), try LINK (what's connected that shouldn't be?). Each schema generates different questions and different solutions.
 
 ## When to Use
 

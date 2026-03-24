@@ -13,6 +13,11 @@ problem_signatures:
   - "the decision felt obvious but now it's causing unexpected pain"
   - "we keep revisiting the same decision"
   - "different people think we chose this for different reasons"
+variables:
+  language:
+    type: pick
+    count: 1
+    pool: languages
 pairs_with:
   - id: TF-046
     why: "steel man the opposite to stress-test whether the tradeoff you named favors the right side"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-For the decision you just made (or are about to make), complete this sentence: "I'm choosing ___ at the cost of ___." Both blanks must be concrete. If you can't fill in the second blank, you haven't understood the decision yet — go find what you're trading away. Then ask: is this tradeoff one I'd make again if someone presented it to me fresh? Write the tradeoff statement somewhere the team can see it. When the cost shows up later (and it will), you'll know it was a conscious choice, not an accident.
+For the decision you just made (or are about to make), complete this sentence: "I'm choosing ___ at the cost of ___." Both blanks must be concrete. If you can't fill in the second blank, you haven't understood the decision yet — go find what you're trading away. Then ask: is this tradeoff one I'd make again if someone presented it to me fresh? Now restate the tradeoff in {{language.1}} — what nuance shifts? Write the tradeoff statement somewhere the team can see it. When the cost shows up later (and it will), you'll know it was a conscious choice, not an accident.
 
 ## When to Use
 

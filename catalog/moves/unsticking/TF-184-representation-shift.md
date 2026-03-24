@@ -13,6 +13,11 @@ problem_signatures:
   - "I understand each piece but can't see how they fit together"
   - "I keep getting confused by the same thing"
   - "when I explain it to someone else, it suddenly seems different"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-014
     why: "explain it to a child is a specific representation shift — from technical to simple language"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Simon and Newell showed that choosing the right REPRESENTATION often matters more than clever problem-solving within a bad representation. The famous Mutilated Checkerboard problem is nearly impossible when represented as a tiling problem and trivial when represented as a coloring problem. You are stuck — but the problem may not be hard. Your REPRESENTATION may be making it hard. Rewrite the problem in a completely different format: if it is code, draw it as a diagram. If it is a diagram, write it as a narrative. If it is abstract, make it concrete with specific numbers. If it is a wall of text, make it a table. The same problem in a new representation may be trivially easy.
+Shift to the native format of {{genre.1}}. Simon and Newell showed that choosing the right REPRESENTATION often matters more than clever problem-solving within a bad representation. The famous Mutilated Checkerboard problem is nearly impossible when represented as a tiling problem and trivial when represented as a coloring problem. You are stuck — but the problem may not be hard. Your REPRESENTATION may be making it hard. Rewrite the problem in a completely different format: if it is code, draw it as a diagram. If it is a diagram, write it as a narrative. If it is abstract, make it concrete with specific numbers. If it is a wall of text, make it a table. The same problem in a new representation may be trivially easy.
 
 ## When to Use
 

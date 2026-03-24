@@ -13,6 +13,11 @@ problem_signatures:
   - "we have a graveyard of failed prototypes"
   - "each attempt fails for a different reason"
   - "the rejected ideas had something good buried in them"
+variables:
+  count:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-037
     why: "Honor Thy Error treats failures as creative prompts — Near Miss Detector systematically mines them"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List every approach you have tried that did not work. For each one, write down specifically why it failed — not vaguely ("it didn't work") but precisely ("it solved the read path but doubled write latency"). Now, for each failed approach, ask: "What is the smallest single change — one inversion, one removal, one reframing — that would fix the specific reason it failed?" The solution space is not uniform. Wrong answers and right answers cluster together; the distance between a near miss and a breakthrough is often one variable.
+Examine your {{count}} closest near-misses. List every approach you have tried that did not work. For each one, write down specifically why it failed — not vaguely ("it didn't work") but precisely ("it solved the read path but doubled write latency"). Now, for each failed approach, ask: "What is the smallest single change — one inversion, one removal, one reframing — that would fix the specific reason it failed?" The solution space is not uniform. Wrong answers and right answers cluster together; the distance between a near miss and a breakthrough is often one variable.
 
 ## When to Use
 

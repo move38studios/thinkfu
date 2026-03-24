@@ -13,6 +13,11 @@ problem_signatures:
   - "we're making confident assertions with no evidence"
   - "I want to stress-test my thinking before presenting it"
   - "decisions are being made on vibes instead of arguments"
+variables:
+  count:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-032
     why: "pre-mortem imagines failure; Claim/Support/Question examines the reasoning that predicts success"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Identify the three most important claims you're making about your solution (or decision, or design). For each one, run this sequence: **CLAIM** — state it in one sentence. "This approach will scale to 10x current load." **SUPPORT** — what is your evidence? "We benchmarked it at 10x with synthetic traffic and p99 stayed under 200ms." **QUESTION** — poke a hole in either the claim or the support. "But the benchmark used uniform request sizes. Real traffic has a long tail of large payloads — would p99 hold?" Any claim without support is an assertion. Any supported claim without a question is unexamined. Do all three for each of your three most important claims.
+Do this for your top {{count}} claims. Identify the most important claims you're making about your solution (or decision, or design). For each one, run this sequence: **CLAIM** — state it in one sentence. "This approach will scale to 10x current load." **SUPPORT** — what is your evidence? "We benchmarked it at 10x with synthetic traffic and p99 stayed under 200ms." **QUESTION** — poke a hole in either the claim or the support. "But the benchmark used uniform request sizes. Real traffic has a long tail of large payloads — would p99 hold?" Any claim without support is an assertion. Any supported claim without a question is unexamined. Do all three for each of your three most important claims.
 
 ## When to Use
 

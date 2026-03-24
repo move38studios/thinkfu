@@ -13,6 +13,11 @@ problem_signatures:
   - "I haven't shown this to anyone yet and I'm about to invest another week in it"
   - "I know what the spec says but I haven't played with the thing I built"
   - "we iterate but we don't learn — each version is just a reaction to the last bug report"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-087
     why: "tinker don't plan provides the mindset for the PLAY step — unstructured modification without a hypothesis"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Run one full cycle of the creative learning spiral. (1) IMAGINE: state what you want to explore — not a spec, a direction. (2) CREATE: build the fastest possible prototype — 30 minutes max, ugly is fine. (3) PLAY: use your prototype with no agenda. Don't test it against requirements. Tinker. Try things the spec didn't mention. Ask "what if I..." and try it. Spend at least as long playing as you spent building. (4) SHARE: show it to one person and watch their face, not their words. What surprised them? What did they try that you didn't expect? (5) REFLECT: write three sentences — what surprised you, what you'd change, and what new question emerged. Then IMAGINE again — the new question is your next starting point.
+Run one full cycle of the creative learning spiral. (1) IMAGINE: state what you want to explore — not a spec, a direction. Seed the IMAGINE phase with {{word.1}}. (2) CREATE: build the fastest possible prototype — 30 minutes max, ugly is fine. (3) PLAY: use your prototype with no agenda. Don't test it against requirements. Tinker. Try things the spec didn't mention. Ask "what if I..." and try it. Spend at least as long playing as you spent building. (4) SHARE: show it to one person and watch their face, not their words. What surprised them? What did they try that you didn't expect? (5) REFLECT: write three sentences — what surprised you, what you'd change, and what new question emerged. Then IMAGINE again — the new question is your next starting point.
 
 ## When to Use
 

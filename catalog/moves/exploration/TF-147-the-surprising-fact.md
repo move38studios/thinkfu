@@ -13,6 +13,11 @@ problem_signatures:
   - "I keep dismissing this anomaly but it keeps showing up"
   - "the system behaved in a way that should be impossible given my understanding"
   - "I noticed something odd but moved past it because it didn't fit my story"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-094
     why: "spot the anomaly finds the surprises; this move reasons backward from them to explanations"
@@ -26,7 +31,7 @@ pairs_with:
 
 Peirce's formula: "The surprising fact **C** is observed. But if **A** were true, **C** would be a matter of course. Hence, there is reason to suspect **A** is true."
 
-Name the surprising fact. Write it down precisely. Now generate **three candidate explanations** — three different "A"s that would make this surprise unsurprising. For each candidate, ask: "If this explanation were true, what ELSE would I expect to observe?" Check those predictions. The explanation that correctly predicts the most *other* observations — especially other things that were also surprising — is your strongest lead.
+What would surprise someone in {{domain.1}} about this? That's your entry point. Name the surprising fact. Write it down precisely. Now generate **three candidate explanations** — three different "A"s that would make this surprise unsurprising. For each candidate, ask: "If this explanation were true, what ELSE would I expect to observe?" Check those predictions. The explanation that correctly predicts the most *other* observations — especially other things that were also surprising — is your strongest lead.
 
 ## When to Use
 

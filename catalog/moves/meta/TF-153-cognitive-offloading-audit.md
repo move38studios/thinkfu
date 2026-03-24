@@ -13,6 +13,11 @@ problem_signatures:
   - "the problem feels overwhelming but I can't say why"
   - "I'm the only person who understands how this all fits together"
   - "I feel like I'm juggling and about to drop something"
+variables:
+  count:
+    type: number
+    min: 3
+    max: 6
 pairs_with:
   - id: TF-156
     why: "Load Triage classifies the type of load; Cognitive Offloading Audit moves extraneous load out of your head"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Draw four columns: HEAD, PAPER, TOOL, OTHER PERSON. For your current problem, list every piece of information, decision, or constraint and place it in the column where it currently lives. Now look at the HEAD column. The longest column is your bottleneck. For each item in HEAD, ask: "Does this NEED to be in my head, or am I just keeping it there out of habit?" Move at least three items out of HEAD into one of the other columns — write it on a sticky note (PAPER), encode it in a test or config file (TOOL), or tell a teammate and make it their responsibility (OTHER PERSON). Hutchins showed that a ship's navigation team is smarter than any individual because the computation is distributed across people and instruments. Your "team" includes your notes, your IDE, and your colleagues.
+List {{count}} things currently in your head that should be externalized. Draw four columns: HEAD, PAPER, TOOL, OTHER PERSON. For your current problem, list every piece of information, decision, or constraint and place it in the column where it currently lives. Now look at the HEAD column. The longest column is your bottleneck. For each item in HEAD, ask: "Does this NEED to be in my head, or am I just keeping it there out of habit?" Move at least three items out of HEAD into one of the other columns — write it on a sticky note (PAPER), encode it in a test or config file (TOOL), or tell a teammate and make it their responsibility (OTHER PERSON). Hutchins showed that a ship's navigation team is smarter than any individual because the computation is distributed across people and instruments. Your "team" includes your notes, your IDE, and your colleagues.
 
 ## When to Use
 

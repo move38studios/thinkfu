@@ -40,8 +40,8 @@ flowchart LR
     A["Raw idea (seed)"] --> B{"Share now or polish first?"}
     B -- "Polish first" --> C["Flower: finished-looking"]
     B -- "Share now" --> D["Seed: rough, open"]
-    C --> E["Audience evaluates & critiques"]
-    D --> F["Audience imagines & contributes"]
+    C --> E["Audience evaluates and critiques"]
+    D --> F["Audience imagines and contributes"]
     F --> G["Collaborative direction"]
     E --> H["Defensive rework"]
 

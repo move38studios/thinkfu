@@ -12,6 +12,11 @@ problem_signatures:
   - "the current ratio was inherited, not deliberately chosen"
   - "nobody has questioned why we allocate this way"
   - "what if we flipped how much time we spend on each part"
+variables:
+  ratio:
+    type: number
+    min: 2
+    max: 9
 pairs_with:
   - id: TF-031
     why: "follow-up to find the leverage point once the flipped ratio reveals misallocated effort"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Look at your current solution, process, or plan and identify the dominant ratio: what are you doing a lot of, and what are you doing a little of? Write it down as a rough percentage split. Now flip it. If you're 90% building and 10% testing, imagine 10% building and 90% testing. If your design is 80% features and 20% polish, imagine 20% features and 80% polish. Don't ask whether the flipped version is practical — ask what it reveals about your assumptions. The current ratio reflects an implicit belief about what matters. Flipping it forces that belief into the open.
+Look at your current solution, process, or plan and identify the dominant ratio: what are you doing a lot of, and what are you doing a little of? Write it down as a rough percentage split. Your current ratio is roughly {{ratio}}:1. Flip to 1:{{ratio}}. If you're 90% building and 10% testing, imagine 10% building and 90% testing. If your design is 80% features and 20% polish, imagine 20% features and 80% polish. Don't ask whether the flipped version is practical — ask what it reveals about your assumptions. The current ratio reflects an implicit belief about what matters. Flipping it forces that belief into the open.
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "someone asked me what's wrong and I couldn't give a coherent answer"
   - "I need to structure my thinking before I can make progress"
   - "I understand the pieces but can't see how they connect"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-014
     why: "explain it to a child is a simpler alternative when you don't need the three-part structure"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Write a brief explanation of your problem structured in exactly three parts: (1) "Here's the goal — what I'm trying to achieve and why it matters." (2) "Here's what I've tried — the approaches I've taken and what happened." (3) "Here's where I'm stuck — the specific point where I can't make progress."
+Write the explanation for {{persona.1}} — what would they need to hear? Write a brief explanation of your problem structured in exactly three parts: (1) "Here's the goal — what I'm trying to achieve and why it matters." (2) "Here's what I've tried — the approaches I've taken and what happened." (3) "Here's where I'm stuck — the specific point where I can't make progress."
 
 Write it as if you're explaining to a colleague who is smart but knows nothing about this particular problem. Use no jargon without defining it. The act of structuring your explanation for someone else forces you to organize your own thinking — and the point where you struggle to explain clearly is almost always the point where your understanding has a gap.
 

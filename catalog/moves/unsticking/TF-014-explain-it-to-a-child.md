@@ -12,6 +12,11 @@ problem_signatures:
   - "I'm using words I couldn't actually define if pressed"
   - "I think I understand this but I'm not sure anymore"
   - "my explanation keeps getting longer instead of clearer"
+variables:
+  language:
+    type: pick
+    count: 1
+    pool: languages
 pairs_with:
   - id: TF-044
     why: "teach it to learn it provides more structure if the free-form child explanation stalls"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Say out loud (or write down) what you're trying to do using only plain language a ten-year-old would understand. No jargon, no acronyms, no abstractions. When you reach a point where you pause, hand-wave, or say "it basically just..." — stop. That is the exact spot where your understanding has a hole. Fill that hole (re-read, re-research, ask someone) before continuing.
+Now explain it again in {{language.1}} — what changes when the language forces different structures? Say out loud (or write down) what you're trying to do using only plain language a ten-year-old would understand. No jargon, no acronyms, no abstractions. When you reach a point where you pause, hand-wave, or say "it basically just..." — stop. That is the exact spot where your understanding has a hole. Fill that hole (re-read, re-research, ask someone) before continuing.
 
 ## When to Use
 

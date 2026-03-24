@@ -13,6 +13,11 @@ problem_signatures:
   - "it works for the happy path but I'm not sure about the rest"
   - "I can't tell if this is simple or just incomplete"
   - "the plan is clean — maybe too clean"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-015
     why: "red team the specific gaps you found to determine their severity"
@@ -26,7 +31,7 @@ pairs_with:
 
 Look at your solution, design, or plan. Instead of evaluating what's there, list what's absent. Answer these five questions: (1) What user did you not consider? (2) What failure mode has no handler? (3) What input did you not account for? (4) What question does this design not answer? (5) What transition or state change is missing?
 
-Write each absence down. Rank them by how damaging they'd be if they surfaced in production. The top two absences are your blind spots — address them before calling the design done.
+What would {{persona.1}} notice is conspicuously absent? Write each absence down. Rank them by how damaging they'd be if they surfaced in production. The top two absences are your blind spots — address them before calling the design done.
 
 ## When to Use
 

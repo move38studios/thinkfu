@@ -14,6 +14,11 @@ problem_signatures:
   - "haven't questioned the premise"
   - "operating on inherited constraints no one re-examined"
   - "confident but can't explain why"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-047
     why: "rewrite the constraints after classifying assumptions as law, policy, or assumption"
@@ -33,7 +38,7 @@ Now classify each one into three buckets:
 - **Belief** — seems true, feels true, but you haven't verified it. Based on experience, pattern-matching, or someone else's word.
 - **Hope** — you want this to be true because your solution depends on it. No evidence either way.
 
-Question every belief. Test every hope. The hopes are where your plan is most fragile.
+Question every belief. Test every hope. The hopes are where your plan is most fragile. Which assumptions would {{persona.1}} challenge first?
 
 ## When to Use
 

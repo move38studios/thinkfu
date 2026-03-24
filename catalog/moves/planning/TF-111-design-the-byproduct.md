@@ -13,6 +13,11 @@ problem_signatures:
   - "the stated goal and the actual behavior don't match"
   - "we keep optimizing the wrong surface"
   - "engagement comes from a feature we barely maintain"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-023
     why: "Use the Problem as the Solution is the inverse — here you design around the unintended output"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List the three to five actual behaviors your solution produces in users — not what you intend, but what people actually do. For each behavior, ask: "If THIS were the product, how would I design for it?" Pick the most valuable byproduct and redesign your solution to amplify it. The intended feature becomes the wrapper; the byproduct becomes the core.
+What byproduct would {{persona.1}} value more than the main product? List the three to five actual behaviors your solution produces in users — not what you intend, but what people actually do. For each behavior, ask: "If THIS were the product, how would I design for it?" Pick the most valuable byproduct and redesign your solution to amplify it. The intended feature becomes the wrapper; the byproduct becomes the core.
 
 This works because the gap between intended and actual use is where product-market fit hides. What people do when they think nobody is watching is more honest than what they say they want.
 

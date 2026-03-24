@@ -13,6 +13,11 @@ problem_signatures:
   - "I rushed to judgment and I know it"
   - "the team accepted this too easily"
   - "I need a quick check on whether my reasoning is sound"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-179
     why: "zoom in on the courage-humility tension if those two scores diverge sharply"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before committing to a conclusion or decision, score yourself 1-5 on each of Baehr's six intellectual virtues: (1) **Curiosity** — did I explore enough, or did I grab the first workable answer? (2) **Humility** — am I owning what I do not know? (3) **Carefulness** — was I precise with evidence, or sloppy with details? (4) **Thoroughness** — did I check enough sources, scenarios, edge cases? (5) **Courage** — did I consider uncomfortable possibilities, or avoid them? (6) **Open-mindedness** — did I genuinely consider alternatives, or just confirm my initial instinct? Your lowest score is your vulnerability. Address that specific weakness before proceeding.
+Before committing to a conclusion or decision, score yourself 1-5 on each of Baehr's six intellectual virtues: (1) **Curiosity** — did I explore enough, or did I grab the first workable answer? (2) **Humility** — am I owning what I do not know? (3) **Carefulness** — was I precise with evidence, or sloppy with details? (4) **Thoroughness** — did I check enough sources, scenarios, edge cases? (5) **Courage** — did I consider uncomfortable possibilities, or avoid them? (6) **Open-mindedness** — did I genuinely consider alternatives, or just confirm my initial instinct? Your lowest score is your vulnerability. How would {{thinker.1}} score you on these virtues? Address that specific weakness before proceeding.
 
 ## When to Use
 

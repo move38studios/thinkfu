@@ -13,6 +13,11 @@ problem_signatures:
   - "my pitch for this idea is vague or generic"
   - "someone challenged my approach and I rambled instead of responding clearly"
   - "I'm not sure if this idea is actually good or just familiar"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-046
     why: "go deeper on the 'against' side with a full steel man if it's more compelling than expected"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Write ONE sentence that is the strongest possible argument FOR your solution. Write ONE sentence that is the strongest possible argument AGAINST it. Both must be specific — no generic praise ("it's simpler and faster") or generic criticism ("it might not scale").
+Write ONE sentence that is the strongest possible argument FOR your solution. Write ONE sentence that is the strongest possible argument AGAINST it. The "against" sentence is argued by {{thinker.1}}. Both must be specific — no generic praise ("it's simpler and faster") or generic criticism ("it might not scale").
 
 Now compare them side by side. If the "against" sentence is more compelling, you have a fundamental problem. If the "for" sentence is boring or generic, you have a positioning problem — your solution may be good but you can't articulate why. If both sentences are strong and specific, you understand your decision and you're ready to make it.
 

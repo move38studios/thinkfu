@@ -12,6 +12,11 @@ problem_signatures:
   - "every issue in the retro gets an action item"
   - "I respond to every piece of feedback and the design has no spine"
   - "we're spread across too many priorities and finishing none"
+variables:
+  percent:
+    type: number
+    min: 20
+    max: 50
 pairs_with:
   - id: TF-052
     why: "Delete Half is the more aggressive version — use it when the bottom third is not enough"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Take your list — features, bugs, feedback, action items, whatever you are responding to. Sort it by importance (gut feeling is fine — speed matters here). Draw a line at the bottom third. Everything below that line: delete it. Not "move to icebox." Not "revisit next quarter." Delete. Gone. The act of deletion is the move. Monk's insight was that musicians who respond to every musical moment produce noise, not music. Emphasis requires silence. Priority requires neglect.
+Take your list — features, bugs, feedback, action items, whatever you are responding to. Sort it by importance (gut feeling is fine — speed matters here). Draw a line at the bottom {{percent}}%. Everything below that line: delete it. Not "move to icebox." Not "revisit next quarter." Delete. Gone. The act of deletion is the move. Monk's insight was that musicians who respond to every musical moment produce noise, not music. Emphasis requires silence. Priority requires neglect.
 
 ## When to Use
 

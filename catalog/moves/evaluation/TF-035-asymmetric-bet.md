@@ -13,6 +13,11 @@ problem_signatures:
   - "the cost of being wrong feels scary but I haven't actually sized it"
   - "we're treating a reversible decision like an irreversible one"
   - "nobody wants to commit without more data"
+variables:
+  hours:
+    type: number
+    min: 2
+    max: 40
 pairs_with:
   - id: TF-025
     why: "make it reversible to shrink the downside and create more asymmetric bets"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-For each option on the table, write two numbers: the downside if you're wrong (cost, time lost, reputation damage) and the upside if you're right (revenue, time saved, learning gained). Check the shape: is the downside capped and small while the upside is open-ended and large? If yes, you have an asymmetric bet — take it without waiting for certainty. If the downside and upside are roughly symmetric, you need more analysis. If the downside is large and the upside is small, walk away. The key question is not "will this work?" but "what do I lose if it doesn't?"
+For each option on the table, write two numbers: the downside if you're wrong (cost, time lost, reputation damage) and the upside if you're right (revenue, time saved, learning gained). Check the shape: is the downside capped and small while the upside is open-ended and large? If yes, you have an asymmetric bet — take it without waiting for certainty. If the downside and upside are roughly symmetric, you need more analysis. If the downside is large and the upside is small, walk away. If this fails, you lose {{hours}} hours. If it works, what's the upside? The key question is not "will this work?" but "what do I lose if it doesn't?"
 
 ## When to Use
 

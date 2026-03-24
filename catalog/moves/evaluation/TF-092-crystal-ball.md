@@ -13,6 +13,11 @@ problem_signatures:
   - "the risks we identified all feel manageable"
   - "nobody has raised a serious objection yet"
   - "my confidence is high but I haven't checked why"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-032
     why: "pre-mortem imagines future failure; crystal ball hunts for a flaw that exists right now"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-You have a crystal ball. It can show you one thing: a flaw in your plan that you haven't seen yet. Not a risk that might happen — a flaw that exists right now. Write down your top 3 guesses for what the crystal ball would reveal. These are the areas where your confidence exceeds your evidence. For each guess, write what evidence you would need to confirm or rule it out. Now go check the most likely one — actually look at the code, the data, the contract, the user behavior. Don't theorize. Verify.
+{{persona.1}} has the crystal ball — what flaw do they show you? It can show you one thing: a flaw in your plan that you haven't seen yet. Not a risk that might happen — a flaw that exists right now. Write down your top 3 guesses for what the crystal ball would reveal. These are the areas where your confidence exceeds your evidence. For each guess, write what evidence you would need to confirm or rule it out. Now go check the most likely one — actually look at the code, the data, the contract, the user behavior. Don't theorize. Verify.
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "the last three decisions were based on assumptions I didn't verify"
   - "I feel urgent but I can't explain why"
   - "the team is moving fast but nobody stopped to look around"
+variables:
+  koan:
+    type: pick
+    count: 1
+    pool: koans
 pairs_with:
   - id: TF-019
     why: "Map the Assumptions makes explicit what Awareness Before Action helps you notice"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Stop. Before doing anything else, audit your current state. Do not plan, do not solve, do not discuss. Answer these four questions in writing: (1) What is the actual state of the system right now — not what it should be, what it IS? List what you know for certain. (2) What is driving your current approach — urgency, confusion, a hunch, inertia? (3) What are you assuming that you have not verified? List every assumption. (4) What signal are you currently ignoring because it's inconvenient? After this audit, compare your answers to the story you were operating under before the pause — that gap is where mistakes are born. Close the gap before acting.
+Stop. While auditing your state, hold this: **{{koan.1}}** Before doing anything else, audit your current state. Do not plan, do not solve, do not discuss. Answer these four questions in writing: (1) What is the actual state of the system right now — not what it should be, what it IS? List what you know for certain. (2) What is driving your current approach — urgency, confusion, a hunch, inertia? (3) What are you assuming that you have not verified? List every assumption. (4) What signal are you currently ignoring because it's inconvenient? After this audit, compare your answers to the story you were operating under before the pause — that gap is where mistakes are born. Close the gap before acting.
 
 ## When to Use
 

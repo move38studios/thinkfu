@@ -13,6 +13,11 @@ problem_signatures:
   - "we're about to commit significant resources based on a hunch"
   - "I've been wrong before on things I felt certain about"
   - "the team seems confident but nobody has named the risks"
+variables:
+  scale:
+    type: number
+    min: 3
+    max: 10
 pairs_with:
   - id: TF-032
     why: "pre-mortem gives structure to the failure scenarios your calibration check surfaces"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before committing to an approach, rate your confidence on a 1-10 scale that it will work. Write the number down. Now list everything that would have to go wrong for your confidence to drop to a 3. If that list is easy to write — if failure scenarios pour out — your real confidence is lower than you reported. You are experiencing the overconfidence bias: your felt certainty exceeds your evidenced certainty.
+Before committing to an approach, rate your confidence on a scale of 1 to {{scale}} that it will work. Write the number down. Now list everything that would have to go wrong for your confidence to drop to a 3. If that list is easy to write — if failure scenarios pour out — your real confidence is lower than you reported. You are experiencing the overconfidence bias: your felt certainty exceeds your evidenced certainty.
 
 If you genuinely cannot imagine realistic failure paths, either you are right or you have a blind spot. Ask someone else to write the failure list.
 

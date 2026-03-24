@@ -14,6 +14,11 @@ problem_signatures:
   - "not sure why I chose this direction"
   - "on autopilot"
   - "working hard but unsure if it's the right work"
+variables:
+  word_limit:
+    type: number
+    min: 2
+    max: 7
 pairs_with:
   - id: TF-013
     why: "backtrack to the fork if naming your strategy reveals you drifted from a better path"
@@ -25,7 +30,7 @@ pairs_with:
 
 ## The Move
 
-Stop. In one sentence, name the strategy you are currently using to solve this problem.
+Stop. Name it in exactly {{word_limit}} words. Name the strategy you are currently using to solve this problem.
 
 Not what you're *doing* ("writing code", "researching options") — what you're *strategically doing* ("narrowing the solution space by testing edge cases first", "building a minimal prototype to validate the core assumption", "pattern-matching against similar problems I've seen before").
 

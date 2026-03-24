@@ -12,6 +12,11 @@ problem_signatures:
   - "this needs to be fast AND thorough — maybe at different stages"
   - "what if we did X first and Y later instead of both at once"
   - "the conflict might dissolve if we split it into phases"
+variables:
+  timeframe:
+    type: pick
+    count: 2
+    pool: timeframes
 pairs_with:
   - id: TF-028
     why: "alternative separation dimension when both requirements must hold at every moment"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-State the contradiction explicitly: "We need the system to be A, but we also need it to be B, and A conflicts with B." Now ask: do A and B actually need to be true at the same moment? Identify distinct time phases in your system — setup vs. runtime, ingestion vs. query, pre-launch vs. post-launch, peak hours vs. off-peak, write path vs. read path. Assign each conflicting requirement to the phase where it matters most. Design a transition mechanism between phases. The conflict dissolves because A and B never coexist.
+State the contradiction explicitly: "We need the system to be A, but we also need it to be B, and A conflicts with B." Now ask: do A and B actually need to be true at the same moment? Identify distinct time phases in your system — setup vs. runtime, ingestion vs. query, pre-launch vs. post-launch, peak hours vs. off-peak, write path vs. read path. Phase 1 happens at {{timeframe.1}}, phase 2 at {{timeframe.2}}. Assign each conflicting requirement to the phase where it matters most. Design a transition mechanism between phases. The conflict dissolves because A and B never coexist.
 
 ## When to Use
 

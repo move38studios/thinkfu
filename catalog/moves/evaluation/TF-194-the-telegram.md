@@ -13,6 +13,11 @@ problem_signatures:
   - "I over-explain because I'm afraid of being misunderstood"
   - "the executive summary is two pages long"
   - "the important thing is buried in the middle of the message"
+variables:
+  word_budget:
+    type: number
+    min: 5
+    max: 20
 pairs_with:
   - id: TF-193
     why: "Blackout Poetry deletes from existing output; The Telegram rewrites from scratch under a hard budget"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Rewrite your entire message, explanation, or proposal as if each word costs $5. Your budget is $50 — that's 10 words. Can you say it in 10 words? If not, try $100 (20 words). The version you'd pay for with real money is the version that matters. Everything else is padding you added because words are free.
+Rewrite your entire message, explanation, or proposal as if each word costs $5. Maximum: {{word_budget}} words. Can you say it in that few? If not, try $100 (20 words). The version you'd pay for with real money is the version that matters. Everything else is padding you added because words are free.
 
 Now compare your telegram to your full output. Is the full version actually better or just longer? If the telegram says the same thing, send the telegram. If the full version adds genuine value beyond the telegram, keep it — but put the telegram first as your opening line.
 

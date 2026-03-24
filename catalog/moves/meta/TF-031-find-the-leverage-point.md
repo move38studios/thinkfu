@@ -13,6 +13,11 @@ problem_signatures:
   - "feels like pushing a boulder uphill"
   - "the real problem is somewhere else but I can't name where"
   - "we're optimizing something that doesn't matter"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-030
     why: "audit feedback loops to find where the leverage point sits in the system dynamics"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List the interventions you're considering (or already executing). For each one, place it on this hierarchy from weakest to strongest leverage: (1) adjusting numbers/parameters, (2) adjusting buffer sizes, (3) improving information flows, (4) changing the rules, (5) changing who makes the rules, (6) changing the goal of the system. If most of your effort is at levels 1-2, you're tweaking parameters in a system whose structure is the problem. Move up the hierarchy. Identify the highest-leverage intervention you could make and write down what it would take to execute it.
+List the interventions you're considering (or already executing). For each one, place it on this hierarchy from weakest to strongest leverage: (1) adjusting numbers/parameters, (2) adjusting buffer sizes, (3) improving information flows, (4) changing the rules, (5) changing who makes the rules, (6) changing the goal of the system. If most of your effort is at levels 1-2, you're tweaking parameters in a system whose structure is the problem. Move up the hierarchy. Identify the highest-leverage intervention you could make and write down what it would take to execute it. Where would someone in {{domain.1}} say the leverage point is?
 
 ## When to Use
 

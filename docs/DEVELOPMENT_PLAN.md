@@ -111,24 +111,54 @@ Three tiers:
 
 ---
 
-## Phase 3 — Smart Router (LLM-based)
+## Phase 3 — Smart Router
 
-**Goal:** Replace random move selection in `/suggest?style=matched` with context-aware routing.
+**Goal:** Replace random move selection in `/suggest?style=matched` with intelligent routing that balances relevance with surprise.
 
-**When:** After we have ~100+ ratings to validate against. The router needs real usage data to tune, not just vibes.
+**When:** Can be built alongside or shortly after Phase 2 deployment. Rating data improves it over time but isn't required to start — the embedding + LLM pipeline works from day one.
 
-### 3.1 Prompted Router
+### Design Principle
+
+Pure embedding similarity would just return "the move that sounds most like your problem" — which is the opposite of good metacognition. The whole point is to sometimes give you the move you *wouldn't* have reached for. The router must balance **relevance** (the move should apply) with **surprise** (the move should shift your thinking somewhere unexpected).
+
+### 3.1 The Routing Pipeline
+
 When `/suggest` is called with `style: matched`:
-1. Send the agent's context (`goal`, `current_approach`, `stuck_on`, `mode`) + all move summaries (`id`, `name`, `one_liner`, `problem_signatures`) to an LLM
-2. Prompt asks the LLM to select the 1-3 most relevant moves and explain why
-3. Return the top pick, resolved with variables and seed
 
-**Model choice:** Haiku for speed/cost. The routing prompt is small (move summaries are ~50 tokens each × 200 moves = ~10K tokens input). Sub-second response time is critical — the agent is mid-task.
-
-**The prompt shape:**
 ```
-You are a metacognitive advisor. Given the user's current situation,
-select the most helpful thinking move from the catalog.
+Context (goal, approach, stuck_on, mode)
+        │
+        ▼
+┌─────────────────────┐
+│  Embed the context   │  embeddinggemma-300m (~50ms)
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│  Pull 5 candidates   │  3 by vector similarity + 2 random from same mode
+└─────────┬───────────┘
+          │
+          ▼
+┌─────────────────────┐
+│  LLM picks the best  │  llama-3.2-1b-instruct (~200ms)
+└─────────┬───────────┘
+          │
+          ▼
+     Resolved move
+     (variables + seed)
+```
+
+**Step 1 — Embed the context.** Concatenate `goal + current_approach + stuck_on` into a single string. Embed with `embeddinggemma-300m` (300M params, runs on Cloudflare edge, effectively free).
+
+**Step 2 — Pull candidates.** Query Vectorize for the top 3 most similar moves (by `one_liner + problem_signatures` embeddings). Then add 2 random moves from the same mode that are NOT in the top 3. These random candidates are the "left field" insurance — they ensure the router doesn't become insular.
+
+**Step 3 — LLM picks the best.** Send all 5 candidates (id, name, one_liner, problem_signatures) plus the agent's context to `llama-3.2-1b-instruct` (1B params, ~200ms on Cloudflare edge). The prompt explicitly asks for the most *unexpectedly useful* move, not the most obviously related one.
+
+**Total latency:** ~250ms. No external API calls. Everything runs inside the Cloudflare Worker on edge infrastructure.
+
+**The LLM prompt:**
+```
+You are a metacognitive advisor selecting a thinking move for someone who is working on a problem.
 
 SITUATION:
 - Mode: {{mode}}
@@ -136,31 +166,61 @@ SITUATION:
 - Current approach: {{current_approach}}
 - Stuck on: {{stuck_on}}
 
-AVAILABLE MOVES:
-{{for each move: id, name, one_liner, problem_signatures}}
+CANDIDATE MOVES:
+{{for each candidate: id, name, one_liner, problem_signatures}}
 
-Select the single best move. Return just its ID and a one-sentence reason.
+Pick the single move most likely to shift this person's thinking in an unexpected and useful direction. Not the most obviously related move — the one that will produce the most surprising insight.
+
+Return ONLY the move ID.
 ```
 
-### 3.2 Rating-Informed Tuning
-- Analyze ratings: which moves work for which problem shapes?
-- Build a lookup table: problem_signature → move performance
-- Weight routing toward moves with higher ratings for similar contexts
-- Update problem_signatures on moves based on real usage patterns
+### 3.2 Embedding Management
+
+All move embeddings are pre-computed and stored in Vectorize. Recalculation on change:
+
+- `scripts/build-embeddings.ts` — reads all moves, embeds `one_liner + problem_signatures`, upserts to Vectorize
+- Run when moves are added/edited: `pnpm build:embeddings`
+- Can be a pre-deploy hook: `pnpm build:embeddings && pnpm wrangler deploy`
+- 200 moves × 1 embedding each = a few seconds total. No incremental logic needed at this scale.
 
 ### 3.3 Oblique Router ✅ (already built)
-`style: oblique` deliberately selects from a different mode. Already implemented in v0.
 
-### 3.4 Fine-Tuned Classifier (later)
-- Train lightweight classifier on (context → move_id) pairs from ratings
-- Replace prompted router for lower latency and zero LLM cost
-- Only viable after significant volume (1000+ rated interactions)
+`style: oblique` skips the pipeline entirely and picks from a different mode. Pure random. This is by design — sometimes the most useful move is the one with zero contextual relevance.
+
+### 3.4 Rating-Informed Tuning (later)
+
+Once we have 100+ ratings:
+- Analyze which moves work for which problem shapes
+- Weight the vector similarity results by historical performance
+- Feed rating history into the LLM prompt as additional context ("moves that worked well in similar situations: ...")
+- Update problem_signatures on moves based on real usage patterns
+
+### 3.5 Fine-Tuned Classifier (much later)
+
+After 1000+ rated interactions:
+- Fine-tune a small model on (context → move_id) pairs
+- Could run as a custom model on Workers AI
+- Replaces the embedding + LLM pipeline for even lower latency
+- Only worth the effort if the pipeline is provably better than random
+
+### Infrastructure (all Cloudflare-native)
+
+| Component | Service | Cost |
+|-----------|---------|------|
+| Embedding model | Workers AI: embeddinggemma-300m | Free tier |
+| Vector storage | Vectorize | Free tier (5M vectors) |
+| Routing LLM | Workers AI: llama-3.2-1b-instruct | Neurons pricing (negligible) |
+| Everything else | Same Worker | Already deployed |
+
+No external API keys. No Anthropic billing. The entire routing stack runs on the edge.
 
 ### Phase 3 Deliverables
-- [ ] Prompted router live on `/suggest?style=matched`
-- [ ] Latency under 500ms
-- [ ] Rating analysis showing router outperforms random
-- [ ] A/B test: random vs. routed selection
+- [ ] `scripts/build-embeddings.ts` — pre-compute and upload move embeddings
+- [ ] Vectorize index configured in `wrangler.toml`
+- [ ] Routing pipeline in `/suggest` handler
+- [ ] LLM tiebreaker prompt tuned
+- [ ] Latency under 300ms
+- [ ] A/B test: random vs. routed selection (once we have rating data)
 
 ---
 

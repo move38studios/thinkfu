@@ -13,6 +13,11 @@ problem_signatures:
   - "the codebase used to feel clean and now it feels fragmented"
   - "I can't tell if this change helps or hurts the whole"
   - "we're optimizing locally but the system is getting harder to understand"
+variables:
+  count:
+    type: number
+    min: 2
+    max: 5
 pairs_with:
   - id: TF-105
     why: "Quality Without a Name diagnoses the feeling; Preserve the Centers gives you the structural lens"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Before making a change, identify the three strongest "centers" in your system — the parts that generate coherence, the elements everything else orbits around, the pieces that make the system feel like itself. These might be a core data model, a key abstraction, a naming convention, a primary user flow, or an architectural invariant. Write them down. Now evaluate your proposed change against each center: does this change STRENGTHEN the center (intensify it, make it more coherent, extend its influence) or WEAKEN it (dilute it, contradict it, create a competing center)? Good changes strengthen existing centers. Destructive changes create new centers that compete with old ones.
+Before making a change, identify the {{count}} strongest "centers" in your system — the parts that generate coherence, the elements everything else orbits around, the pieces that make the system feel like itself. These might be a core data model, a key abstraction, a naming convention, a primary user flow, or an architectural invariant. Write them down. Now evaluate your proposed change against each center: does this change STRENGTHEN the center (intensify it, make it more coherent, extend its influence) or WEAKEN it (dilute it, contradict it, create a competing center)? Good changes strengthen existing centers. Destructive changes create new centers that compete with old ones.
 
 ## When to Use
 

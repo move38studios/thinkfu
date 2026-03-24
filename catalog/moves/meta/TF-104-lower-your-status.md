@@ -12,6 +12,11 @@ problem_signatures:
   - "I keep reaching for sophisticated tools when simpler ones might work"
   - "nobody is pushing back on my approach and that worries me"
   - "I'm reluctant to propose the simple version because it feels embarrassing"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-006
     why: "What Would a Beginner Do targets the same instinct — strip expertise-bias from the design"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Pause and audit your status moves. High-status technical moves include: using jargon when plain language works, reaching for complex architectures, dismissing simpler alternatives as "naive," assuming expertise you haven't verified, and over-engineering for hypothetical scale. Now deliberately lower your status. Do one of these: (1) propose the embarrassingly simple version out loud, (2) ask a question you're afraid sounds dumb, (3) admit specifically what you don't know about this problem, or (4) describe your solution without any technical vocabulary. If the low-status version works, the complexity was ego, not engineering.
+{{thinker.1}} is watching your work. Are you performing competence or actually being useful? Pause and audit your status moves. High-status technical moves include: using jargon when plain language works, reaching for complex architectures, dismissing simpler alternatives as "naive," assuming expertise you haven't verified, and over-engineering for hypothetical scale. Now deliberately lower your status. Do one of these: (1) propose the embarrassingly simple version out loud, (2) ask a question you're afraid sounds dumb, (3) admit specifically what you don't know about this problem, or (4) describe your solution without any technical vocabulary. If the low-status version works, the complexity was ego, not engineering.
 
 ## When to Use
 

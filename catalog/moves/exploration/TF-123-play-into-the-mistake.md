@@ -13,6 +13,11 @@ problem_signatures:
   - "we built the wrong thing but users are already using it"
   - "the mistake revealed something we didn't know about the system"
   - "reverting would lose progress along with the error"
+variables:
+  word:
+    type: pick
+    count: 1
+    pool: random-words
 pairs_with:
   - id: TF-037
     why: "Honor Thy Error is the philosophical cousin — use it for general openness to mistakes, then Play Into the Mistake for the specific tactical move"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-You have made a mistake — wrong output, wrong behavior, wrong direction. Before you revert, pause. Describe the mistake in one sentence. Now ask: "What context would make this output correct?" Can you change the surrounding system, the framing, or the requirements so the mistake becomes an intended behavior? If the cost of recontextualizing is lower than the cost of reverting, play into the mistake. Miles Davis did not hear a wrong chord — he heard an unresolved chord, and he resolved it.
+You have made a mistake — wrong output, wrong behavior, wrong direction. Before you revert, pause. Describe the mistake in one sentence. Recontextualize using {{word.1}} — what if the mistake has the properties of {{word.1}}? Now ask: "What context would make this output correct?" Can you change the surrounding system, the framing, or the requirements so the mistake becomes an intended behavior? If the cost of recontextualizing is lower than the cost of reverting, play into the mistake. Miles Davis did not hear a wrong chord — he heard an unresolved chord, and he resolved it.
 
 ## When to Use
 

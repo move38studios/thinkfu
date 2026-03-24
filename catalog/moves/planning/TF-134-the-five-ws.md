@@ -13,6 +13,11 @@ problem_signatures:
   - "everyone on the team has a slightly different understanding of the task"
   - "I'm about to start but I have a nagging feeling I've missed something"
   - "the ticket says what to build but not why it matters"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-003
     why: "Three Framings explores different problem interpretations; Five Ws ensures each framing is complete"
@@ -26,7 +31,7 @@ pairs_with:
 
 Before starting work, answer these six questions in one sentence each. Write the answers down — do not just think them. (1) WHO is this for? Name a specific user or persona. (2) WHAT does it do? One sentence, no jargon. (3) WHEN do they need it? A date or a trigger condition. (4) WHERE does it live? Which system, repo, service, or context. (5) WHY does it matter? What changes if this ships vs. does not ship. (6) HOW does it work? The one-sentence mechanism.
 
-If any answer is vague ("everyone," "whenever," "because it's better," "somewhere in the backend"), you have found a gap. Resolve the gap before writing code. The framework works because it is both simple and complete — it forces you to address the dimensions that planning typically skips.
+Then answer the five Ws again from {{persona.1}}'s perspective. What shifts? If any answer is vague ("everyone," "whenever," "because it's better," "somewhere in the backend"), you have found a gap. Resolve the gap before writing code. The framework works because it is both simple and complete — it forces you to address the dimensions that planning typically skips.
 
 ## When to Use
 

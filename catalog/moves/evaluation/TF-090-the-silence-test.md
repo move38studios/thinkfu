@@ -13,6 +13,11 @@ problem_signatures:
   - "I need to prioritize what to keep and what to cut"
   - "we're adding complexity and I can't tell if it's earning its keep"
   - "the roadmap is full but nothing on it feels urgent"
+variables:
+  timeframe:
+    type: pick
+    count: 1
+    pool: timeframes
 pairs_with:
   - id: TF-052
     why: "delete half the features is the action step after the silence test identifies what's unnecessary"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Mentally remove your solution — the feature, the service, the tool, the process — entirely. Not "what if it broke" but "what if it never existed." Now observe the silence: what fills the gap? If users would route around it immediately using existing tools, your solution is convenient but not necessary. If nothing fills the gap and nobody notices, you're solving a phantom problem. If something unexpected fills the gap — a workaround, a manual process, a competitor — THAT reveals the real dynamic you should be designing for. Cage's 4'33" revealed that silence isn't silent — the ambient sounds of the room ARE the music. Your system's absence isn't empty either. What's in the negative space?
+Mentally remove your solution — the feature, the service, the tool, the process — entirely. Not "what if it broke" but "what if it never existed." Delete your solution mentally. At {{timeframe.1}}, what filled the gap? Now observe the silence: If users would route around it immediately using existing tools, your solution is convenient but not necessary. If nothing fills the gap and nobody notices, you're solving a phantom problem. If something unexpected fills the gap — a workaround, a manual process, a competitor — THAT reveals the real dynamic you should be designing for. Cage's 4'33" revealed that silence isn't silent — the ambient sounds of the room ARE the music. Your system's absence isn't empty either. What's in the negative space?
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "the architecture is in my head but I can't hold it all at once"
   - "every time I fix one part I break another because I forgot the dependency"
   - "we need a picture, not another document"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-079
     why: "climb the ladder of abstraction to decide what level of detail your whole-system view should show"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Take your system — the modules, services, data flows, user journeys, whatever you're working on — and create a representation where every part is visible simultaneously on one screen or one wall. Not a document you scroll through. Not a list you read top-to-bottom. A spatial layout where position and proximity encode relationships. Use a whiteboard, a diagramming tool, sticky notes on a wall, or a single wide canvas. Place components and draw connections. Now step back and look at the whole thing. What clusters appear? Where do the arrows concentrate? What's isolated that shouldn't be? What's connected that shouldn't be? The patterns that emerge from the spatial view are invisible in any sequential representation.
+Take your system — the modules, services, data flows, user journeys, whatever you're working on — and create a representation where every part is visible simultaneously on one screen or one wall. Not a document you scroll through. Not a list you read top-to-bottom. A spatial layout where position and proximity encode relationships. Use a whiteboard, a diagramming tool, sticky notes on a wall, or a single wide canvas. Place components and draw connections. Render the whole system as {{genre.1}} — what does the genre's structure reveal? Now step back and look at the whole thing. What clusters appear? Where do the arrows concentrate? What's isolated that shouldn't be? What's connected that shouldn't be? The patterns that emerge from the spatial view are invisible in any sequential representation.
 
 ## When to Use
 

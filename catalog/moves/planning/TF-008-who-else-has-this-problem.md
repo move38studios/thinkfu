@@ -14,6 +14,11 @@ problem_signatures:
   - "my solution feels clunky and I suspect there's an elegant one somewhere"
   - "I keep reinventing infrastructure that probably exists"
   - "the domain is niche but the underlying structure is common"
+variables:
+  domain:
+    type: pick
+    count: 2
+    pool: domains
 pairs_with:
   - id: TF-004
     why: "if cross-domain search finds a promising pattern, use Import from Another Domain to rigorously translate it"
@@ -25,7 +30,7 @@ pairs_with:
 
 ## The Move
 
-Strip your problem down to its abstract structure: ignore the domain, the technology, and the specifics. Write one sentence describing the *shape* of the problem — what goes in, what comes out, what constraint makes it hard. Then list 3-5 other domains where that same shape appears. For each domain, research how they solved it. Look for the structural match, not the surface match. Translate the most promising solution back into your domain.
+Search {{domain.1}} and {{domain.2}} for structurally similar problems. Strip your problem down to its abstract structure: ignore the domain, the technology, and the specifics. Write one sentence describing the *shape* of the problem — what goes in, what comes out, what constraint makes it hard. Then list 3-5 other domains where that same shape appears. For each domain, research how they solved it. Look for the structural match, not the surface match. Translate the most promising solution back into your domain.
 
 ## When to Use
 

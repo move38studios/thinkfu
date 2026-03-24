@@ -13,6 +13,11 @@ problem_signatures:
   - "I can't explain why I dislike this solution even though it scores well on my criteria"
   - "the team keeps arguing about one thing while ignoring everything else"
   - "my evaluation feels one-dimensional"
+variables:
+  count:
+    type: number
+    min: 3
+    max: 6
 pairs_with:
   - id: TF-020
     why: "zoom in/out shifts scale; decentration shifts which dimension you're looking at entirely"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Name the **single dimension** you've been evaluating your solution on. Write it down: "I've been focused on ___." (Performance? Cost? Simplicity? Time-to-ship? Elegance?) Now list **three other dimensions** that matter but that you haven't been weighing. Rate your current solution on all four dimensions, using a simple 1-5 scale. The dimension you weren't looking at is usually where the real problem lives.
+Name the **single dimension** you've been evaluating your solution on. Write it down: "I've been focused on ___." (Performance? Cost? Simplicity? Time-to-ship? Elegance?) List {{count}} dimensions you're ignoring. Now list those dimensions that matter but that you haven't been weighing. Rate your current solution on all four dimensions, using a simple 1-5 scale. The dimension you weren't looking at is usually where the real problem lives.
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "jumping straight to solution mode"
   - "only see one way to interpret the brief"
   - "treating the problem as already defined"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-019
     why: "after generating three framings, map the assumptions behind each to decide which framing fits best"
@@ -26,7 +31,7 @@ pairs_with:
 
 Before solving anything, write three genuinely different versions of the problem statement. Not three wordings of the same problem — three different *framings* that would lead to different solutions.
 
-The way you frame a problem determines the solution space you search. Most of the time, you inherit one framing (from the user, the ticket, the brief) and never question it. But the framing is a choice, and it's often the most consequential choice in the entire process.
+For the third framing, ask: how would someone in {{domain.1}} frame this problem? The way you frame a problem determines the solution space you search. Most of the time, you inherit one framing (from the user, the ticket, the brief) and never question it. But the framing is a choice, and it's often the most consequential choice in the entire process.
 
 ## When to Use
 

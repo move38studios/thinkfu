@@ -12,6 +12,11 @@ problem_signatures:
   - "this component is trying to do two incompatible things at once"
   - "the conflict might dissolve if we put these in different locations"
   - "we need both behaviors but they can't coexist in one module"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-027
     why: "alternative separation dimension when the conflict is temporal, not spatial"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-You have two requirements that conflict when they live in the same place. Ask: do they actually need to be in the same place? Identify the two conflicting needs, then list the places they could live separately — different modules, different services, different interfaces, different environments, different data stores. For each candidate separation, check whether splitting removes the conflict without creating a worse coordination problem. Pick the split where the boundary is cleanest.
+You have two requirements that conflict when they live in the same place. Ask: do they actually need to be in the same place? Identify the two conflicting needs, then list the places they could live separately — different modules, different services, different interfaces, different environments, different data stores. For each candidate separation, check whether splitting removes the conflict without creating a worse coordination problem. How does {{domain.1}} handle spatial separation of conflicting requirements? Pick the split where the boundary is cleanest.
 
 ## When to Use
 

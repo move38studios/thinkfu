@@ -13,6 +13,11 @@ problem_signatures:
   - "the obvious cause feels too shallow"
   - "we're treating symptoms instead of the disease"
   - "the same kind of bug keeps appearing in different places"
+variables:
+  depth:
+    type: number
+    min: 3
+    max: 7
 pairs_with:
   - id: TF-031
     why: "the fifth why often reveals the leverage point — the structural cause worth changing"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-State the problem in one concrete sentence — not "things are slow" but "the checkout page takes 4 seconds to load." Ask "Why?" and write the answer. Ask "Why?" of that specific answer. Repeat until you've asked five times. Each "why" must target the previous answer specifically, not the original problem. Don't ask "why" in the abstract — ask "why did THAT happen?" If a "why" has multiple answers, pick the one that's most within your control and continue that branch. The first why gives a symptom. The second gives a proximate cause. By the fifth, you're usually at a structural or process-level root cause.
+Ask 'why?' {{depth}} times. State the problem in one concrete sentence — not "things are slow" but "the checkout page takes 4 seconds to load." Ask "Why?" and write the answer. Ask "Why?" of that specific answer. Repeat until you've asked five times. Each "why" must target the previous answer specifically, not the original problem. Don't ask "why" in the abstract — ask "why did THAT happen?" If a "why" has multiple answers, pick the one that's most within your control and continue that branch. The first why gives a symptom. The second gives a proximate cause. By the fifth, you're usually at a structural or process-level root cause.
 
 ## When to Use
 

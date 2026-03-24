@@ -13,6 +13,11 @@ problem_signatures:
   - "there's one part that keeps causing problems"
   - "I assumed we needed this but now I'm not sure"
   - "the architecture has a piece that scares everyone"
+variables:
+  count:
+    type: number
+    min: 1
+    max: 3
 pairs_with:
   - id: TF-052
     why: "if removing one part helped, try Delete Half to aggressively strip down the rest of the solution"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-List every component of your current solution. For each one, estimate its cost — in implementation time, ongoing complexity, risk, or literal dollars. Rank them. Take the most expensive one and remove it completely. Don't replace it with something cheaper — just delete it. Now ask: does the remaining solution still solve the core problem? If yes, you were carrying dead weight. If no, ask what minimal thing you'd need to add back. That minimal thing is almost always cheaper than what you removed.
+Remove the top {{count}} most expensive parts. List every component of your current solution. For each one, estimate its cost — in implementation time, ongoing complexity, risk, or literal dollars. Rank them. Take the most expensive one and remove it completely. Don't replace it with something cheaper — just delete it. Now ask: does the remaining solution still solve the core problem? If yes, you were carrying dead weight. If no, ask what minimal thing you'd need to add back. That minimal thing is almost always cheaper than what you removed.
 
 ## When to Use
 

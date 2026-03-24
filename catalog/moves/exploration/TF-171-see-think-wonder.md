@@ -13,6 +13,11 @@ problem_signatures:
   - "I'm interpreting data before I've finished looking at it"
   - "everyone has an opinion but nobody has observed carefully"
   - "we're arguing about solutions before agreeing on what we're looking at"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-165
     why: "sit with the felt difficulty is Dewey's version of the same impulse — observe before solving"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Three phases, done strictly in order with no bleeding between them. **SEE (3 minutes):** Write down only what you observe. Facts. No interpretation. "The response time graph shows a spike at 2:14 PM." NOT "The server was overloaded at 2:14 PM." **THINK (3 minutes):** Now interpret. What do your observations suggest? "The spike coincides with the daily cron job. It might be resource contention." **WONDER (3 minutes):** What questions do your interpretations raise? "Does the cron job run on the same host? What happens if we move it to off-peak hours? Are there other daily patterns we haven't noticed?" Do not answer the Wonder questions yet. Collect them.
+Three phases, done strictly in order with no bleeding between them. **SEE (3 minutes):** SEE through the eyes of {{persona.1}}. Write down only what you observe. Facts. No interpretation. "The response time graph shows a spike at 2:14 PM." NOT "The server was overloaded at 2:14 PM." **THINK (3 minutes):** Now interpret. What do your observations suggest? "The spike coincides with the daily cron job. It might be resource contention." **WONDER (3 minutes):** What questions do your interpretations raise? "Does the cron job run on the same host? What happens if we move it to off-peak hours? Are there other daily patterns we haven't noticed?" Do not answer the Wonder questions yet. Collect them.
 
 ## When to Use
 

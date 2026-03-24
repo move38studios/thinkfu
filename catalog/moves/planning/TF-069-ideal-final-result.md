@@ -13,6 +13,11 @@ problem_signatures:
   - "I don't have a clear picture of what 'done' looks like"
   - "we're debating implementation before agreeing on the destination"
   - "every proposed solution comes with painful tradeoffs"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-022
     why: "after defining the ideal, use Remove the Most Expensive Part to identify which current components are furthest from it"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Write one sentence describing the Ideal Final Result: the function you need is performed perfectly, but the system that performs it does not exist. There is no new mechanism, no added cost, no harmful side effects. The problem simply doesn't occur. This sounds absurd — that's the point. Now ask three questions: (1) What would have to be true for this ideal to actually work? (2) Which of those conditions are already partially true? (3) What is the smallest real mechanism that bridges the remaining gap? The gap between your current system and the ideal is your actual work list.
+{{thinker.1}}'s ideal: the problem solves itself. What does their version look like? Write one sentence describing the Ideal Final Result: the function you need is performed perfectly, but the system that performs it does not exist. There is no new mechanism, no added cost, no harmful side effects. The problem simply doesn't occur. This sounds absurd — that's the point. Now ask three questions: (1) What would have to be true for this ideal to actually work? (2) Which of those conditions are already partially true? (3) What is the smallest real mechanism that bridges the remaining gap? The gap between your current system and the ideal is your actual work list.
 
 ## When to Use
 

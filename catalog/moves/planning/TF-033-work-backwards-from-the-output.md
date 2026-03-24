@@ -13,6 +13,11 @@ problem_signatures:
   - "I built a bunch of infrastructure and still don't have the thing I need"
   - "the requirements feel vague and I'm guessing at what to build"
   - "I keep gold-plating components that might not matter"
+variables:
+  genre:
+    type: pick
+    count: 1
+    pool: genres
 pairs_with:
   - id: TF-043
     why: "once you have the backward chain, prototype the riskiest step first to validate the whole plan"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Write down the *exact* final output. Not a description of it — the actual thing. If it's an API response, write the JSON. If it's a report, sketch the page with real numbers. If it's a CLI tool, write the terminal session showing the command and its output. Now look at that output and ask: what is the last transformation that produces this? Write that down. Then ask: what does *that* step need as input? Keep going until you reach things you already have. The chain from existing inputs to final output is your plan.
+Describe the final output as if it were {{genre.1}} — then trace backwards. Write down the *exact* final output. Not a description of it — the actual thing. If it's an API response, write the JSON. If it's a report, sketch the page with real numbers. If it's a CLI tool, write the terminal session showing the command and its output. Now look at that output and ask: what is the last transformation that produces this? Write that down. Then ask: what does *that* step need as input? Keep going until you reach things you already have. The chain from existing inputs to final output is your plan.
 
 ## When to Use
 

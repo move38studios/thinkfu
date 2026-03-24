@@ -13,6 +13,11 @@ problem_signatures:
   - "there are good ideas scattered everywhere but nothing cohesive"
   - "I could summarize what I explored but I can't say what I learned"
   - "the exploration was productive but I don't know what to do with it"
+variables:
+  word_limit:
+    type: number
+    min: 3
+    max: 10
 pairs_with:
   - id: TF-005
     why: "name your strategy after crystallizing — the insight should reshape what you do next"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Stop generating. Review everything you've produced — ideas, angles, fragments, half-thoughts, seeds. Now write ONE sentence that captures the core insight. Not a summary of what you explored. The single non-obvious thing you now believe that you didn't believe before you started.
+Stop generating. Review everything you've produced — ideas, angles, fragments, half-thoughts, seeds. Compress to exactly {{word_limit}} words. Now write ONE sentence that captures the core insight. Not a summary of what you explored. The single non-obvious thing you now believe that you didn't believe before you started.
 
 If you can't write that sentence, you haven't found the insight yet — keep exploring. If you can, everything else is decoration around it. That sentence is your output. Pin it to the top and let it govern what happens next.
 

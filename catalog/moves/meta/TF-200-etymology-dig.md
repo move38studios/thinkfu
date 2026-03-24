@@ -12,6 +12,11 @@ problem_signatures:
   - "the team argues about the solution but might actually disagree about the definition"
   - "I'm using a technical term that everyone nods at but nobody has examined"
   - "the framing feels inherited rather than chosen"
+variables:
+  language:
+    type: pick
+    count: 1
+    pool: languages
 pairs_with:
   - id: TF-144
     why: "Excavate the Metaphor surfaces the live metaphor; Etymology Dig surfaces the dead one — the metaphor so old it became the literal word"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Identify the key word in your problem — the one that appears in every description, the one everyone uses without questioning. Look up (or reason about) its etymology: what did it originally mean, literally? "Decide" comes from Latin *decidere* — to cut off. "Problem" from Greek *proballein* — to throw forward. "Computer" once meant a human who computes. "Manager" from Italian *maneggiare* — to handle horses. Write down the original meaning. Now ask: is the dead metaphor inside this word shaping how I think about the problem? If "deciding" is "cutting off," am I unconsciously treating every decision as an elimination rather than a selection? Name the hidden metaphor. Then ask: what if the opposite metaphor were true?
+Identify the key word in your problem — the one that appears in every description, the one everyone uses without questioning. Look up (or reason about) its etymology: what did it originally mean, literally? "Decide" comes from Latin *decidere* — to cut off. "Problem" from Greek *proballein* — to throw forward. "Computer" once meant a human who computes. "Manager" from Italian *maneggiare* — to handle horses. Write down the original meaning. Now ask: is the dead metaphor inside this word shaping how I think about the problem? If "deciding" is "cutting off," am I unconsciously treating every decision as an elimination rather than a selection? Also trace the key word in {{language.1}} — what root does it come from there? Name the hidden metaphor. Then ask: what if the opposite metaphor were true?
 
 ## When to Use
 

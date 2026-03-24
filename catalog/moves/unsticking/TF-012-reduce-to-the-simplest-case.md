@@ -12,6 +12,11 @@ problem_signatures:
   - "it works in simple tests but breaks in the real system"
   - "I can't isolate what's actually causing the issue"
   - "the problem is too complex to hold in my head all at once"
+variables:
+  parts:
+    type: number
+    min: 1
+    max: 3
 pairs_with:
   - id: TF-026
     why: "after reducing, find the bottleneck in the piece that broke when you added it back"
@@ -23,7 +28,7 @@ pairs_with:
 
 ## The Move
 
-Remove every variable, feature, and edge case until you have the dumbest possible version of the problem — one input, one output, no config, hardcoded everything. Solve that trivial version completely. Then add back one piece of complexity at a time, testing after each addition. The exact addition that breaks things (or makes you stuck again) is the real problem.
+Reduce to {{parts}} moving parts. Remove every variable, feature, and edge case until you have the dumbest possible version of the problem — one input, one output, no config, hardcoded everything. Solve that trivial version completely. Then add back one piece of complexity at a time, testing after each addition. The exact addition that breaks things (or makes you stuck again) is the real problem.
 
 ## When to Use
 

@@ -13,6 +13,11 @@ problem_signatures:
   - "the obvious answer is boring and I wonder if there's a deeper pattern"
   - "I have competing hypotheses and I'm not sure which to investigate first"
   - "my explanation works but it doesn't feel satisfying"
+variables:
+  domain:
+    type: pick
+    count: 1
+    pool: domains
 pairs_with:
   - id: TF-034
     why: "what would have to be true stress-tests each explanation's assumptions"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-You have multiple explanations for a phenomenon. **Rank them by likeliest** — most probable given your current evidence and priors. Now **separately rank by loveliest** — which explanation, if true, would explain the most other puzzling things with the most elegance? The likeliest explanation is the safe bet. The loveliest is the high-value investigation target. When the two rankings diverge — when the loveliest explanation is not the likeliest — that gap is where breakthrough understanding hides. Invest investigation time proportional to the explanatory payoff, not just the prior probability.
+You have multiple explanations for a phenomenon. **Rank them by likeliest** — most probable given your current evidence and priors. Now **separately rank by loveliest** — which explanation, if true, would explain the most other puzzling things with the most elegance? The likeliest explanation is the safe bet. The loveliest is the high-value investigation target. What explanation would someone in {{domain.1}} find loveliest? When the two rankings diverge — when the loveliest explanation is not the likeliest — that gap is where breakthrough understanding hides. Invest investigation time proportional to the explanatory payoff, not just the prior probability.
 
 ## When to Use
 

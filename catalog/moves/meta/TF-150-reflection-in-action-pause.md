@@ -13,6 +13,11 @@ problem_signatures:
   - "something feels off but I can't articulate what"
   - "I keep making the same kind of adjustment without questioning why"
   - "my approach shifted somewhere but I didn't notice when"
+variables:
+  thinker:
+    type: pick
+    count: 1
+    pool: thinkers
 pairs_with:
   - id: TF-005
     why: "Name Your Current Strategy is the what; Reflection-in-Action Pause is the what-am-I-noticing-right-now"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Checkpoint: stop what you are doing right now — not after this function, not after this paragraph, now. Answer three questions in writing: "What am I noticing?" (observations about the work as it unfolds), "What is working?" (what is producing results or moving toward the goal), and "What would I adjust?" (what your in-process experience is telling you to change). Schon's key distinction: reflection-ON-action happens after the fact and misses the signals of the moment; reflection-IN-action happens mid-process while context is still loaded and captures signals that vanish once you step away. Write the answers down — do not just hold them in memory. The act of writing forces the implicit to become explicit.
+Checkpoint: stop what you are doing right now — not after this function, not after this paragraph, now. What would {{thinker.1}} notice at this checkpoint that you're missing? Answer three questions in writing: "What am I noticing?" (observations about the work as it unfolds), "What is working?" (what is producing results or moving toward the goal), and "What would I adjust?" (what your in-process experience is telling you to change). Schon's key distinction: reflection-ON-action happens after the fact and misses the signals of the moment; reflection-IN-action happens mid-process while context is still loaded and captures signals that vanish once you step away. Write the answers down — do not just hold them in memory. The act of writing forces the implicit to become explicit.
 
 ## When to Use
 

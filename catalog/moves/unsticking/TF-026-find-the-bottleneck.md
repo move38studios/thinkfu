@@ -13,6 +13,11 @@ problem_signatures:
   - "work keeps piling up at the same stage"
   - "the team is busy everywhere but delivery is flat"
   - "I need to find the single point that's holding everything back"
+variables:
+  persona:
+    type: pick
+    count: 1
+    pool: personas
 pairs_with:
   - id: TF-031
     why: "find the leverage point generalizes bottleneck thinking beyond throughput to any system"
@@ -24,7 +29,7 @@ pairs_with:
 
 ## The Move
 
-Map the flow of work through your system from start to finish — every stage, handoff, and queue. For each stage, estimate throughput (how much can it process per unit of time) and observe where work piles up waiting. The stage with the lowest throughput or the longest queue in front of it is your bottleneck. Now apply the rule: any improvement not at the bottleneck is an illusion. Ignore everything else. Focus all effort on increasing the capacity of that one stage. Once it's no longer the bottleneck, find the new one and repeat.
+{{persona.1}} watches your process end to end — where do they see the queue forming? Map the flow of work through your system from start to finish — every stage, handoff, and queue. For each stage, estimate throughput (how much can it process per unit of time) and observe where work piles up waiting. The stage with the lowest throughput or the longest queue in front of it is your bottleneck. Now apply the rule: any improvement not at the bottleneck is an illusion. Ignore everything else. Focus all effort on increasing the capacity of that one stage. Once it's no longer the bottleneck, find the new one and repeat.
 
 ## When to Use
 
