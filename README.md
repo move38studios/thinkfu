@@ -465,16 +465,20 @@ thinkfu/
 │       └── helpers.ts        # Filtering, selection, formatting
 ├── api/
 │   ├── src/
-│   │   └── index.ts          # Hono API (REST + future website)
-│   └── wrangler.toml         # Cloudflare Worker config
-├── mcp/
-│   └── src/
-│       └── server.ts         # Local MCP server (FastMCP)
-├── plugin/                   # Claude Code plugin (for distribution)
+│   │   ├── index.ts          # Hono API + website routes
+│   │   ├── html.ts           # HTML rendering
+│   │   └── catalog-data.ts   # Pre-parsed catalog loader
+│   └── wrangler.jsonc        # Cloudflare Worker config
+├── plugin/                   # Claude Code plugin (also used for local dev)
 │   ├── .claude-plugin/
+│   │   └── plugin.json
 │   ├── skills/thinkfu/
-│   ├── catalog/              # symlink → ../../catalog
-│   └── mcp/                  # bundled MCP server
+│   │   └── SKILL.md          # symlink → ../../SKILL.md
+│   ├── catalog/              # symlink → ../catalog
+│   ├── mcp/                  # MCP server (FastMCP + stdio)
+│   │   ├── src/server.ts
+│   │   └── start.sh
+│   └── .mcp.json
 ├── SKILL.md
 ├── LICENSE.md
 └── scripts/
