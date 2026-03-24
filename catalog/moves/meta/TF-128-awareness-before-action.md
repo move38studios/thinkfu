@@ -1,7 +1,7 @@
 ---
 id: TF-128
 name: Awareness Before Action
-one_liner: "Before doing anything, spend 60 seconds just noticing. What is actually true right now?"
+one_liner: "Before doing anything, audit current state. What is actually true right now?"
 mode: [plan, stuck]
 category: Meta
 tags: [awareness, mindfulness, assumptions, rick-rubin, creative-act, observation, grounding]
@@ -24,7 +24,7 @@ pairs_with:
 
 ## The Move
 
-Stop. Set a 60-second timer. Do not plan, do not solve, do not discuss. Just notice. Answer these four questions in writing: (1) What is the actual state of the system right now — not what it should be, what it IS? (2) What am I feeling — urgency, confusion, excitement, dread? (3) What am I assuming that I have not verified? (4) What signal am I currently ignoring because it's inconvenient? After 60 seconds, read your answers. The gap between your answers and the story you were telling yourself before the pause — that gap is where mistakes are born. Close the gap before acting.
+Stop. Before doing anything else, audit your current state. Do not plan, do not solve, do not discuss. Answer these four questions in writing: (1) What is the actual state of the system right now — not what it should be, what it IS? List what you know for certain. (2) What is driving your current approach — urgency, confusion, a hunch, inertia? (3) What are you assuming that you have not verified? List every assumption. (4) What signal are you currently ignoring because it's inconvenient? After this audit, compare your answers to the story you were operating under before the pause — that gap is where mistakes are born. Close the gap before acting.
 
 ## When to Use
 

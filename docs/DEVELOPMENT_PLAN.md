@@ -4,362 +4,221 @@
 
 ---
 
-## Phase 0 — Catalog & Local Tooling
+## Phase 0 — Catalog & Local Tooling ✅
 
-**Goal:** 30+ validated cards, complete pools, and a local tool to test them.
+**Goal:** 200+ validated moves, complete pools, local MCP server, validation tooling.
 
-### 0.1 Complete the Pool Files
-- [x] `domains.yaml` — 150+ disciplines
-- [x] `personas.yaml` — 80+ perspectives
-- [x] `random-words.yaml` — 300+ concrete sensory nouns
-- [ ] `constraints.yaml` — creative constraints ("max 3 components", "no nouns", "explain in one sentence")
-- [ ] `timeframes.yaml` — time horizons ("in 5 minutes", "in 10 years", "in 1888")
+**Status: DONE**
 
-### 0.2 Write Seed Cards (target: 30-40)
-Current: 5 cards (one per category). Need ~6-8 per category.
+- [x] 200 moves across 5 categories (planning, exploration, unsticking, evaluation, meta)
+- [x] 9 pool files (domains, personas, random-words, constraints, timeframes, genres, koans, languages, thinkers)
+- [x] Local MCP server (FastMCP + stdio) — tested with Claude Code
+- [x] Catalog validator (`pnpm validate`) — checks YAML, required fields, pool refs, mermaid syntax
+- [x] Shared lib (`lib/src/`) — portable types, parser, resolver, helpers
+- [x] Move quality checklist established
 
-**Planning (before you start)**
-- [x] TF-003 Three Framings
-- [ ] What Would a Beginner Do?
-- [ ] Steal the Opposite Brief
-- [ ] Who Else Has This Problem?
-- [ ] Pre-Mortem
-- [ ] Shrink the Scope to One User
-
-**Exploration (while working)**
-- [x] TF-004 Import from Another Domain
-- [ ] Random Entry (uses `random-words` pool)
-- [ ] Add a Constraint (uses `constraints` pool)
-- [ ] Worst Possible Idea
-- [ ] Combine Two Half-Solutions
-- [ ] Time Shift (uses `timeframes` pool)
-
-**Unsticking (when blocked)**
-- [x] TF-001 Invert the Problem
-- [ ] Reduce to the Simplest Case
-- [ ] Backtrack to the Fork
-- [ ] Explain It to a Child
-- [ ] Change the Representation
-- [ ] Remove the Thing That Feels Essential
-
-**Evaluation (when you think you're done)**
-- [x] TF-002 Describe It Without the Obvious Words
-- [ ] Red Team Your Solution
-- [ ] Change the Audience (uses `personas` pool)
-- [ ] 10x Not 10%
-- [ ] Kill Your Darlings
-- [ ] What Would Go Wrong at Scale?
-
-**Meta (thinking about thinking)**
-- [x] TF-005 Name Your Current Strategy
-- [ ] Map the Assumptions
-- [ ] Zoom In / Zoom Out
-- [ ] Merge Contradictions
-- [ ] Check Your Emotional State
-- [ ] What Question Are You Actually Answering?
-
-### 0.3 Local CLI Tool
-A simple Node/Deno script that:
-- Loads catalog from disk
-- Resolves variables from pools
-- Injects a random seed
-- Serves a card to stdout
-
-```bash
-thinkfu random                     # random card, resolved
-thinkfu suggest --mode stuck       # random from mode
-thinkfu show TF-001                # specific card
-thinkfu validate                   # check all cards for format errors
-```
-
-This is NOT the production server — it's a development/testing tool.
-Validates the card format, variable resolution, and pool references work before we build anything.
-
-### 0.4 Card Quality Checklist
-Every card must pass these tests before shipping:
-
-- [ ] **Mechanical, not aspirational.** Could you follow this move as a procedure without needing to "be creative"? If it says "try harder" or "think differently" it's broken.
-- [ ] **The Move section is 2-4 sentences.** If it needs more, the move is too complex — split it.
-- [ ] **Problem signatures are situation-shaped**, not topic-shaped. "stuck approaching directly" not "creativity".
-- [ ] **Example is concrete and specific.** Not "imagine a problem" but "you're designing X and Y happens."
-- [ ] **Mermaid diagram renders.** Single-line labels, no `&` joins, tested in a renderer.
-- [ ] **Variables resolve correctly.** Pool references exist. Template slots match variable names.
-- [ ] **Watch Out For is honest.** Names real failure modes, not just "don't overdo it."
-
-### Phase 0 Deliverables
-- [x] 30+ cards across all 5 categories **(54 cards written)**
-- [ ] All 5 pool files populated (3/5 done)
-- [x] Local MCP server working (FastMCP + stdio)
-- [ ] Validation script passing on all cards
+### Move Quality Checklist
+Every move must pass:
+- **Mechanical, not aspirational.** Could you follow this as a procedure without needing to "be creative"?
+- **The Move section is 2-4 sentences.** Too complex → split it.
+- **Problem signatures are situation-shaped**, not topic-shaped.
+- **Example is concrete and specific.**
+- **Mermaid diagram renders.** Single-line labels, no `&` joins.
+- **Variables resolve correctly.** Pool references exist.
+- **Watch Out For is honest.** Names real failure modes.
 
 ---
 
-## Phase 1 — Validate with Real Agents
+## Phase 1 — Validate with Real Agents 🔄
 
-**Goal:** Evidence that ThinkFu actually changes output quality. This is the go/no-go gate for building infrastructure.
+**Goal:** Evidence that ThinkFu changes output quality. Go/no-go gate.
 
-### 1.0 Connect ThinkFu to Claude Code
+**Status: IN PROGRESS**
 
-The local MCP server is built and working. To test with a real agent:
+### 1.1 Connect ThinkFu to Claude Code ✅
+MCP server registered and working. SKILL.md loaded via CLAUDE.md include.
 
-**In any project's `.claude/settings.json`:**
+### 1.2 Early Testing ✅
+Two test conversations completed:
+- **Startup ideation** — 8 moves chained, seeds drove the core metaphor ("assumption rust"), produced a novel concept
+- **Strategy framework** — 3 moves applied deeply, each produced concrete actionable output
 
-```json
-{
-  "mcpServers": {
-    "thinkfu": {
-      "command": "pnpm",
-      "args": ["tsx", "src/server.ts"],
-      "cwd": "/Users/gs/dev/thinkfu/mcp"
-    }
-  }
-}
-```
+**Key findings:**
+- Seeds are doing real creative work — not just perturbation, but building metaphorical coherence across chains
+- ThinkFu works better as a sharpening tool for existing thinking than as a generative engine from scratch
+- Agent tends to card-hop (draw many, apply shallowly) rather than apply deeply — SKILL.md updated to address this
+- Agent doesn't rate moves — SKILL.md updated to strengthen this
+- `plan` and `stuck` modes underused — needs more testing
 
-**Then add to that project's `CLAUDE.md`:**
-
-Copy the contents of `/Users/gs/dev/thinkfu/SKILL.md` into the project's CLAUDE.md (or reference it).
-
-Now Claude Code has ThinkFu available as three MCP tools and knows when/how to use them.
-
-### 1.1 Design the Evaluation
-Pick 10 diverse tasks across domains (coding, writing, design, strategy). For each:
-
-1. **Baseline:** Agent solves the task normally
-2. **With ThinkFu:** Agent uses SKILL.md + ThinkFu MCP tools
-3. **Compare:** Score both outputs on originality, quality, and whether the ThinkFu version explored the solution space more
-
-This doesn't need to be rigorous research — it's a gut check. Do the cards change behavior? Do they improve output? Are some categories more useful than others?
-
-### 1.2 Iterate on Cards
-Based on evaluation:
-- Kill cards that don't change behavior
-- Rewrite cards where the mechanism is unclear
-- Identify gaps — situations where the agent needed a move and none existed
-- Tune problem signatures based on what contexts each card actually helped with
-
-### 1.3 Test the Seed Effect
-Serve the same static card 5 times with different seeds. Does output actually vary? If not, seeds need rethinking (different word pool, different placement in response, etc.)
-
-### Phase 1 Deliverables
-- [ ] 10-task evaluation completed
-- [ ] Cards iterated based on results
-- [ ] Seed effect validated or redesigned
-- [ ] Decision: proceed to infrastructure or iterate further on catalog
+### 1.3 Remaining Validation
+- [ ] Test with 5+ more diverse tasks
+- [ ] Test seed perturbation effect (same move, different seeds)
+- [ ] Test `plan` and `stuck` modes specifically
+- [ ] Verify rating behavior after SKILL.md updates
+- [ ] Iterate on moves that don't change behavior
 
 ---
 
-## Phase 1.5 — Claude Code Plugin
+## Phase 2 — Deploy API + Plugin 🔄
 
-**Goal:** Package ThinkFu as a Claude Code plugin so anyone can install it with one command. This is the fastest path to real-world usage and feedback — every Claude Code user becomes a potential tester.
+**Goal:** ThinkFu live on Cloudflare and installable as a Claude Code plugin.
 
-### Why before the API
-- Zero infrastructure needed — the plugin bundles the catalog and runs locally
-- Immediate distribution — install via marketplace or `--plugin-dir`
-- The SKILL.md, MCP server, and catalog are already built — this is just packaging
-- Gets real usage data and feedback before investing in cloud infrastructure
-- Useful for us too — we can use ThinkFu in every project immediately
+**Status: BUILT, NOT YET DEPLOYED**
 
-### Plugin Structure
-
-```
-thinkfu-plugin/
-├── .claude-plugin/
-│   └── plugin.json          # name, description, version
-├── skills/
-│   └── thinkfu/
-│       └── SKILL.md          # Agent skill (metacognitive instructions)
-├── .mcp.json                 # MCP server config (points to bundled server)
-├── mcp/
-│   └── ...                   # Bundled MCP server + catalog
-└── README.md
-```
-
-### Plugin Manifest
-
-```json
-{
-  "name": "thinkfu",
-  "description": "Metacognition as a service. Thinking moves for AI agents.",
-  "version": "0.1.0",
-  "author": {
-    "name": "move38"
-  }
-}
-```
-
-### Tasks
-- [ ] Restructure repo as a Claude Code plugin
-- [ ] SKILL.md becomes a plugin skill (auto-loaded, no manual CLAUDE.md copy)
-- [ ] MCP server bundled inside the plugin
-- [ ] Test with `claude --plugin-dir ./thinkfu-plugin`
-- [ ] Submit to Claude Code plugin marketplace
-- [ ] Write install instructions: `claude plugin install thinkfu`
-
-### Phase 1.5 Deliverables
-- [ ] ThinkFu installable as a Claude Code plugin
-- [ ] Works with `claude --plugin-dir` for local testing
-- [ ] Listed in a plugin marketplace for distribution
-
----
-
-## Phase 2 — API + MCP
-
-**Goal:** ThinkFu live on Cloudflare, usable by any MCP-compatible agent.
-
-### 2.1 Cloudflare Worker
-Single Worker serving all interfaces:
-
-**REST API:**
-- `GET /random` — random resolved card
-- `GET /move/:id` — specific card (resolved)
-- `GET /list` — card summaries, filterable
+### 2.1 Cloudflare Worker API ✅ (built, not deployed)
+Hono + D1, all endpoints working locally:
+- `GET /random` — random resolved move
+- `GET /move/:id` — specific move
+- `GET /list` — move summaries, filterable by mode/category
 - `GET /catalog` — full catalog
-- `POST /suggest` — context-aware card selection (v0: random, mode-filtered)
-- `POST /rate` — submit feedback
+- `POST /suggest` — context-aware selection (v0: random, mode-filtered)
+- `POST /rate` — submit feedback → D1
 
-**Implementation:**
-- Catalog baked into the Worker at build time (no runtime file reads)
-- Variable resolution at serve time (random picks from pools)
-- Seed injection on every response
-- D1 database for ratings storage
-- Format negotiation: `?format=json|md|html`
+Catalog bundled at build time. Variable resolution + seed injection at serve time.
 
-### 2.2 MCP Server
-Thin wrapper exposing three tools:
-- `list_thinkfu_moves`
-- `get_thinkfu_move`
-- `submit_thinkfu_rating`
+### 2.2 Deploy to Cloudflare
+- [ ] `wrangler d1 create thinkfu-ratings`
+- [ ] Update `wrangler.toml` with real database_id
+- [ ] `wrangler d1 execute thinkfu-ratings --file=schema.sql`
+- [ ] Configure think-fu.org domain route
+- [ ] `pnpm wrangler deploy` from `api/`
+- [ ] Verify all endpoints on production
 
-MCP protocol handled in the same Worker (different endpoint/transport).
+### 2.3 Claude Code Plugin ✅ (built, not published)
+Plugin structure complete:
+- `.claude-plugin/plugin.json` — manifest
+- `skills/thinkfu/SKILL.md` — auto-loaded agent skill (symlink)
+- `catalog/` — symlink to repo root catalog (followed during install)
+- `mcp/` — bundled MCP server
+- `.mcp.json` — MCP config using `${CLAUDE_PLUGIN_ROOT}`
 
-### 2.3 Onboarding
-Make it dead simple to start using ThinkFu:
+### 2.4 Rating Architecture
+Three tiers:
+1. **Local only** (default) — ratings log to `~/.thinkfu/ratings.jsonl`
+2. **Anonymous opt-in** — ratings POST to `api.think-fu.org/rate` (plugin-generated UUID, no account)
+3. **Identified** (future) — account-based, enables personalized routing
 
-```json
-{
-  "mcpServers": {
-    "thinkfu": {
-      "url": "https://api.thinkfu.org/mcp"
-    }
-  }
-}
-```
-
-One line in the MCP config. SKILL.md available to copy into any agent's context.
-
-### 2.4 Rating Schema
-D1 table storing complete training records:
-
-```sql
-CREATE TABLE ratings (
-  id TEXT PRIMARY KEY,
-  instance_id TEXT,         -- TF-001-x8k2m
-  move_id TEXT,             -- TF-001
-  seed TEXT,                -- "corrosion"
-  resolved_variables TEXT,  -- JSON of resolved variable values
-  useful BOOLEAN,
-  note TEXT,
-  original_request TEXT,    -- JSON of the full suggest request
-  created_at TIMESTAMP
-);
-```
+### 2.5 Publish Plugin
+- [ ] Test with `claude --plugin-dir /path/to/plugin`
+- [ ] Create marketplace repo (`move38/thinkfu` or separate)
+- [ ] Submit to official Anthropic marketplace
+- [ ] Write install instructions
 
 ### Phase 2 Deliverables
-- [ ] Worker deployed to Cloudflare
-- [ ] All REST endpoints working
-- [ ] MCP server working with Claude Code
-- [ ] D1 ratings storage
-- [ ] One-line MCP config documented
-- [ ] Domain: api.thinkfu.org
+- [ ] API live at api.think-fu.org
+- [ ] Plugin installable via marketplace
+- [ ] Rating opt-in working (local default, remote opt-in)
 
 ---
 
-## Phase 3 — Website
+## Phase 3 — Smart Router (LLM-based)
 
-**Goal:** thinkfu.org — a human-facing card browser that also serves as marketing.
+**Goal:** Replace random move selection in `/suggest?style=matched` with context-aware routing.
 
-### 3.1 Landing Page
-- Random card displayed prominently with a "draw another" button
-- Brief explanation of what ThinkFu is
-- Links to MCP setup, API docs, GitHub
+**When:** After we have ~100+ ratings to validate against. The router needs real usage data to tune, not just vibes.
 
-### 3.2 Card Browser
-- Filter by category and mode
-- Search by keyword
-- Each card shows: name, one_liner, mode badges, effort badge
-- Click to expand full card with rendered mermaid diagram
+### 3.1 Prompted Router
+When `/suggest` is called with `style: matched`:
+1. Send the agent's context (`goal`, `current_approach`, `stuck_on`, `mode`) + all move summaries (`id`, `name`, `one_liner`, `problem_signatures`) to an LLM
+2. Prompt asks the LLM to select the 1-3 most relevant moves and explain why
+3. Return the top pick, resolved with variables and seed
 
-### 3.3 Individual Card Pages
-- `/move/TF-001` — shareable URL
-- Full card content with rendered diagram
-- "Draw a new card" button
-- Variables re-resolved on each page load (so refreshing gives a different instance)
+**Model choice:** Haiku for speed/cost. The routing prompt is small (move summaries are ~50 tokens each × 200 moves = ~10K tokens input). Sub-second response time is critical — the agent is mid-task.
 
-### 3.4 Design
-- Minimal. Card-focused. Think: a beautiful deck of cards, not a SaaS dashboard.
-- Mermaid diagrams rendered client-side
-- Dark/light mode
-- Mobile-friendly (card format works well on narrow screens)
+**The prompt shape:**
+```
+You are a metacognitive advisor. Given the user's current situation,
+select the most helpful thinking move from the catalog.
+
+SITUATION:
+- Mode: {{mode}}
+- Goal: {{goal}}
+- Current approach: {{current_approach}}
+- Stuck on: {{stuck_on}}
+
+AVAILABLE MOVES:
+{{for each move: id, name, one_liner, problem_signatures}}
+
+Select the single best move. Return just its ID and a one-sentence reason.
+```
+
+### 3.2 Rating-Informed Tuning
+- Analyze ratings: which moves work for which problem shapes?
+- Build a lookup table: problem_signature → move performance
+- Weight routing toward moves with higher ratings for similar contexts
+- Update problem_signatures on moves based on real usage patterns
+
+### 3.3 Oblique Router ✅ (already built)
+`style: oblique` deliberately selects from a different mode. Already implemented in v0.
+
+### 3.4 Fine-Tuned Classifier (later)
+- Train lightweight classifier on (context → move_id) pairs from ratings
+- Replace prompted router for lower latency and zero LLM cost
+- Only viable after significant volume (1000+ rated interactions)
 
 ### Phase 3 Deliverables
-- [ ] Landing page live
-- [ ] Card browser with filtering
-- [ ] Individual card pages with shareable URLs
-- [ ] Mermaid rendering working
-- [ ] thinkfu.org domain configured
+- [ ] Prompted router live on `/suggest?style=matched`
+- [ ] Latency under 500ms
+- [ ] Rating analysis showing router outperforms random
+- [ ] A/B test: random vs. routed selection
 
 ---
 
-## Phase 4 — Smart Router
+## Phase 4 — Website
 
-**Goal:** Replace random card selection with context-aware routing.
+**Goal:** think-fu.org — human-facing move browser + marketing.
 
-### 4.1 Prompted Router
-- When `/suggest` is called with `style: matched`, pass the full context + catalog summaries to an LLM
-- Prompt asks the LLM to select the most relevant move based on problem signatures, mode, and context
-- Use Anthropic API (Haiku for speed/cost)
+### 4.1 Landing Page
+- Random move displayed prominently with a "draw another" button
+- Brief explanation of what ThinkFu is
+- Links to MCP setup, API docs, GitHub, Claude Code plugin install
 
-### 4.2 Rating-Informed Tuning
-- Analyze ratings data: which cards work for which problem shapes?
-- Update problem signatures based on real usage patterns
-- Weight routing toward cards with higher ratings for similar contexts
+### 4.2 Move Browser
+- Filter by category and mode
+- Search by keyword
+- Each move shows: name, one_liner, mode badges, effort badge
+- Click to expand full move with rendered mermaid diagram
 
-### 4.3 Oblique Router
-- When `style: oblique` is requested, deliberately select a card from a *different* mode or category
-- The mismatch is the mechanism — it forces the agent to make unexpected connections
+### 4.3 Individual Move Pages
+- `/move/TF-001` — shareable URL
+- Full move content with rendered diagram
+- Variables re-resolved on each page load
+- "Draw another" button
 
-### 4.4 Eventual: Fine-Tuned Classifier
-- Train a lightweight classifier on (context → move) pairs from ratings data
-- Replace prompted router for lower latency and cost
-- Only viable after significant ratings volume (1000+)
+### 4.4 Design
+- Minimal. Move-focused. Beautiful deck, not a SaaS dashboard.
+- Mermaid diagrams rendered client-side
+- Dark/light mode
+- Mobile-friendly
 
 ### Phase 4 Deliverables
-- [ ] Prompted router live
-- [ ] Oblique routing working
-- [ ] Rating analysis pipeline
-- [ ] Latency under 500ms for matched routing
+- [ ] Landing page live at think-fu.org
+- [ ] Move browser with filtering
+- [ ] Individual move pages with shareable URLs
+- [ ] Mermaid rendering
 
 ---
 
 ## Open Questions
 
 ### How do we measure success?
-- **Agent-side:** Do ThinkFu-assisted agents produce more varied, higher-quality output? Need a repeatable evaluation.
-- **Human-side:** Do people come back? Do they share cards? Website analytics + card draw frequency.
+- **Agent-side:** Do ThinkFu-assisted agents produce more varied, higher-quality output?
+- **Human-side:** Do people come back? Do they share moves? Website analytics + draw frequency.
 - **System-side:** Rating volume and usefulness ratio. If nobody rates, the feedback loop is broken.
 
-### Card authoring at scale
-- Who writes cards beyond the seed set? Open source contributions? Curated submissions?
-- Quality control: every card must pass the mechanical-not-aspirational test
-- Do we need a card editor / preview tool?
+### Move authoring at scale
+- Who writes moves beyond the current set? Open source contributions? Curated submissions?
+- Quality control: every move must pass the mechanical-not-aspirational test + `pnpm validate`
+- Do we need a move editor / preview tool?
 
 ### Pricing / access
-- API: free tier with rate limits? Open source catalog, hosted API as a service?
-- MCP: always free? The value proposition weakens behind a paywall.
-- Website: free, always.
+- **Plugin:** free always (local-first, opt-in rating sharing)
+- **API:** free tier with rate limits. Commercial license for high-volume use (covered by PolyForm Small Business).
+- **Website:** free always.
+- **Smart router:** potentially premium feature (requires LLM calls = cost)
 
 ### What's the moat?
-- The catalog quality is the moat. Anyone can build the infrastructure; the cards are the hard part.
-- Rating data becomes a moat over time — informs routing, which improves card selection, which drives more usage.
-- Pool quality matters more than pool size. 150 well-chosen domains beat 10,000 random ones.
+- The catalog quality. Anyone can build infrastructure; the moves are the hard part.
+- Rating data becomes a moat over time — informs routing, improves selection, drives more usage.
+- Pool quality > pool size. 150 well-chosen domains beat 10,000 random ones.
+- The SKILL.md / agent training. How to *use* ThinkFu well is as important as the moves themselves.

@@ -2,43 +2,123 @@
 # Each should be specific, actionable, and force a different approach.
 # Bad: "think harder". Good: "you can only use 3 components".
 
-- you must solve it without any technology
-- the solution must work for exactly one person
-- the solution must work for one million people simultaneously
-- you have only 5 minutes to implement it
-- you cannot use any words to explain it
+# Resource constraints
 - the budget is zero
-- it must be reversible in under 10 seconds
+- you have only 5 minutes to implement it
+- you can only use materials in this room
+- you have no access to the internet
+- you can use only one tool
+- you must do it alone
+- you must do it with ten strangers
+- the entire thing must cost less than a cup of coffee
+- you can only use free and open-source components
+- you have exactly 100 words to describe the entire solution
+- you must complete it in a single sitting with no breaks
+- you can only use what you already know -- no research allowed
+- you have unlimited budget but only one hour
+- you have unlimited time but only one dollar
+- every resource must be borrowed, not owned
+- you can only use technology that existed before 1990
+- you can only use technology that existed before 1950
+- you must do it with one hand tied behind your back (metaphorically: remove your strongest skill)
+
+# Audience constraints
 - a child must be able to operate it
-- it must work in complete darkness
-- you can only add things, never remove
-- you can only remove things, never add
-- it must fit on a single index card
-- every component must serve at least two purposes
-- it must work identically offline
-- you cannot use the most obvious tool for the job
+- a 90-year-old who has never used a computer must understand it
+- it must work for exactly one person
+- it must work for one million people simultaneously
+- someone who speaks no language in common with you must be able to use it
+- the user must never need instructions
+- it must be usable by someone who is angry
+- it must be usable by someone who is grieving
+- it must be testable by someone who knows nothing about the domain
+- it must be completable by a team of strangers with no leader
+- it must be delightful for someone who has seen a thousand similar things
+- your harshest critic is the only user
+- it must work for someone who actively doesn't want to use it
+- the person using it must learn something they didn't expect
+
+# Communication constraints
+- you cannot use any words to explain it
+- you can only communicate through drawings
+- you cannot use any jargon or technical terms
+- the entire solution must fit on a single index card
 - it must be explainable in one sentence
+- it must be explainable to a dog
+- you can only use questions, never statements
+- you must explain it as a story
+- you must explain it as a recipe
+- you must explain it as a warning label
+- you can only describe what it is not
+- the explanation must be shorter than the thing it explains
+- you must pitch it in the time an elevator takes to go up 3 floors
+- you can only use words a 6-year-old knows
+
+# Design constraints
+- it must be silent
+- it must work in complete darkness
+- it must work identically offline
+- it must work even if your core assumption is wrong
+- it must be beautiful
 - the solution must produce no waste
 - it must work the same way in any culture
-- you must build it from materials in this room
-- the user must never need instructions
-- it must be silent
-- it must degrade gracefully when half the parts are removed
-- you cannot use any existing solution as a starting point
-- it must be completed in a single sitting with no breaks
-- the solution must be beautiful
-- it must work even if your core assumption is wrong
-- you can only use analog methods
-- it must be testable by someone who knows nothing about the domain
-- every step must be visible to an observer
-- the entire solution must be stateless
 - it must still work in 100 years
-- you must use the least powerful tool that could work
-- the solution must teach something to the person using it
 - it must work on the first try with no iteration
-- you can only communicate through drawings
-- it must be completable by a team of strangers with no leader
-- remove the step you think is most important and solve without it
-- the output must be exactly half the size of what you planned
+- every component must serve at least two purposes
+- it must degrade gracefully when half the parts are removed
 - it must use no more than three moving parts
-- you cannot use any jargon or technical terms
+- the entire solution must be stateless
+- it must be reversible in under 10 seconds
+- remove the step you think is most important and solve without it
+- it must be invisible to the user
+- it must fit in your pocket
+- it must work underwater
+- it must work in zero gravity
+- it must produce something useful even when it fails
+- the output must be exactly half the size of what you planned
+- it must have no settings or configuration
+- it must be self-repairing
+- every part must be replaceable independently
+- it must work without electricity
+- it must be forkable -- anyone can take it and make their own version
+- it must leave no trace when removed
+
+# Process constraints
+- you can only add things, never remove
+- you can only remove things, never add
+- you cannot use any existing solution as a starting point
+- you cannot use the most obvious tool for the job
+- you can only use analog methods
+- every step must be visible to an observer
+- you must use the least powerful tool that could work
+- you must build the opposite first, then invert it
+- each step must be done by a different person
+- you must prototype it physically before building it digitally
+- you must write the documentation before building the thing
+- you must build it backwards -- start with the last step
+- you can only work on it for 15 minutes at a time
+- you must get a stranger's approval at each step
+- you must alternate between two completely different approaches
+- every decision must be made by flipping a coin, then you must justify why the coin was right
+- you must delete your first draft without reading it, then start over
+- you can only use copy-paste from things that already exist -- no original writing
+- you must finish before you feel ready
+- you must explain each decision out loud before making it
+
+# Scale constraints
+- it must work at 1/100th the current scale
+- it must work at 100x the current scale
+- it must work for a single person and for a nation, with no changes
+- the solution must teach something to the person using it
+- it must be replicable by anyone with no special training
+- it must work the same whether you care about the outcome or not
+- it must be something you could have built when you were 12
+- it must work even if the user misunderstands it
+- the entire thing must be doable in one breath
+- it must survive being translated through 5 languages and back
+- it must be explainable by someone who has never seen it
+- it must work during a power outage
+- it must work during a crisis
+- it must work during a celebration
+- it must be something a competitor would copy immediately
+- it must be something a competitor could never copy

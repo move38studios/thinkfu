@@ -1,7 +1,7 @@
 ---
 id: TF-086
 name: Hard Fun
-one_liner: Stuck and miserable? Check if you're solving a hard-fun problem or a hard-boring one. Find the fun core.
+one_liner: Stuck and grinding? Check if you're working on the core challenge or peripheral friction. Find the core.
 mode: [stuck]
 category: Unsticking
 tags: [motivation, reframing, agency, papert, resnick, energy, intrinsic-motivation]
@@ -24,7 +24,7 @@ pairs_with:
 
 ## The Move
 
-Ask yourself one question: is this hard-fun or hard-boring? Hard-fun is struggle with agency — you're challenged, the problem resists you, but you're engaged because the challenge connects to something you care about. Hard-boring is struggle without agency — you're fighting configuration files, waiting for builds, navigating bureaucracy, or doing repetitive tasks that a machine should do. If it's hard-boring, you're stuck on the WRONG problem. Name the hard-fun version — the genuinely interesting core challenge buried under the tedium — and find a way to work on that directly. Automate, skip, delegate, or delete the hard-boring wrapper.
+Ask yourself one question: is this the core challenge or peripheral friction? The core challenge is the actual hard problem worth solving — the design question, the architectural tension, the algorithmic puzzle. Peripheral friction is everything that surrounds it without being it — fighting configuration, waiting for builds, navigating bureaucracy, doing repetitive setup. If you're stuck on peripheral friction, you're stuck on the WRONG problem. Name the core challenge — the genuinely interesting problem buried under the tedium — and find a way to work on that directly. Automate, skip, delegate, or delete the friction wrapper.
 
 ## When to Use
 

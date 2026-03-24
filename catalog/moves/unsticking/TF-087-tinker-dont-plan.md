@@ -6,7 +6,7 @@ mode: [stuck, explore]
 category: Unsticking
 tags: [tinkering, experimentation, prototyping, papert, resnick, empirical, bricolage]
 effort: snap
-origin: Mitch Resnick, "Lifelong Kindergarten" / Seymour Papert — Tinkering as methodology
+origin: Mitch Resnick, "Lifelong Kindergarten" / Seymour Papert — Tinkering as methodology / Karl Weick, "Sensemaking in Organizations" (1995) — Enactment
 problem_signatures:
   - "I've been planning for an hour without writing a single line of code"
   - "the system is too complex to reason about from first principles"
@@ -20,11 +20,15 @@ pairs_with:
     why: "make the invisible visible so your tinkering produces observable results instead of blind poking"
   - id: TF-013
     why: "backtrack to the fork if tinkering reveals you're on the wrong path entirely"
+  - id: TF-045
+    why: "two-minute version is one concrete way to act small and learn"
+  - id: TF-057
+    why: "ship the worst version is a larger-scale enactment move"
 ---
 
 ## The Move
 
-Stop whatever planning, analyzing, or diagramming you're doing. Open the code, the config, the system. Change one small thing — a parameter, a function call, a flag, a constant. Run it. Observe what changed. You're not testing a hypothesis. You're probing the system to learn how it actually behaves. Change another thing. Observe again. After 3-5 changes, you'll know more about the system's real behavior than an hour of reading code would have taught you. Tinkering is a legitimate methodology — it works when the system is too complex, too undocumented, or too surprising for pure reasoning.
+Stop whatever planning, analyzing, or diagramming you're doing. Weick's radical insight: in ambiguous situations, you do not analyze then act — you ACT then make sense of what happened. "How can I know what I think till I see what I say?" The environment does not reveal its structure to passive observers. It reveals structure in RESPONSE to action. Open the code, the config, the system. Change one small thing — a parameter, a function call, a flag, a constant. Run it. Observe what changed — and critically, observe how the environment RESPONDS. You're not testing a hypothesis. You're probing the system to learn how it actually behaves. What surprised you? What did the response reveal that you could not have learned from more analysis? Change another thing. Observe again. After 3-5 changes, you'll know more about the system's real behavior than an hour of reading code would have taught you. Tinkering is a legitimate methodology — it works when the system is too complex, too undocumented, or too surprising for pure reasoning. The action creates the information you could not get from thinking alone.
 
 ## When to Use
 

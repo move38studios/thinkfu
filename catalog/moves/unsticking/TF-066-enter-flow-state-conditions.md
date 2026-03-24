@@ -1,7 +1,7 @@
 ---
 id: TF-066
 name: Enter Flow State Conditions
-one_liner: You can't force flow, but you can check which of its three preconditions is missing.
+one_liner: You can't force productive engagement, but you can check which of its three structural preconditions is missing.
 mode: [stuck]
 category: Unsticking
 tags: [flow, motivation, challenge-skill, goals, feedback, productivity]

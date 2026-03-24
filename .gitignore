@@ -2,3 +2,5 @@ node_modules/
 dist/
 *.jsonl
 .DS_Store
+api/catalog-bundle.json
+.wrangler/

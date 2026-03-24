@@ -24,9 +24,9 @@ pairs_with:
 
 ## The Move
 
-Identify the constraint you are fighting. Write it down plainly: "We cannot change the database schema." "The deadline is in two weeks and it is not moving." "The legacy API cannot be modified." Now answer three questions. (1) What does this constraint TEACH you? What design principle, user need, or system truth is it forcing you to confront? (2) What would you LOSE if the constraint were magically removed? Every constraint also protects something — stability, backward compatibility, user expectations. (3) Given that this constraint is permanent, what is the BEST possible work you can do within it?
+Identify the constraint you are fighting. Write it down plainly: "We cannot change the database schema." "The deadline is in two weeks and it is not moving." "The legacy API cannot be modified." Now answer three questions. (1) What does this constraint TEACH you about the problem? What design principle, user need, or system truth is it forcing you to confront? The constraint is information — it reveals something about the problem's structure that you would miss if the constraint didn't exist. (2) What would you LOSE if the constraint were magically removed? Every constraint also protects something — stability, backward compatibility, user expectations. Name what the constraint preserves. (3) Given that this constraint is permanent, what is the BEST possible work you can do within it?
 
-The third question is the one that matters. It shifts you from "fighting the wall" to "building within the room." Frankl's insight was that meaning can be found in any situation, including suffering. Your constraint is not suffering — but the principle applies: stop wishing for different circumstances and find purpose in these ones.
+The third question is the one that matters. It shifts you from "fighting the wall" to "building within the room." Stop wishing for different circumstances and find the best path within these ones.
 
 ## When to Use
 

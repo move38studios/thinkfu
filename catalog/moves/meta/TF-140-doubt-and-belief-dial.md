@@ -6,7 +6,7 @@ mode: [plan, evaluate]
 category: Meta
 tags: [metacognition, doubt, belief, balance, epistemology, decision-making]
 effort: snap
-origin: "108 Thoughts" (#90, #91) — Doubt and belief as complementary ingredients
+origin: "108 Thoughts (#90, #91) — Doubt and belief as complementary ingredients"
 problem_signatures:
   - "I keep second-guessing myself and can't commit to a direction"
   - "I shipped too fast without questioning and now I'm cleaning up the mess"

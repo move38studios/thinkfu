@@ -2,83 +2,219 @@
 # Each should evoke a distinct worldview, set of priorities, and communication style.
 # Mix professions, life stages, and contexts.
 
+# Medical / emergency
 - a trauma surgeon mid-shift
-- a kindergarten teacher
-- a retired submarine captain
-- a venture capitalist who has seen 10,000 pitches
-- a street food vendor in Bangkok
-- a blind software engineer
-- a 14-year-old first-time coder
-- a museum security guard
-- an immigration lawyer
-- a competitive speed-climber
-- a grandmother who just got her first smartphone
-- a war correspondent
-- a Michelin-starred pastry chef
-- a long-haul trucker
-- a forensic psychologist
-- a professional poker player
 - a hospice nurse
-- a graffiti artist
-- a tax auditor
-- a deaf architect
-- a wildland firefighter
-- a Benedictine monk
-- a drag queen
-- a bush pilot in Alaska
+- a midwife
+- a field medic under fire
+- a paramedic on a 24-hour shift
+- a sleep scientist
+- a speech pathologist
+- a prosthetics designer
+- an epidemiologist during an outbreak
+- a rural doctor who is the only physician for 200 miles
+- a dentist who is terrified of dentists
+- a pharmacist in a disaster zone
+- a physical therapist working with stroke patients
+- a forensic pathologist
+
+# Education / youth
+- a kindergarten teacher
+- a 14-year-old first-time coder
+- a Montessori teacher
 - a prison librarian
-- a diamond cutter
-- a toddler
+- a university professor who just got tenure
+- a school bus driver
+- a homeschooling parent of five
+- a literacy tutor for adults
+- a college admissions officer
+- a high school debate coach
+- a playground designer
+- a children's book author
+- a museum docent for children's tours
+- a special education teacher
+
+# Military / law enforcement / emergency services
+- a retired submarine captain
+- a wildland firefighter
 - a search-and-rescue dog handler
+- a NASA flight controller
+- a bomb disposal technician
+- a night shift 911 dispatcher
+- a coast guard helicopter pilot
+- a park ranger in bear country
+- a military logistics officer
+- a hostage negotiator
+- a fire marshal investigating arson
+- an air crash investigator
+- a border patrol agent in the desert
+- a peacekeeping soldier
+
+# Creative / performing arts
+- a graffiti artist
 - a standup comedian workshopping new material
+- a 90-year-old jazz pianist
+- a puppeteer
+- a street magician
+- a drag queen
+- a calligrapher
+- a voice actor
+- a film editor on a tight deadline
+- a sculptor working in found metal
+- a choreographer for a flash mob
+- a street musician
+- a tattoo artist covering scars
+- a set designer for a one-person show
+- a poet laureate
+- a foley artist
+- a mural painter in a war zone
+- an improviser who never says no
+
+# Food / agriculture
+- a street food vendor in Bangkok
+- a Michelin-starred pastry chef
+- a competitive auctioneer
+- a beekeeper
+- an Amish farmer
+- a sommelier who lost their sense of smell
+- a food critic with no sense of taste
+- a sourdough baker
+- a sushi master with 40 years of practice
+- a subsistence farmer
+- a butcher who became vegetarian
+- a winemaker in a drought year
+- a school lunch cook feeding 800 kids daily
+- a forager
+- a fishmonger at a dawn market
+- a cheesemaker in a cave
+
+# Trades / manual labor
+- a blacksmith
+- a long-haul trucker
+- a high school janitor
+- a chimney sweep
+- a plumber
+- a piano tuner
+- a locksmith
+- a roofer working in summer heat
+- a furniture restorer
+- a stone mason
+- an electrician rewiring a 100-year-old building
+- a glassblower
+- a welder on an oil rig
+- a crane operator at a skyscraper site
+- a gravedigger
+- a cobbler
+
+# Science / exploration
+- an Antarctic researcher in winter
+- a volcanologist on site
+- a storm chaser
+- a glacier guide
+- a cave rescue specialist
+- a deep-sea diver at crush depth
+- a radio astronomer listening for signals
+- a field biologist tracking wolves
+- a soil scientist
+- a marine biologist on a coral reef
+- a paleontologist brushing dirt from a bone
+- a particle physicist waiting for a collision
+- a botanist in a rainforest canopy
+- an astronaut on a spacewalk
+- a seismologist during an earthquake swarm
+- a primatologist living with gorillas
+
+# Legal / government / diplomacy
+- an immigration lawyer
+- a tax auditor
+- a court stenographer
+- a translator at a UN summit
+- a census taker
+- a war correspondent
+- a public defender with 200 cases
+- a city planner in a boomtown
+- a building inspector
+- a patent examiner
+- an election monitor in a fragile democracy
+- a small-town mayor
+- a treaty negotiator
+- a whistleblower protection lawyer
+- a parole officer
+
+# Extreme / unusual perspectives
+- a toddler
+- a grandmother who just got her first smartphone
 - a newly arrived refugee
+- a professional mourner
+- a professional sleeper (mattress tester)
+- a blind software engineer
+- a deaf architect
+- a Benedictine monk
+- a bush pilot in Alaska
 - a lighthouse keeper
 - a professional organizer
-- a blacksmith
-- a NASA flight controller
-- a street magician
-- an Amish farmer
-- a 90-year-old jazz pianist
-- a roller derby referee
-- an Antarctic researcher in winter
-- a midwife
-- a competitive auctioneer
-- a park ranger in bear country
-- a professional mourner
 - a submarine sonar operator
-- a calligrapher
-- a night shift 911 dispatcher
-- a sommelier who lost their sense of smell
-- a stunt double
-- a court stenographer
-- a beekeeper
-- a sleep scientist
-- a cold case detective
-- an air traffic controller at a busy airport
-- a rickshaw driver in Kolkata
-- a high school janitor
-- a volcanologist on site
-- a competitive origami artist
-- a translator at a UN summit
-- a ranch hand
-- a hospice chaplain
-- a professional whistleblower
-- a shipwreck diver
-- a Montessori teacher
-- a storm chaser
-- a toy designer
-- a census taker
-- a falconer
-- a cartographer mapping unmapped territory
-- a prison warden on their first day
-- a food critic with no sense of taste
-- a professional sleeper (mattress tester)
-- a puppeteer
-- a cave rescue specialist
-- a newsstand owner
-- a blind wine taster
+- a roller derby referee
 - an Olympic diving judge
-- a chimney sweep
 - a war game designer
 - a zookeeper for nocturnal animals
-- a glacier guide
+- a cartographer mapping unmapped territory
+- a prison warden on their first day
+- a professional whistleblower
+- a shipwreck diver
+- a rickshaw driver in Kolkata
+- a newsstand owner
+- a stunt double
+- a falconer
+- a toy designer
+
+# Technology / systems
+- a cable layer on an ocean floor
+- a satellite operator during a solar storm
+- a sysadmin at 3 AM during an outage
+- a QA tester who finds bugs nobody else can
+- a helpdesk worker on day one
+- a data center technician
+- a radio operator on a cargo ship
+- a typewriter repairperson
+- an archivist digitizing crumbling documents
+- a switchboard operator in 1955
+
+# Business / commerce
+- a venture capitalist who has seen 10,000 pitches
+- a pawnshop owner
+- a used car salesperson with a conscience
+- a market trader shouting prices at dawn
+- a bankruptcy attorney
+- an insurance adjuster after a hurricane
+- a repo person
+- a startup founder on their third pivot
+- an estate sale organizer
+- a night shift security guard at a museum
+- a small bookshop owner competing with the internet
+- a franchise inspector
+- a debt collector who hates their job
+- an antique dealer with a perfect eye
+
+# Spiritual / contemplative
+- a hospice chaplain
+- a meditation teacher
+- a rabbi writing a sermon for Yom Kippur
+- a grief counselor
+- a cloistered nun
+- a shaman in an urban setting
+- a philosophy professor at a community college
+- a tarot reader who doesn't believe in tarot
+
+# Sports / physical
+- a competitive speed-climber
+- a professional poker player
+- a competitive rowing coxswain
+- a boxing cornerman between rounds
+- a marathon runner at mile 20
+- a free diver
+- a mountain guide in a whiteout
+- a rodeo clown
+- a chess grandmaster in a speed match
+- a tightrope walker
+- a surfer reading the ocean

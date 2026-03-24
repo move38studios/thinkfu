@@ -24,7 +24,7 @@ pairs_with:
 
 ## The Move
 
-Identify the thing you're making decisions about — the user flow, the production system, the deployment pipeline, the support queue. Now go look at it directly. Not the dashboard. Not the summary. Not someone else's description. The actual thing. Watch a real user use the product and don't intervene. Read the raw error logs, not the aggregated report. Trace one real request through the entire system. Sit with the support team and listen to actual tickets. Before you go, write down what you expect to see. After, write down what you actually saw. The gap between those two lists is where your mental model has drifted from reality. That drift is where your worst decisions come from.
+Identify the thing you're making decisions about — the user flow, the production system, the deployment pipeline, the support queue. Now go look at the actual data directly. Not the dashboard. Not the summary. Not a cached understanding or someone else's description. The primary source. Read the raw error logs, not the aggregated report. Trace one real request through the entire system. Watch a real user use the product. Read the actual support tickets, not the categorization. Before you look, write down what you expect to see. After, write down what you actually saw. The gap between those two lists is where your mental model has drifted from reality. That drift is where your worst decisions come from.
 
 ## When to Use
 

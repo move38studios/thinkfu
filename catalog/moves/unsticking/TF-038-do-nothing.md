@@ -1,7 +1,7 @@
 ---
 id: TF-038
 name: Do Nothing
-one_liner: Stop working. Walk away. Let your unconscious mind take a shift.
+one_liner: Stop working on this. Context-switch completely, then return with fresh parameters.
 mode: [stuck]
 category: Unsticking
 tags: [incubation, rest, creativity, unconscious, disengagement]
@@ -23,9 +23,9 @@ pairs_with:
 
 ## The Move
 
-Set a timer for 20 minutes (or longer). Close the laptop, leave the room, do something completely unrelated — walk, shower, cook, pull weeds. Do not think about the problem on purpose. Do not "take a break to brainstorm." Actually disengage.
+Set a boundary: for 20 minutes (or longer), do NOT work on this problem. Context-switch to something completely unrelated — a different project, a different sub-problem, a task in a different cognitive domain. The key is full disengagement from the current problem space. Do not "take a break to brainstorm." Actually redirect your processing elsewhere.
 
-When the timer goes off, sit back down and write the first thing that comes to mind about the problem — before re-reading any of your previous work. If nothing comes, extend the break. The cognitive science is clear: incubation periods disproportionately produce breakthroughs on problems where conscious effort has plateaued.
+When the time is up, return to the problem and write the first thing that comes to mind — before re-reading any of your previous work. If nothing new surfaces, extend the break. The cognitive science is clear: incubation periods disproportionately produce breakthroughs on problems where sustained effort has plateaued. The mechanism works whether the "disengagement" is a walk around the block or switching to an unrelated task.
 
 ## When to Use
 

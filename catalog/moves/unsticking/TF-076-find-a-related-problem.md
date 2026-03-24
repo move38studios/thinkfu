@@ -6,7 +6,7 @@ mode: [stuck]
 category: Unsticking
 tags: [polya, analogy, pattern-matching, transfer, problem-solving]
 effort: quick
-origin: Polya "How to Solve It" — find a related problem
+origin: Polya "How to Solve It" — find a related problem / Donald Schon — "Seeing-as" and professional repertoire
 variables:
   domain:
     type: pick
@@ -25,11 +25,13 @@ pairs_with:
     why: "if the problem is too complex to match, use Reduce to the Simplest Case first, then find a related problem at that simpler level"
   - id: TF-008
     why: "Who Else Has This Problem searches for people who solved it; this card searches for problems YOU solved with similar structure"
+  - id: TF-155
+    why: "Three Representations may reveal the structural similarity your current framing is hiding"
 ---
 
 ## The Move
 
-Stop trying to solve your problem directly. Instead, strip it to its abstract structure: ignore domain-specific names and describe the shape. "I need to synchronize state between two systems that can't communicate directly" or "I need to find the optimal allocation of limited resources across competing demands." Now search your memory for problems with that same shape: past projects, textbook problems, patterns from {{domain.1}}, or classic computer science solutions. Write down the related problem and its known solution. Finally, map the solution back to your specific case: what translates directly? What needs adaptation? What doesn't map at all?
+Stop trying to solve your problem directly. Instead, strip it to its abstract structure: ignore domain-specific names and describe the shape. "I need to synchronize state between two systems that can't communicate directly" or "I need to find the optimal allocation of limited resources across competing demands." Schon called this "seeing-as" — experts don't reason from first principles; they see new situations AS familiar ones from a repertoire built over years. Now search your memory for problems with that same shape: past projects, textbook problems, patterns from {{domain.1}}, or classic computer science solutions. Name the analogy explicitly: "This is like [X] because [structural similarity]." Write down the related problem and its known solution. Then stress-test: **where does this analogy break down?** The breakdown points are where the genuinely new aspects of your problem live. Finally, map the solution back to your specific case: what translates directly? What needs adaptation at the breakdown points? What doesn't map at all?
 
 ## When to Use
 

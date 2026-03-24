@@ -31,13 +31,13 @@ pairs_with:
 
 This is not "take a break." This is structured incubation — a specific protocol backed by research:
 
-**(1)** State the problem clearly in writing. One sentence. Write it on a sticky note, a notepad, or a text file. The act of crystallizing the problem primes your unconscious processing.
+**(1)** State the problem clearly in writing. One sentence. The act of crystallizing the problem primes what comes next.
 
-**(2)** Set a timer for **{{timeframe.1}}**. If that duration is impractical, use 20 minutes as a default.
+**(2)** Set a boundary of **{{timeframe.1}}**. If that duration is impractical, use 20 minutes as a default.
 
-**(3)** Work on something COMPLETELY unrelated. Not a variant of the same problem. Not a related feature. Something in a different cognitive domain — a different project, a code review for another team, answering emails, or a non-work task. Sio & Ormerod's meta-analysis found the incubation effect is strongest when the break involves mild cognitive activity, not passive rest.
+**(3)** Work on something COMPLETELY unrelated. Not a variant of the same problem. Not a related feature. Something in a different cognitive domain — a different project, a code review for another team, a task with different constraints and different patterns. Sio & Ormerod's meta-analysis found the incubation effect is strongest when the break involves active work in a different domain, not passive rest. The cross-domain work is the point: it loads different patterns that may cross-pollinate when you return.
 
-**(4)** When the timer fires, re-read your one-sentence problem statement. What is the first thing that comes to mind? Write it down immediately, before your analytical brain kicks in and starts filtering.
+**(4)** When the time is up, re-read your one-sentence problem statement. What is the first thing that comes to mind? Write it down immediately, before your analytical process kicks in and starts filtering.
 
 ## When to Use
 

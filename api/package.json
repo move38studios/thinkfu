@@ -1,0 +1,21 @@
+{
+  "name": "thinkfu-api",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "chanfana": "^3.3.0",
+    "hono": "^4.12.9",
+    "yaml": "^2.8.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260317.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "wrangler": "^4.77.0"
+  }
+}

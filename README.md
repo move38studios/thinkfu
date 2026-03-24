@@ -13,7 +13,7 @@ Inspired by:
 - **Brian Eno's Oblique Strategies** — a deck of disorienting prompts designed to break creative deadlock
 - **Design Thinking, Lateral Thinking, Systems Thinking** — and other structured reasoning traditions
 
-ThinkFu does what those do, but is built for **three audiences simultaneously**: AI agents (via MCP), developers (via REST API), and humans (via the website... and maybe one day an app or a card deck).
+ThinkFu does what those do, but is built for **three audiences simultaneously**: AI agents (via MCP), developers (via REST API), and humans (via the website... and maybe one day an app or a move deck).
 
 ---
 
@@ -56,7 +56,7 @@ One Cloudflare Worker serves three interfaces from the same catalog:
 
 ### 1. The Catalog
 
-A manually curated library of thinking moves. Each move is a structured card (see Card Format below). The catalog is the foundation — everything else builds on it.
+A manually curated library of thinking moves. Each move is a structured move (see Move Format below). The catalog is the foundation — everything else builds on it.
 
 Sources to draw from initially:
 - TRIZ's 40 inventive principles
@@ -71,7 +71,7 @@ The canonical interface. Both the MCP server and website are thin layers on top 
 
 #### `GET /random`
 
-Returns a random ThinkFu card.
+Returns a random ThinkFu move.
 
 Optional query params:
 - `category` — filter by category
@@ -79,7 +79,7 @@ Optional query params:
 
 #### `GET /move/:id`
 
-Returns a specific card by ID (e.g., `/move/TF-001`).
+Returns a specific move by ID (e.g., `/move/TF-001`).
 
 Optional query params:
 - `format` — `json` (default), `md`, `html`
@@ -110,10 +110,10 @@ The `exclude` array lists move IDs already tried in this session. The server wil
 
 The `style` field controls the routing strategy:
 - **`matched`** (default) — best move for this context, using problem signatures and mode
-- **`random`** — pure random draw (mode-filtered). Sometimes the wrong card is the most useful one.
+- **`random`** — pure random draw (mode-filtered). Sometimes the wrong move is the most useful one.
 - **`oblique`** — deliberately tangential. Returns a move from a *different* mode or category than expected. Designed to break fixation through surprise.
 
-Returns a ThinkFu card. Backend logic for `matched` (progressive):
+Returns a ThinkFu move. Backend logic for `matched` (progressive):
 - v0: Random selection (mode-filtered)
 - v1: Prompt-based router — pass context to an LLM with the catalog and ask it to select the most relevant move
 - v2: Fine-tuned classifier trained on usage data
@@ -166,25 +166,25 @@ Optional query params:
 
 #### `GET /catalog`
 
-Returns the full catalog with complete card content as a JSON array. Useful for caching locally, offline use, or building custom UIs.
+Returns the full catalog with complete move content as a JSON array. Useful for caching locally, offline use, or building custom UIs.
 
 ### 3. The MCP Server
 
 Wraps the REST API for AI agents. Exposes three tools:
 
 - **`list_thinkfu_moves`** — calls `GET /list`. Returns summaries of all available moves, optionally filtered by mode or category. Lets the agent browse the catalog and understand what's available.
-- **`get_thinkfu_move`** — calls `POST /suggest` with the agent's context. Returns a full card.
+- **`get_thinkfu_move`** — calls `POST /suggest` with the agent's context. Returns a full move.
 - **`submit_thinkfu_rating`** — calls `POST /rate` with the outcome and original context.
 
 The MCP layer is thin by design. All logic lives in the API.
 
 ### 4. The Website
 
-**thinkfu.org** — a human-facing card browser, also served by the same Worker.
+**think-fu.org** — a human-facing move browser, also served by the same Worker.
 
-- `/` — landing page with a random card and a "draw another" button
-- `/browse` — filterable card catalog
-- `/move/:id` — individual card page (shareable URL)
+- `/` — landing page with a random move and a "draw another" button
+- `/browse` — filterable move catalog
+- `/move/:id` — individual move page (shareable URL)
 
 The website reads from the same API endpoints, rendered as HTML.
 
@@ -222,11 +222,11 @@ You can call list_thinkfu_moves to browse available moves by mode or category.
 
 ---
 
-## The Card Format
+## The Move Format
 
-Each ThinkFu move is a structured card. YAML frontmatter for machine parsing, markdown body for readability. Cards can be **static** (fixed procedure) or **dynamic** (contain variable slots resolved at serve time).
+Each ThinkFu move is a structured move. YAML frontmatter for machine parsing, markdown body for readability. Moves can be **static** (fixed procedure) or **dynamic** (contain variable slots resolved at serve time).
 
-### Static card example (TF-001):
+### Static move example (TF-001):
 
 ```yaml
 ---
@@ -246,7 +246,7 @@ problem_signatures:
 ---
 ```
 
-### Dynamic card example (TF-004):
+### Dynamic move example (TF-004):
 
 ```yaml
 ---
@@ -287,17 +287,17 @@ Pools are shared YAML files in `catalog/pools/`:
 
 ### The Seed
 
-Every card response — static or dynamic — includes a **seed**: a random concrete noun drawn from `random-words.yaml`.
+Every move response — static or dynamic — includes a **seed**: a random concrete noun drawn from `random-words.yaml`.
 
 ```json
 {
   "_seed": "corrosion",
   "_instance": "TF-001-x8k2m",
-  "card": { ... }
+  "move": { ... }
 }
 ```
 
-The seed is **visible in the response**, not hidden metadata. It must be in the LLM's processing window because its purpose is to subtly shift interpretation. The same card, served twice with different seeds, activates different reasoning paths — even if the card content is identical.
+The seed is **visible in the response**, not hidden metadata. It must be in the LLM's processing window because its purpose is to subtly shift interpretation. The same move, served twice with different seeds, activates different reasoning paths — even if the move content is identical.
 
 The word pool should be concrete nouns with strong sensory associations — "lighthouse", "fermentation", "cartilage", "avalanche", "loom" — not abstract words like "synergy" or "paradigm" that are already overrepresented in the LLM's default vocabulary.
 
@@ -314,7 +314,7 @@ The word pool should be concrete nouns with strong sensory associations — "lig
 | `effort` | yes | `quick` (apply in seconds) or `deep` (requires sustained thinking) |
 | `origin` | yes | Attribution — where the idea comes from |
 | `problem_signatures` | yes | Short phrases describing the *shape* of problem this move fits. |
-| `variables` | no | Variable definitions for dynamic cards. See Variable Types. |
+| `variables` | no | Variable definitions for dynamic moves. See Variable Types. |
 
 ### Body Sections
 
@@ -328,7 +328,7 @@ The word pool should be concrete nouns with strong sensory associations — "lig
 
 ---
 
-## Card Categories
+## Move Categories
 
 Organized by **metacognitive mode** and **moment of use**:
 
@@ -413,12 +413,16 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 ## Tech Stack
 
-- **Catalog storage:** YAML+MD flat files in a git repo
-- **Server:** Cloudflare Worker (serves API, MCP, and website)
-- **Router/classifier:** Prompted LLM call via Anthropic API initially; fine-tuned later
-- **Rating storage:** Cloudflare D1
-- **Website:** HTML rendered by the Worker (no separate build step)
-- **Domain:** thinkfu.org
+- **Catalog:** YAML+MD flat files in a git repo (200 moves, 9 pools)
+- **Shared lib:** TypeScript — portable types, parser, resolver, helpers (no Node deps)
+- **API:** Cloudflare Worker (Hono + Chanfana) — REST API with OpenAPI docs
+- **MCP server:** FastMCP (TypeScript) — local stdio server for Claude Code
+- **Plugin:** Claude Code plugin — bundles MCP server + catalog for one-command install
+- **Rating storage:** Cloudflare D1 (remote, opt-in) + local JSONL (default)
+- **Router/classifier:** Random (v0) → prompted LLM (v1) → fine-tuned classifier (v2)
+- **Website:** HTML rendered by the Worker (planned)
+- **Domain:** think-fu.org
+- **License:** PolyForm Small Business 1.0.0
 
 ---
 
@@ -426,13 +430,12 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for the full phased plan. Summary:
 
-- **Phase 0** — Catalog & local tooling (30+ cards, pools, CLI tool, validation)
-- **Phase 1** — Validate with real agents (does ThinkFu actually change output quality?)
-- **Phase 2** — API + MCP on Cloudflare
-- **Phase 3** — Website (thinkfu.org)
+- **Phase 0** — Catalog & local tooling — **done** (200 moves, 9 pools, local MCP server, validator)
+- **Phase 1** — Validate with real agents — **in progress** (testing with Claude Code)
+- **Phase 1.5** — Claude Code plugin — **built** (packaging for marketplace distribution)
+- **Phase 2** — API on Cloudflare — **built** (Hono + D1, all endpoints working locally)
+- **Phase 3** — Website (think-fu.org)
 - **Phase 4** — Smart routing (LLM-based, then classifier)
-
-We are currently in **Phase 0**.
 
 ---
 
@@ -454,20 +457,28 @@ thinkfu/
 │       ├── random-words.yaml
 │       ├── constraints.yaml
 │       └── timeframes.yaml
-├── SKILL.md
-├── worker/
+├── lib/
+│   └── src/                  # Shared library (portable — Workers + Node)
+│       ├── types.ts          # Move/Pool type definitions
+│       ├── parser.ts         # YAML frontmatter parser (no deps)
+│       ├── resolver.ts       # Variable resolution + seed injection
+│       └── helpers.ts        # Filtering, selection, formatting
+├── api/
 │   ├── src/
-│   │   ├── index.ts          # Router: API, MCP, and website
-│   │   ├── api.ts            # REST API handlers
-│   │   ├── mcp.ts            # MCP protocol handler
-│   │   ├── web.ts            # HTML rendering
-│   │   ├── catalog.ts        # Catalog loader and search
-│   │   └── router.ts         # Move selection logic
-│   └── wrangler.toml
-├── web/
-│   └── templates/            # HTML templates
+│   │   └── index.ts          # Hono API (REST + future website)
+│   └── wrangler.toml         # Cloudflare Worker config
+├── mcp/
+│   └── src/
+│       └── server.ts         # Local MCP server (FastMCP)
+├── plugin/                   # Claude Code plugin (for distribution)
+│   ├── .claude-plugin/
+│   ├── skills/thinkfu/
+│   ├── catalog/              # symlink → ../../catalog
+│   └── mcp/                  # bundled MCP server
+├── SKILL.md
+├── LICENSE.md
 └── scripts/
-    └── validate-catalog.ts
+    └── build-catalog-bundle.ts
 ```
 
 ---
@@ -477,6 +488,12 @@ thinkfu/
 **ThinkFu** — like kung fu, but for thinking. Because thinking — when done well — is a martial art. Martial arts traditions are exactly this: a named, practiced, teachable catalog of moves. You don't invent a new kick every fight. You have a repertoire. You train. You reach for the right move at the right moment.
 
 ThinkFu is that repertoire for cognitive work. For agents. For humans. For anyone doing hard thinking under pressure.
+
+---
+
+## License
+
+ThinkFu is released under the [PolyForm Small Business License 1.0.0](LICENSE.md) — free for individuals and companies with less than $1M USD in annual revenue, with a commercial license required above that threshold. The catalog content (`catalog/` directory) is additionally available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) for non-commercial educational use. See [LICENSE.md](LICENSE.md) for full terms.
 
 ---
 
