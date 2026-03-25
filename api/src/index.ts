@@ -3,7 +3,7 @@ import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
-import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderCredits, renderMove } from "./html.js";
+import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderCredits, renderTerms, renderMove } from "./html.js";
 import { routeMove } from "./router.js";
 
 type Bindings = {
@@ -222,6 +222,9 @@ app.get("/setup", (c) => c.html(renderSetup()));
 // GET /credits
 app.get("/credits", (c) => c.html(renderCredits()));
 
+// GET /terms
+app.get("/terms", (c) => c.html(renderTerms()));
+
 // GET /match?q=...&exclude=... — smart-routed move for humans, redirects to pinned URL
 app.get("/match", async (c) => {
   const q = c.req.query("q") ?? "";
@@ -312,71 +315,20 @@ app.get("/move/:id", (c) => {
 
 // --- Test endpoints for router development (remove before production) ---
 
-// Test embedding model (single)
-app.post("/__test/embed", async (c) => {
+// --- Internal endpoints (used by build scripts) ---
+
+// Single embedding (fallback for build-embeddings.ts)
+app.post("/_internal/embed", async (c) => {
   const { text } = await c.req.json();
   const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: [text] });
-  return c.json({
-    model: "embeddinggemma-300m",
-    input_length: text.length,
-    embedding_dimensions: result.data[0].length,
-    embedding: result.data[0],
-  });
+  return c.json({ embedding: result.data[0] });
 });
 
-// Batch embedding (for build-embeddings script)
-app.post("/__test/embed-batch", async (c) => {
+// Batch embedding (used by build-embeddings.ts)
+app.post("/_internal/embed-batch", async (c) => {
   const { texts } = await c.req.json();
   const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: texts });
-  return c.json({
-    count: result.data.length,
-    dimensions: result.data[0]?.length,
-    embeddings: result.data,
-  });
-});
-
-// Test LLM (with structured output)
-app.post("/__test/llm", async (c) => {
-  const { prompt } = await c.req.json();
-  const result = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-    messages: [{ role: "user", content: prompt }],
-    max_tokens: 300,
-    response_format: {
-      type: "json_schema",
-      json_schema: {
-        type: "object",
-        properties: {
-          move_id: { type: "string" },
-          reason: { type: "string" },
-          variables: { type: "object" },
-        },
-        required: ["move_id", "reason"],
-      },
-    },
-  });
-  return c.json({
-    model: "llama-3.1-8b-instruct",
-    response: result.response,
-  });
-});
-
-// Test similarity search
-app.post("/__test/search", async (c) => {
-  const { text, top_k } = await c.req.json();
-  // Embed the query
-  const embedResult = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: [text] });
-  const queryVector = embedResult.data[0];
-  // Search Vectorize
-  const results = await c.env.VECTORIZE.query(queryVector, { topK: top_k ?? 5, returnMetadata: "all" });
-  return c.json({
-    query: text,
-    matches: results.matches.map((m: any) => ({
-      id: m.id,
-      score: m.score,
-      name: m.metadata?.name,
-      category: m.metadata?.category,
-    })),
-  });
+  return c.json({ embeddings: result.data });
 });
 
 export default app;

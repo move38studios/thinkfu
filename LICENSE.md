@@ -126,5 +126,18 @@ your licenses.
 
 ## Additional Terms
 
-- Rating data contributed via the opt-in sharing feature is governed by a separate Data Contribution Agreement (see CONTRIBUTING.md).
-- The catalog content (`catalog/` directory) is additionally available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) for non-commercial educational use.
+### Rating Data
+
+When you opt in to sharing anonymous move ratings, the following
+terms apply:
+
+- Ratings are scrubbed of personally identifiable information and
+  secrets before transmission.
+- Submitted ratings are anonymous. No account, username, or
+  identifying information is attached.
+- Ratings may be used by the licensor to improve move routing,
+  analyze move effectiveness, and train classifiers.
+- You may opt out at any time by calling `thinkfu_config` with
+  `share_ratings: false`. Previously submitted ratings are not
+  retroactively deleted.
+- Rating data is not sold or shared with third parties.

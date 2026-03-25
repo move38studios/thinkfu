@@ -169,6 +169,12 @@ details.more summary:hover { color: var(--text-dim); }
 }
 .match-form button:hover { color: var(--text-strong); border-color: var(--link-hover); }
 
+/* Rating */
+.rating { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+.rating span { cursor: pointer; padding: 0.25rem 0; border-bottom: 1px solid var(--border); margin-right: 1rem; }
+.rating span:hover { color: var(--text-strong); border-color: var(--link-hover); }
+.rating .done { color: var(--text-muted); border: none; cursor: default; }
+
 /* Theme toggle */
 .theme-toggle {
   position: fixed;
@@ -222,7 +228,7 @@ function layout(title: string, content: string): string {
   <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">light</button>
   <main>${content}</main>
   <footer>
-    <a href="/">think-fu.org</a> &middot; <a href="/credits">credits</a> &middot; <a href="https://move38.org">move38</a>
+    <a href="/">think-fu.org</a> &middot; <a href="/credits">credits</a> &middot; <a href="/terms">terms</a> &middot; <a href="https://move38.org">move38</a>
   </footer>
   <script>
     // Theme
@@ -418,6 +424,21 @@ export function renderCredits(): string {
   `);
 }
 
+export function renderTerms(): string {
+  return layout("Terms — ThinkFu", `
+    <div class="page">
+      <h1>Terms of Use</h1>
+      <p>ThinkFu is provided free of charge by move38 B.V.</p>
+      <p><strong>No warranty.</strong> Thinking moves are cognitive prompts, not professional advice. Outcomes depend on how you apply them. Use at your own risk.</p>
+      <p><strong>Fair use.</strong> The API and website are for interactive use. Automated scraping, bulk downloading, or sustained high-volume programmatic access without permission is not allowed. Rate limits apply.</p>
+      <p><strong>Ratings.</strong> When you rate a move on this website (or via the plugin with sharing enabled), your anonymous feedback is stored and used to improve move routing and train models. No personal information is collected. Ratings cannot be attributed to any individual. By submitting a rating, you agree that move38 may use this data to improve ThinkFu, including training proprietary routing models.</p>
+      <p><strong>Software license.</strong> The ThinkFu codebase and catalog are released under the <a href="https://github.com/move38studios/thinkfu/blob/main/LICENSE.md">PolyForm Small Business License 1.0.0</a> &mdash; free for individuals and companies under $1M USD annual revenue.</p>
+      <p>Contact: thinkfu@move38.org</p>
+      <p style="margin-top: 2rem;"><a href="/">home</a></p>
+    </div>
+  `);
+}
+
 export function renderAgents(): string {
   return layout("ThinkFu — For Agents", `
     <div class="page">
@@ -467,6 +488,11 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
       <a href="#" id="clear-link" style="display:none" onclick="clearProblem(); return false;">clear problem</a>
       <a href="/">home</a>
     </div>
+    <div class="rating" id="rating-ui" style="display:none">
+      did this move help?
+      <span onclick="rateMove(true, this)">yes</span>
+      <span onclick="rateMove(false, this)">no</span>
+    </div>
     <p class="swipe-hint" id="swipe-hint">&larr; back &middot; next &rarr;</p>
     <script>
       // Active problem tracking
@@ -478,8 +504,9 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
         let excludes = JSON.parse(sessionStorage.getItem('thinkfu-excludes') || '[]');
         if (!excludes.includes(currentId)) excludes.push(currentId);
         sessionStorage.setItem('thinkfu-excludes', JSON.stringify(excludes));
-        // Show clear link and update hint
+        // Show clear link, rating, and update hint
         document.getElementById('clear-link').style.display = '';
+        document.getElementById('rating-ui').style.display = '';
         document.getElementById('swipe-hint').innerHTML = 'matched to your problem &middot; &larr; back &middot; next &rarr;';
       }
 
@@ -495,6 +522,24 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
         sessionStorage.removeItem('thinkfu-query');
         sessionStorage.removeItem('thinkfu-excludes');
         window.location.href = '/random';
+      }
+
+      function rateMove(helpful, el) {
+        const ui = document.getElementById('rating-ui');
+        ui.innerHTML = helpful ? 'thanks — rated helpful' : 'thanks — noted';
+        ui.querySelector?.('.done')?.remove;
+        fetch('/rate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            move_id: currentId,
+            instance_id: '${esc(m._instance)}',
+            changed_approach: helpful,
+            user_reaction: helpful ? 'positive' : 'negative',
+            note: 'Website rating',
+            original_request: query ? { mode: 'explore', goal: query } : undefined,
+          }),
+        }).catch(() => {});
       }
 
       // History as array + cursor index (like browser back/forward)
@@ -530,6 +575,7 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
       function goBack() {
         if (index > 0) {
           index--;
+          save(history, index);
           window.location.href = history[index];
         }
       }

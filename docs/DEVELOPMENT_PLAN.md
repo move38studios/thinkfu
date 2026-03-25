@@ -249,7 +249,7 @@ After 1000+ rated interactions:
 | Routing LLM | Workers AI: llama-3.1-8b-instruct | Neurons pricing (negligible) |
 | Everything else | Same Worker | Already deployed |
 
-No external API keys. No Anthropic billing. Entire routing stack on the edge.
+Entire routing stack on the edge.
 
 ### Phase 3 Deliverables
 - [x] Vectorize index with all move embeddings

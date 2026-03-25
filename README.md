@@ -58,12 +58,14 @@ One Cloudflare Worker serves three interfaces from the same catalog:
 
 A manually curated library of thinking moves. Each move is a structured move (see Move Format below). The catalog is the foundation — everything else builds on it.
 
-Sources to draw from initially:
-- TRIZ's 40 inventive principles
+Sources drawn from:
+- TRIZ's inventive principles
 - Oblique Strategies
-- Design Thinking methods
-- Lateral thinking techniques (de Bono)
-- Systems thinking heuristics
+- Design Thinking
+- Lateral thinking (de Bono)
+- Systems thinking (Meadows, Senge)
+- Metacognition research (Flavell, Schraw)
+- Classical philosophy, improv theater, Zen, cognitive science, and more (see [credits](https://think-fu.org/credits))
 
 ### 2. The REST API
 
@@ -116,13 +118,15 @@ The LLM never controls the seed word — that stays random always as non-negotia
 
 #### `POST /rate`
 
-Submit feedback on a move. Stateless — the client sends the original context back so each rating is a self-contained training record.
+Submit feedback on a move. Stateless — the client sends the original context back so each rating is a self-contained training record. All data is scrubbed of PII and secrets before storage.
 
 ```json
 {
   "move_id": "TF-001",
-  "useful": true,
-  "note": "Optional: what happened when you tried to apply it",
+  "instance_id": "TF-001-x8k2m",
+  "changed_approach": true,
+  "user_reaction": "positive",
+  "note": "What specifically shifted when you applied the move",
   "original_request": {
     "mode": "stuck",
     "goal": "...",
@@ -134,9 +138,7 @@ Submit feedback on a move. Stateless — the client sends the original context b
 }
 ```
 
-If `retry: true`, returns another move. The `original_request` is reused for routing, the rated move is auto-added to `exclude`, and the `note` is appended as additional context.
-
-Each rating record is a complete training example: *situation → move → outcome*. No server-side session state needed.
+`changed_approach` is factual, not polite — false if the move didn't actually shift your output. `user_reaction` captures the human signal. If `retry: true`, returns another move.
 
 #### `GET /list`
 
@@ -176,45 +178,30 @@ The MCP layer is thin by design. All logic lives in the API.
 
 ### 4. The Website
 
-**think-fu.org** — a human-facing move browser, also served by the same Worker.
+**think-fu.org** — served by the same Worker.
 
-- `/` — landing page with a random move and a "draw another" button
-- `/browse` — filterable move catalog
-- `/move/:id` — individual move page (shareable URL)
+- `/` — landing page (human / agent / why)
+- `/humans` — description + "describe your problem" (smart-routed) + random draw
+- `/agents` — agent-facing integration guide
+- `/why` — manifesto
+- `/setup` — step-by-step for Claude Code, Claude Desktop, ChatGPT
+- `/credits` — intellectual traditions and attribution
+- `/random` — redirects to a pinned move URL (shareable)
+- `/match?q=...` — smart-routed move for humans
+- `/move/:id?seed=...&vars=...` — individual move page with swipe navigation
 
-The website reads from the same API endpoints, rendered as HTML.
+### 5. Claude Code Plugin
 
-### 5. The System Prompt Snippet
-
-Include in any agent's system prompt to activate ThinkFu-aware behavior:
+The recommended way for agents to use ThinkFu. Install the plugin and the SKILL.md is loaded automatically — no manual system prompt needed.
 
 ```
-You have access to ThinkFu — a metacognitive toolkit exposed via MCP.
-
-USE IT IN FOUR MOMENTS:
-1. PLAN — Before starting a non-trivial task, call get_thinkfu_move with mode
-   "plan" to challenge your default approach. Ask yourself: "Am I about to do
-   the obvious thing?"
-2. EXPLORE — While working, if you notice you're executing without questioning,
-   call with mode "explore" to broaden your search space.
-3. STUCK — When looping or blocked, call with mode "stuck".
-4. EVALUATE — Before delivering a solution, call with mode "evaluate" to
-   stress-test your output. Especially if the solution came quickly.
-
-WHEN YOU RECEIVE A MOVE: Actually apply it. Work through it step by step.
-Let it change your approach if warranted.
-
-AFTER APPLYING: Call submit_thinkfu_rating with the outcome. Include the
-original context so the system can learn.
-
-WATCH THE USER'S REACTION: If the user pushes back on your output, seems
-unsatisfied, or asks you to redo something — that's a signal. Consider whether
-a ThinkFu move would have caught the issue. If so, call submit_thinkfu_rating
-retroactively (useful: false, with a note about what the user flagged) and
-try a new move.
-
-You can call list_thinkfu_moves to browse available moves by mode or category.
+/plugin marketplace add move38studios/thinkfu
+/plugin install thinkfu@move38studios-thinkfu
 ```
+
+The plugin bundles the MCP server, catalog, and SKILL.md. It calls the smart router API for move selection and handles rating collection with PII scrubbing.
+
+See [SKILL.md](SKILL.md) for the full agent instructions.
 
 ---
 
@@ -273,13 +260,18 @@ a similar tension in their field?
 
 Pools are shared YAML files in `catalog/pools/`:
 
-| Pool | Contents | Used by |
-|------|----------|---------|
-| `domains.yaml` | 150+ fields/disciplines | Import from Another Domain |
-| `personas.yaml` | Diverse user archetypes | Change the Audience |
-| `random-words.yaml` | 500+ concrete nouns with strong sensory associations | Seeds + Random Entry |
-| `constraints.yaml` | Creative constraints | Add a Constraint |
-| `timeframes.yaml` | Time horizons | Temporal Shift |
+| Pool | Contents |
+|------|----------|
+| `domains.yaml` | 150+ fields/disciplines |
+| `personas.yaml` | 220+ diverse user archetypes |
+| `random-words.yaml` | 500+ concrete sensory nouns (seeds + Random Entry) |
+| `constraints.yaml` | Creative constraints |
+| `timeframes.yaml` | Time horizons |
+| `genres.yaml` | Literary/artistic genres |
+| `koans.yaml` | Contemplative prompts |
+| `languages.yaml` | Natural languages |
+| `thinkers.yaml` | Historical thinkers |
+| `scamper.yaml` | SCAMPER operations |
 
 ### The Seed
 
@@ -397,15 +389,12 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 ## Tech Stack
 
-- **Catalog:** YAML+MD flat files in a git repo (200 moves, 9 pools)
-- **Shared lib:** TypeScript — portable types, parser, resolver, helpers (no Node deps)
-- **API:** Cloudflare Worker (Hono + Chanfana) — REST API with OpenAPI docs
-- **MCP server:** FastMCP (TypeScript) — local stdio server for Claude Code
-- **Plugin:** Claude Code plugin — bundles MCP server + catalog for one-command install
-- **Rating storage:** Cloudflare D1 (remote, opt-in) + local JSONL (default)
-- **Router:** Random (v0) → embedding similarity + tiny LLM tiebreaker on Cloudflare edge (v1) → fine-tuned classifier (v2). All Cloudflare-native, no external API calls.
-- **Website:** HTML rendered by the Worker (planned)
-- **Domain:** think-fu.org
+- **Catalog:** 200+ moves, 10+ pools — YAML+MD flat files
+- **Shared lib:** TypeScript — portable types, parser, resolver, helpers
+- **API + Website:** Cloudflare Worker (Hono) — REST API + HTML at think-fu.org
+- **Smart router:** embeddinggemma-300m + Vectorize + llama-3.1-8b-instruct — all on Cloudflare edge, no external API calls
+- **Plugin:** Claude Code plugin — MCP server + catalog + SKILL.md, calls smart router API
+- **Ratings:** Cloudflare D1 (remote, opt-in with PII scrubbing) + local JSONL
 - **License:** PolyForm Small Business 1.0.0
 
 ---
@@ -425,18 +414,6 @@ After adding or editing moves, run `pnpm run deploy`. This validates, rebuilds t
 
 ---
 
-## Development Plan
-
-See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for the full phased plan. Summary:
-
-- **Phase 0** — Catalog & local tooling — **done** (208 moves, 10 pools, validator)
-- **Phase 1** — Validate with real agents — **done** (iterated on seed visibility, rating quality, SKILL.md)
-- **Phase 2** — API + Plugin — **deployed** (api.think-fu.org, plugin built with rating opt-in + PII scrubbing)
-- **Phase 3** — Smart router — **deployed** (embeddings + Vectorize + LLM on Cloudflare edge)
-- **Phase 4** — Website — **deployed** (think-fu.org with matched mode + random + swipe navigation)
-
----
-
 ## Repo Structure
 
 ```
@@ -449,12 +426,7 @@ thinkfu/
 │   │   ├── unsticking/
 │   │   ├── evaluation/
 │   │   └── meta/
-│   └── pools/
-│       ├── domains.yaml
-│       ├── personas.yaml
-│       ├── random-words.yaml
-│       ├── constraints.yaml
-│       └── timeframes.yaml
+│   └── pools/              # Pool files (domains, personas, random-words, ...)
 ├── lib/
 │   └── src/                  # Shared library (portable — Workers + Node)
 │       ├── types.ts          # Move/Pool type definitions
@@ -465,6 +437,7 @@ thinkfu/
 │   ├── src/
 │   │   ├── index.ts          # Hono API + website routes
 │   │   ├── html.ts           # HTML rendering
+│   │   ├── router.ts         # Smart routing (embeddings + LLM)
 │   │   └── catalog-data.ts   # Pre-parsed catalog loader
 │   └── wrangler.jsonc        # Cloudflare Worker config
 ├── plugin/                   # Claude Code plugin (also used for local dev)
@@ -474,13 +447,17 @@ thinkfu/
 │   │   └── SKILL.md          # symlink → ../../SKILL.md
 │   ├── catalog/              # symlink → ../catalog
 │   ├── mcp/                  # MCP server (FastMCP + stdio)
-│   │   ├── src/server.ts
+│   │   ├── src/
+│   │   │   ├── server.ts     # MCP tools + smart router call + rating sync
+│   │   │   └── scrub.ts      # PII/secret scrubber
 │   │   └── start.sh
 │   └── .mcp.json
 ├── SKILL.md
 ├── LICENSE.md
 └── scripts/
-    └── build-catalog-bundle.ts
+    ├── build-catalog-bundle.ts
+    ├── build-embeddings.ts
+    └── validate-catalog.ts
 ```
 
 ---
@@ -495,8 +472,8 @@ ThinkFu is that repertoire for cognitive work. For agents. For humans. For anyon
 
 ## License
 
-ThinkFu is released under the [PolyForm Small Business License 1.0.0](LICENSE.md) — free for individuals and companies with less than $1M USD in annual revenue, with a commercial license required above that threshold. The catalog content (`catalog/` directory) is additionally available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) for non-commercial educational use. See [LICENSE.md](LICENSE.md) for full terms.
+ThinkFu is released under the [PolyForm Small Business License 1.0.0](LICENSE.md) — free for individuals and companies with less than $1M USD in annual revenue. Commercial license required above that threshold. See [LICENSE.md](LICENSE.md) for full terms.
 
 ---
 
-*Built by move38.*
+*Built by [move38](https://move38.org).*

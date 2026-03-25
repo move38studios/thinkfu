@@ -2,7 +2,7 @@
 // Embeds all moves and uploads to Vectorize via the Worker's test endpoint.
 // Run: pnpm build:embeddings
 //
-// Requires the Worker to be deployed with the AI binding and a /__test/embed endpoint.
+// Requires the Worker to be deployed with the AI binding and a /_internal/embed endpoint.
 // Uses the live API to generate embeddings, then wrangler vectorize to upload.
 
 import { readFileSync, readdirSync, writeFileSync } from "fs";
@@ -63,7 +63,7 @@ async function main() {
     const batch = entries.slice(i, i + BATCH_SIZE);
     const texts = batch.map((e) => e.text);
 
-    const resp = await fetch(`${API_BASE}/__test/embed-batch`, {
+    const resp = await fetch(`${API_BASE}/_internal/embed-batch`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ texts }),
@@ -72,7 +72,7 @@ async function main() {
     if (!resp.ok) {
       // Fallback: embed one at a time
       for (const entry of batch) {
-        const r = await fetch(`${API_BASE}/__test/embed`, {
+        const r = await fetch(`${API_BASE}/_internal/embed`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: entry.text }),

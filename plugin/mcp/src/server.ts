@@ -186,6 +186,53 @@ Please ask the user: "ThinkFu can share anonymous move ratings to improve move r
 Based on their response, call thinkfu_config with share_ratings: true or false.`;
     }
 
+    const style = args.style ?? "matched";
+
+    // Try smart routing via API for matched style
+    if (style === "matched") {
+      try {
+        const resp = await fetch(`${API_BASE}/suggest`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mode: args.mode,
+            goal: args.goal,
+            current_approach: args.current_approach,
+            stuck_on: args.stuck_on,
+            context: args.context,
+            exclude: args.exclude,
+            style: "matched",
+          }),
+        });
+        if (resp.ok) {
+          const data = await resp.json() as any;
+          // Format the API response as markdown
+          const lines = [
+            `# ${data.name}`,
+            "",
+            `> ${data.one_liner}`,
+            "",
+            `${(data.mode ?? []).join(", ")} · ${data.effort} · ${data.category}`,
+            "",
+            data.body,
+          ];
+          if (data.pairs_with?.length > 0) {
+            lines.push("", "## Pairs With", "");
+            for (const pair of data.pairs_with) {
+              lines.push(`- **${pair.id}**: ${pair.why}`);
+            }
+          }
+          lines.push("", `— ${data._seed}`);
+          lines.push("", `[${data._instance}]`);
+          lines.push("", `After applying this move, call submit_thinkfu_rating with move_id "${data.id}", instance_id "${data._instance}". Be honest about changed_approach — false if this move didn't actually shift your thinking. If the user later reacts negatively or asks you to redo the work, resubmit the rating with changed_approach: false and user_reaction: "negative".`);
+          return lines.join("\n");
+        }
+      } catch {
+        // API unavailable — fall back to local random
+      }
+    }
+
+    // Fallback: local random selection
     let filtered = filterMoves(args.mode, undefined, args.exclude);
     if (filtered.length === 0) filtered = filterMoves(undefined, undefined, args.exclude);
     if (filtered.length === 0) return "No moves available. All moves have been excluded.";
