@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "validate": "pnpm tsx scripts/validate-catalog.ts",
-    "build:catalog": "pnpm tsx scripts/build-catalog-bundle.ts"
+    "build:catalog": "pnpm tsx scripts/build-catalog-bundle.ts",
+    "build:embeddings": "pnpm tsx scripts/build-embeddings.ts",
+    "upload:embeddings": "cd api && pnpm wrangler vectorize insert thinkfu-moves --file vectorize-upload.ndjson",
+    "rebuild": "pnpm validate && pnpm build:catalog && pnpm build:embeddings && pnpm upload:embeddings",
+    "deploy": "pnpm rebuild && cd api && pnpm wrangler deploy"
   },
   "devDependencies": {
     "tsx": "^4.21.0",

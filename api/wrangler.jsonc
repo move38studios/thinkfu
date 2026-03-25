@@ -18,6 +18,19 @@
     "@thinkfu/lib": "../lib/src"
   },
 
+  // Workers AI for embedding + routing LLM
+  "ai": {
+    "binding": "AI"
+  },
+
+  // Vectorize for move similarity search
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "thinkfu-moves"
+    }
+  ],
+
   "d1_databases": [
     {
       "binding": "DB",

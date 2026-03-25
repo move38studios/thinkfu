@@ -20,7 +20,7 @@ variables:
     pool: random-words
 pairs_with:
   - id: TF-084
-    why: "creative learning spiral provides the full cycle; this card is just the PLAY step, applied when you're stuck"
+    why: "Imagine, Play, Share, Reflect provides the full cycle; this card is just the PLAY step, applied when you're stuck"
   - id: TF-080
     why: "make the invisible visible so your tinkering produces observable results instead of blind poking"
   - id: TF-013

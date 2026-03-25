@@ -82,6 +82,15 @@ with these terms, and take practical steps to correct past
 violations, within 32 days of receiving notice. Otherwise, all
 your licenses end immediately.
 
+## No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NONINFRINGEMENT. USE OF THE SOFTWARE, INCLUDING ANY THINKING
+MOVES, STRATEGIES, OR RECOMMENDATIONS IT PRODUCES, IS ENTIRELY
+AT YOUR OWN RISK.
+
 ## No Liability
 
 ***As far as the law allows, the software comes as is, without

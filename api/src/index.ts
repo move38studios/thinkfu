@@ -3,10 +3,13 @@ import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
-import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderMove } from "./html.js";
+import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderCredits, renderMove } from "./html.js";
+import { routeMove } from "./router.js";
 
 type Bindings = {
   DB: D1Database;
+  AI: any;
+  VECTORIZE: any;
   RATE_LIMIT_READ: any;
   RATE_LIMIT_WRITE: any;
 };
@@ -108,7 +111,23 @@ app.post("/suggest", async (c) => {
   const exclude = body.exclude ?? [];
   const style = body.style ?? "matched";
 
-  const resolved = selectMove(moves, pools, { mode, exclude, style });
+  let resolved: ResolvedMove | null = null;
+
+  if (style === "matched" && c.env.AI && c.env.VECTORIZE) {
+    // Smart routing: embeddings + LLM
+    resolved = await routeMove(
+      { mode, goal: body.goal ?? "", current_approach: body.current_approach, stuck_on: body.stuck_on, context: body.context, exclude },
+      moves,
+      pools,
+      c.env.AI,
+      c.env.VECTORIZE,
+    );
+  }
+
+  // Fallback to random if router returned null or style is "random"
+  if (!resolved) {
+    resolved = selectMove(moves, pools, { mode, exclude, style: "random" });
+  }
 
   if (!resolved) {
     return c.json({ error: "No moves available" }, 404);
@@ -200,6 +219,40 @@ app.get("/why", (c) => c.html(renderWhy()));
 // GET /setup
 app.get("/setup", (c) => c.html(renderSetup()));
 
+// GET /credits
+app.get("/credits", (c) => c.html(renderCredits()));
+
+// GET /match?q=...&exclude=... — smart-routed move for humans, redirects to pinned URL
+app.get("/match", async (c) => {
+  const q = c.req.query("q") ?? "";
+  const excludeStr = c.req.query("exclude") ?? "";
+  const exclude = excludeStr ? excludeStr.split(",") : [];
+
+  if (!q) return c.redirect("/humans");
+
+  let resolved: ResolvedMove | null = null;
+
+  if (c.env.AI && c.env.VECTORIZE) {
+    resolved = await routeMove(
+      { mode: "explore", goal: q, exclude },
+      moves,
+      pools,
+      c.env.AI,
+      c.env.VECTORIZE,
+    );
+  }
+
+  // Fallback to random
+  if (!resolved) {
+    resolved = selectMove(moves, pools, { mode: "explore", exclude, style: "random" });
+  }
+
+  if (!resolved) return c.redirect("/humans");
+
+  const shareQuery = resolvedMoveToQuery(resolved);
+  return c.redirect(`/move/${resolved.id}?${shareQuery}`);
+});
+
 // GET /random — website: HTML card with swipe. API: JSON.
 app.get("/random", (c) => {
   const format = c.req.query("format");
@@ -255,6 +308,75 @@ app.get("/move/:id", (c) => {
 
   const shareQuery = resolvedMoveToQuery(resolved);
   return c.html(renderMove(resolved, `/move/${resolved.id}?${shareQuery}`));
+});
+
+// --- Test endpoints for router development (remove before production) ---
+
+// Test embedding model (single)
+app.post("/__test/embed", async (c) => {
+  const { text } = await c.req.json();
+  const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: [text] });
+  return c.json({
+    model: "embeddinggemma-300m",
+    input_length: text.length,
+    embedding_dimensions: result.data[0].length,
+    embedding: result.data[0],
+  });
+});
+
+// Batch embedding (for build-embeddings script)
+app.post("/__test/embed-batch", async (c) => {
+  const { texts } = await c.req.json();
+  const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: texts });
+  return c.json({
+    count: result.data.length,
+    dimensions: result.data[0]?.length,
+    embeddings: result.data,
+  });
+});
+
+// Test LLM (with structured output)
+app.post("/__test/llm", async (c) => {
+  const { prompt } = await c.req.json();
+  const result = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    messages: [{ role: "user", content: prompt }],
+    max_tokens: 300,
+    response_format: {
+      type: "json_schema",
+      json_schema: {
+        type: "object",
+        properties: {
+          move_id: { type: "string" },
+          reason: { type: "string" },
+          variables: { type: "object" },
+        },
+        required: ["move_id", "reason"],
+      },
+    },
+  });
+  return c.json({
+    model: "llama-3.1-8b-instruct",
+    response: result.response,
+  });
+});
+
+// Test similarity search
+app.post("/__test/search", async (c) => {
+  const { text, top_k } = await c.req.json();
+  // Embed the query
+  const embedResult = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: [text] });
+  const queryVector = embedResult.data[0];
+  // Search Vectorize
+  const results = await c.env.VECTORIZE.query(queryVector, { topK: top_k ?? 5, returnMetadata: "all" });
+  return c.json({
+    query: text,
+    matches: results.matches.map((m: any) => ({
+      id: m.id,
+      score: m.score,
+      name: m.metadata?.name,
+      category: m.metadata?.category,
+    })),
+  });
 });
 
 export default app;

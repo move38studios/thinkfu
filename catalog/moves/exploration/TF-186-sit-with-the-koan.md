@@ -24,7 +24,7 @@ pairs_with:
   - id: TF-038
     why: "Do Nothing disengages entirely; Sit With the Koan stays engaged but shifts from solving to contemplating"
   - id: TF-037
-    why: "Honor Thy Error uses the unexpected as material; the koan reframes what counts as an answer"
+    why: "Your Error May Have Been Intended uses the unexpected as material; the koan reframes what counts as an answer"
 ---
 
 ## The Move

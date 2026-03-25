@@ -1,6 +1,6 @@
 ---
 id: TF-105
-name: Find the Quality Without a Name
+name: Does It Feel Alive?
 one_liner: "Does this solution feel alive, whole, and egoless — or are you forcing it to exist?"
 mode: [evaluate]
 category: Evaluation
@@ -67,6 +67,6 @@ flowchart TD
 ## Watch Out For
 
 - This is a subjective check and it requires honesty. If you're attached to the cleverness, you'll rationalize the "no" answers away. Do the gut check BEFORE the rational justification
-- "Quality Without a Name" is not a license to endlessly polish. Use it as a diagnostic, not a perfectionism engine. If the nagging feeling survives two revision attempts, ship it and revisit later
+- This is not a license to endlessly polish. Use it as a diagnostic, not a perfectionism engine. If the nagging feeling survives two revision attempts, ship it and revisit later
 - The quality is easier to feel in small systems. For large systems, apply the check to individual subsystems or interfaces rather than the whole
 - Alexander's quality is destroyed by ego. If you're proud of how clever something is, that's a signal to investigate, not celebrate

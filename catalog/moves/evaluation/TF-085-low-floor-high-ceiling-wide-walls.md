@@ -1,6 +1,6 @@
 ---
 id: TF-085
-name: Low Floor, High Ceiling, Wide Walls
+name: Easy Start, Expert Depth, Many Paths
 one_liner: Rate your design on three axes — easy start, expert depth, diverse use — and fix the one you're neglecting.
 mode: [evaluate, plan]
 category: Evaluation

@@ -1,6 +1,6 @@
 ---
 id: TF-037
-name: Honor Thy Error as a Hidden Intention
+name: Your Error May Have Been Intended
 one_liner: Before fixing the mistake, ask what it's trying to tell you.
 mode: [explore, stuck]
 category: Exploration

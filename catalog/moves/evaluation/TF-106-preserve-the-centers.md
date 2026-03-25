@@ -20,7 +20,7 @@ variables:
     max: 5
 pairs_with:
   - id: TF-105
-    why: "Quality Without a Name diagnoses the feeling; Preserve the Centers gives you the structural lens"
+    why: "Does It Feel Alive diagnoses the feeling; Preserve the Centers gives you the structural lens"
   - id: TF-031
     why: "Find the Leverage Point identifies where to intervene; Preserve the Centers checks whether the intervention helps"
   - id: TF-070

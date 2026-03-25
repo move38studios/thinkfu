@@ -20,7 +20,7 @@ variables:
     pool: random-words
 pairs_with:
   - id: TF-037
-    why: "Honor Thy Error is the same principle applied specifically to mistakes"
+    why: "Your Error May Have Been Intended is the same principle applied specifically to mistakes"
   - id: TF-023
     why: "Use the Problem as the Solution is a structural cousin — the obstacle becomes the path"
   - id: TF-009

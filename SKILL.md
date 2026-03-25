@@ -1,3 +1,8 @@
+---
+name: thinkfu
+description: Thinking moves that improve creative and strategic work. Use when brainstorming, designing, writing, problem-solving, strategizing, or any task where the obvious answer isn't good enough. Also use when stuck, looping, or about to deliver something that feels too safe. Calls ThinkFu MCP tools automatically.
+---
+
 # ThinkFu — Metacognition as a Service
 
 You have access to ThinkFu, a catalog of thinking moves exposed via MCP. ThinkFu helps you think better — not just when you're stuck, but as a regular practice to elevate the quality of your work.
@@ -91,6 +96,8 @@ submit_thinkfu_rating({
 ```
 
 This is how the system learns. Rate every move you draw — even if briefly. Set `retry: true` to get a different move if the first one didn't help.
+
+**Revise ratings when the user reacts.** If you rated a move positively but the user later pushes back, asks to redo the work, or seems unsatisfied, resubmit the rating with `changed_approach: false` and `user_reaction: "negative"`. The user's reaction is the real signal — your initial self-assessment may be wrong.
 
 ## When to Use ThinkFu Proactively
 

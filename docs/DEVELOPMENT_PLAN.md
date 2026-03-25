@@ -10,8 +10,8 @@
 
 **Status: DONE**
 
-- [x] 200 moves across 5 categories (planning, exploration, unsticking, evaluation, meta)
-- [x] 9 pool files (domains, personas, random-words, constraints, timeframes, genres, koans, languages, thinkers)
+- [x] 208 moves across 5 categories (planning, exploration, unsticking, evaluation, meta)
+- [x] 10 pool files (domains, personas, random-words, constraints, timeframes, genres, koans, languages, thinkers, scamper)
 - [x] Local MCP server (FastMCP + stdio) — tested with Claude Code
 - [x] Catalog validator (`pnpm validate`) — checks YAML, required fields, pool refs, mermaid syntax
 - [x] Shared lib (`lib/src/`) — portable types, parser, resolver, helpers
@@ -38,24 +38,22 @@ Every move must pass:
 ### 1.1 Connect ThinkFu to Claude Code ✅
 MCP server registered and working. SKILL.md loaded via CLAUDE.md include.
 
-### 1.2 Early Testing ✅
-Two test conversations completed:
-- **Startup ideation** — 8 moves chained, seeds drove the core metaphor ("assumption rust"), produced a novel concept
-- **Strategy framework** — 3 moves applied deeply, each produced concrete actionable output
+### 1.2 Testing ✅
+Multiple test conversations across brainstorming, strategy, essay feedback, product ideation.
 
-**Key findings:**
-- Seeds are doing real creative work — not just perturbation, but building metaphorical coherence across chains
-- ThinkFu works better as a sharpening tool for existing thinking than as a generative engine from scratch
-- Agent tends to move-hop (draw many, apply shallowly) rather than apply deeply — SKILL.md updated to address this
-- Agent doesn't rate moves — SKILL.md updated to strengthen this
-- `plan` and `stuck` modes underused — needs more testing
+**Key findings (iteratively addressed):**
+- Seed word was too prominent → fixed: seed now unlabeled footnote, agent no longer fixates
+- Agent wasn't rating moves → fixed: explicit reminder in every move response + "MUST" in tool description
+- Agent always rated useful:true → fixed: changed from `useful` boolean to `changed_approach` + `user_reaction`
+- Agent move-hopped → fixed: SKILL.md updated to enforce "apply fully before drawing another"
+- List tool returned 14k tokens → fixed: compact grouped format, ~3k tokens
+- Seed instruction in SKILL.md caused fixation → removed entirely
+- Smart router produces better move selection than random (tested on Nose, startup ideation, essay feedback)
+- Agent now re-rates moves when user reacts negatively
 
 ### 1.3 Remaining Validation
-- [ ] Test with 5+ more diverse tasks
-- [ ] Test seed perturbation effect (same move, different seeds)
-- [ ] Test `plan` and `stuck` modes specifically
-- [ ] Verify rating behavior after SKILL.md updates
-- [ ] Iterate on moves that don't change behavior
+- [ ] More testing with `plan` and `stuck` modes specifically
+- [ ] Validate smart router vs random quality with larger sample
 
 ---
 
@@ -92,36 +90,47 @@ Plugin structure complete:
 - `mcp/` — bundled MCP server
 - `.mcp.json` — MCP config using `${CLAUDE_PLUGIN_ROOT}`
 
-### 2.4 Rating Architecture
-Three tiers:
-1. **Local only** (default) — ratings log to `~/.thinkfu/ratings.jsonl`
-2. **Anonymous opt-in** — ratings POST to `api.think-fu.org/rate` (plugin-generated UUID, no account)
-3. **Identified** (future) — account-based, enables personalized routing
+### 2.4 Rating Architecture ✅
+- **First-use config flow:** first call to `get_thinkfu_move` triggers setup — agent asks user about sharing, calls `thinkfu_config`
+- **Default: sharing ON** (informed default, user can opt out anytime via `thinkfu_config`)
+- **Local:** always written to `plugin/mcp/ratings.jsonl` (scrubbed)
+- **Remote:** when sharing enabled, POSTs scrubbed ratings to `api.think-fu.org/rate` → D1
+- **PII/secret scrubber:** regex-based, catches emails, phones, API keys (sk-, ghp_, AKIA, etc.), URLs with tokens, env var assignments, credit cards, SSNs, addresses
+- **Agent instructed** to not include PII in context fields + to resubmit ratings when user reaction changes initial assessment
 
 ### 2.5 Publish Plugin
-- [ ] Test with `claude --plugin-dir /path/to/plugin`
-- [ ] Create marketplace repo (`move38studios/thinkfu` or separate)
+- [x] Test with `claude --plugin-dir /path/to/plugin`
+- [ ] Create marketplace repo (move38studios/thinkfu)
 - [ ] Submit to official Anthropic marketplace
 - [ ] Write install instructions
 
 ### Phase 2 Deliverables
-- [ ] API live at api.think-fu.org
+- [x] API live at api.think-fu.org
 - [ ] Plugin installable via marketplace
-- [ ] Rating opt-in working (local default, remote opt-in)
+- [x] Rating opt-in working (first-use config, PII scrubbing, remote sync)
 
 ---
 
-## Phase 3 — Smart Router
+## Phase 3 — Smart Router ✅
 
-**Goal:** Replace random move selection in `/suggest?style=matched` with intelligent routing that balances relevance with surprise.
+**Goal:** Replace random move selection with intelligent routing that balances relevance with surprise, and lets the LLM choose contextually appropriate variables.
 
-**When:** Can be built alongside or shortly after Phase 2 deployment. Rating data improves it over time but isn't required to start — the embedding + LLM pipeline works from day one.
+**Status: DEPLOYED**
 
-### Design Principle
+### Design Principles
 
-Pure embedding similarity would just return "the move that sounds most like your problem" — which is the opposite of good metacognition. The whole point is to sometimes give you the move you *wouldn't* have reached for. The router must balance **relevance** (the move should apply) with **surprise** (the move should shift your thinking somewhere unexpected).
+1. Pure embedding similarity would return "the move that sounds most like your problem" — the opposite of good metacognition. The router must balance **relevance** with **surprise**.
+2. The LLM should choose variables from pools with intent, not randomly. "Given this is a scaling problem, pick domains that deal with scaling in unusual ways." Still from the pool (quality controlled), but not random.
+3. The seed word stays random always — non-negotiable perturbation that the LLM does not control.
 
-### 3.1 The Routing Pipeline
+### 3.1 Two Styles (simplified)
+
+- **`matched`** (default) — the full pipeline: embedding → candidates → LLM selects move + chooses variables
+- **`random`** — pure random, mode-filtered. No intelligence. For the website `/random` and testing.
+
+`oblique` is dropped. The "left field" surprise is built into `matched` via the 2 random candidates mixed with 3 similar ones, filtered through the LLM.
+
+### 3.2 The Routing Pipeline
 
 When `/suggest` is called with `style: matched`:
 
@@ -129,36 +138,47 @@ When `/suggest` is called with `style: matched`:
 Context (goal, approach, stuck_on, mode)
         │
         ▼
-┌─────────────────────┐
-│  Embed the context   │  embeddinggemma-300m (~50ms)
-└─────────┬───────────┘
-          │
-          ▼
-┌─────────────────────┐
-│  Pull 5 candidates   │  3 by vector similarity + 2 random from same mode
-└─────────┬───────────┘
-          │
-          ▼
-┌─────────────────────┐
-│  LLM picks the best  │  llama-3.2-1b-instruct (~200ms)
-└─────────┬───────────┘
-          │
-          ▼
-     Resolved move
-     (variables + seed)
+┌──────────────────────┐
+│  1. Embed context     │  embeddinggemma-300m (~50ms)
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  2. Pull 5 candidates │  3 by vector similarity + 2 random (same mode)
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  3. LLM selects move  │  llama-3.1-8b-instruct (~200ms)
+│     + picks variables │  (from pools, with intent)
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│  4. Inject random seed│  always random from pool
+└──────────┬───────────┘
+           │
+           ▼
+      Resolved move
 ```
 
-**Step 1 — Embed the context.** Concatenate `goal + current_approach + stuck_on` into a single string. Embed with `embeddinggemma-300m` (300M params, runs on Cloudflare edge, effectively free).
+**Step 1 — Embed the context.** Concatenate `goal + current_approach + stuck_on`. Embed with `embeddinggemma-300m` (300M params, Cloudflare edge, free tier).
 
-**Step 2 — Pull candidates.** Query Vectorize for the top 3 most similar moves (by `one_liner + problem_signatures` embeddings). Then add 2 random moves from the same mode that are NOT in the top 3. These random candidates are the "left field" insurance — they ensure the router doesn't become insular.
+**Step 2 — Pull candidates.** Query Vectorize for top 3 similar moves (by pre-embedded `one_liner + problem_signatures`). Add 2 random moves from the same mode not in the top 3. The random candidates are "left field" insurance.
 
-**Step 3 — LLM picks the best.** Send all 5 candidates (id, name, one_liner, problem_signatures) plus the agent's context to `llama-3.2-1b-instruct` (1B params, ~200ms on Cloudflare edge). The prompt explicitly asks for the most *unexpectedly useful* move, not the most obviously related one.
+**Step 3 — LLM selects move + chooses variables.** Send all 5 candidates plus the context to `llama-3.1-8b-instruct`. The LLM returns:
+- Which move to use
+- For moves with variables: specific values chosen from the pools, based on context
 
-**Total latency:** ~250ms. No external API calls. Everything runs inside the Cloudflare Worker on edge infrastructure.
+**Step 4 — Inject random seed.** Always random from `random-words` pool. The LLM never sees or controls the seed.
+
+**Total latency target:** ~300ms. All on Cloudflare edge. No external API calls.
 
 **The LLM prompt:**
 ```
-You are a metacognitive advisor selecting a thinking move for someone who is working on a problem.
+You are a metacognitive advisor. Someone is working on a problem. Select
+a thinking move and, if the move has variables, choose specific values
+that will produce the most unexpectedly useful result for their situation.
 
 SITUATION:
 - Mode: {{mode}}
@@ -167,41 +187,58 @@ SITUATION:
 - Stuck on: {{stuck_on}}
 
 CANDIDATE MOVES:
-{{for each candidate: id, name, one_liner, problem_signatures}}
+{{for each candidate: id, name, one_liner, problem_signatures, variables}}
 
-Pick the single move most likely to shift this person's thinking in an unexpected and useful direction. Not the most obviously related move — the one that will produce the most surprising insight.
+AVAILABLE POOLS:
+{{for each pool referenced by candidates: pool_name, 20 random samples}}
 
-Return ONLY the move ID.
+Pick the move most likely to shift this person's thinking in a surprising
+and useful direction. Not the most obviously related — the one that will
+produce the most unexpected insight.
+
+If the chosen move has variables, select specific values from the pools.
+Choose values that create interesting tension with the situation — not
+the obvious choices, but not random either. Aim for productive friction.
+
+Return JSON:
+{
+  "move_id": "TF-XXX",
+  "reason": "one sentence why",
+  "variables": { "domain": ["value1", "value2", "value3"] }
+}
 ```
 
-### 3.2 Embedding Management
+### 3.3 Embedding Management
 
-All move embeddings are pre-computed and stored in Vectorize. Recalculation on change:
+Pre-computed, stored in Vectorize. Rebuilt on catalog changes:
 
 - `scripts/build-embeddings.ts` — reads all moves, embeds `one_liner + problem_signatures`, upserts to Vectorize
-- Run when moves are added/edited: `pnpm build:embeddings`
-- Can be a pre-deploy hook: `pnpm build:embeddings && pnpm wrangler deploy`
-- 200 moves × 1 embedding each = a few seconds total. No incremental logic needed at this scale.
+- `pnpm build:embeddings` — run when moves change
+- Pre-deploy hook: `pnpm build:embeddings && pnpm wrangler deploy`
+- 200+ moves × 1 embedding = a few seconds total
 
-### 3.3 Oblique Router ✅ (already built)
+### 3.4 Implementation ✅
 
-`style: oblique` skips the pipeline entirely and picks from a different mode. Pure random. This is by design — sometimes the most useful move is the one with zero contextual relevance.
+- [x] embeddinggemma-300m — 768-dim vectors, ~50ms
+- [x] Vectorize index — all moves embedded and uploaded
+- [x] llama-3.1-8b-instruct with JSON schema — structured output (move + reason + variables)
+- [x] Full pipeline in `/suggest?style=matched` and `/match?q=...` (website)
+- [x] End-to-end latency ~1.4s
+- [ ] MCP plugin to call API for `matched` style (deferred — plugin uses random locally)
 
-### 3.4 Rating-Informed Tuning (later)
+### 3.5 Rating-Informed Tuning (later)
 
 Once we have 100+ ratings:
-- Analyze which moves work for which problem shapes
-- Weight the vector similarity results by historical performance
-- Feed rating history into the LLM prompt as additional context ("moves that worked well in similar situations: ...")
-- Update problem_signatures on moves based on real usage patterns
+- Weight similarity results by historical performance
+- Feed rating history into the LLM prompt ("moves that worked in similar situations")
+- Update problem_signatures based on real usage patterns
 
-### 3.5 Fine-Tuned Classifier (much later)
+### 3.6 Fine-Tuned Classifier (much later)
 
 After 1000+ rated interactions:
 - Fine-tune a small model on (context → move_id) pairs
-- Could run as a custom model on Workers AI
-- Replaces the embedding + LLM pipeline for even lower latency
-- Only worth the effort if the pipeline is provably better than random
+- Run as custom model on Workers AI
+- Replace the pipeline for lower latency and zero per-request LLM cost
 
 ### Infrastructure (all Cloudflare-native)
 
@@ -209,53 +246,39 @@ After 1000+ rated interactions:
 |-----------|---------|------|
 | Embedding model | Workers AI: embeddinggemma-300m | Free tier |
 | Vector storage | Vectorize | Free tier (5M vectors) |
-| Routing LLM | Workers AI: llama-3.2-1b-instruct | Neurons pricing (negligible) |
+| Routing LLM | Workers AI: llama-3.1-8b-instruct | Neurons pricing (negligible) |
 | Everything else | Same Worker | Already deployed |
 
-No external API keys. No Anthropic billing. The entire routing stack runs on the edge.
+No external API keys. No Anthropic billing. Entire routing stack on the edge.
 
 ### Phase 3 Deliverables
-- [ ] `scripts/build-embeddings.ts` — pre-compute and upload move embeddings
-- [ ] Vectorize index configured in `wrangler.toml`
-- [ ] Routing pipeline in `/suggest` handler
-- [ ] LLM tiebreaker prompt tuned
-- [ ] Latency under 300ms
-- [ ] A/B test: random vs. routed selection (once we have rating data)
+- [x] Vectorize index with all move embeddings
+- [x] `scripts/build-embeddings.ts`
+- [x] Routing pipeline in `/suggest` handler
+- [x] LLM selects move + variables from pools
+- [x] Seed always random
+- [x] Latency ~1.4s (target was 300ms — LLM inference is the bottleneck, acceptable)
+- [x] Fallback to random if pipeline fails
 
 ---
 
-## Phase 4 — Website
+## Phase 4 — Website ✅
 
-**Goal:** think-fu.org — human-facing move browser + marketing.
+**Status: DEPLOYED** at think-fu.org
 
-### 4.1 Landing Page
-- Random move displayed prominently with a "draw another" button
-- Brief explanation of what ThinkFu is
-- Links to MCP setup, API docs, GitHub, Claude Code plugin install
-
-### 4.2 Move Browser
-- Filter by category and mode
-- Search by keyword
-- Each move shows: name, one_liner, mode badges, effort badge
-- Click to expand full move with rendered mermaid diagram
-
-### 4.3 Individual Move Pages
-- `/move/TF-001` — shareable URL
-- Full move content with rendered diagram
-- Variables re-resolved on each page load
-- "Draw another" button
-
-### 4.4 Design
-- Minimal. Move-focused. Beautiful deck, not a SaaS dashboard.
-- Mermaid diagrams rendered client-side
-- Dark/light mode
-- Mobile-friendly
-
-### Phase 4 Deliverables
-- [ ] Landing page live at think-fu.org
-- [ ] Move browser with filtering
-- [ ] Individual move pages with shareable URLs
-- [ ] Mermaid rendering
+- [x] Landing page: `/` with human / agent / why paths
+- [x] `/humans` — description + "describe your problem" textarea (calls smart router) + random draw
+- [x] `/agents` — agent-facing integration guide (MCP tools, REST API)
+- [x] `/why` — manifesto page
+- [x] `/setup` — step-by-step for Claude Code, Claude Desktop, ChatGPT
+- [x] `/credits` — intellectual traditions and attribution
+- [x] `/random` — redirects to pinned move URL
+- [x] `/match?q=...` — smart-routed move for humans, redirects to pinned URL
+- [x] `/move/:id?seed=...&vars=...` — shareable pinned instance with swipe/back/next/share
+- [x] Mermaid diagrams rendered client-side
+- [x] Dark/light mode toggle
+- [x] Session history (back/forward navigation)
+- [x] Problem-mode: matched moves cycle with excludes, "clear problem" to return to random
 
 ---
 
@@ -282,3 +305,23 @@ No external API keys. No Anthropic billing. The entire routing stack runs on the
 - Rating data becomes a moat over time — informs routing, improves selection, drives more usage.
 - Pool quality > pool size. 150 well-chosen domains beat 10,000 random ones.
 - The SKILL.md / agent training. How to *use* ThinkFu well is as important as the moves themselves.
+
+---
+
+## What's Next
+
+### Immediate
+- [x] **Rating opt-in in plugin** — first-use config, PII scrubbing, remote sync to D1
+- [ ] **Publish Claude Code plugin** — create marketplace repo, submit to official marketplace
+- [ ] **MCP plugin uses smart router** — plugin calls API `/suggest?style=matched` instead of local random
+- [ ] **Remove test endpoints** — `/__test/*` routes in the API
+
+### Soon
+- [ ] Rating-informed routing — weight results by historical performance
+- [ ] Browse page on website — filterable move catalog for humans
+- [ ] npm package for MCP server — `npx thinkfu-mcp` for Claude Desktop users
+
+### Later
+- [ ] Fine-tuned classifier replacing LLM router
+- [ ] Usage analytics dashboard
+- [ ] Community move contributions

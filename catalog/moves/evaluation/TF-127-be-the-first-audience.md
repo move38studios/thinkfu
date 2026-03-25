@@ -17,7 +17,7 @@ pairs_with:
   - id: TF-016
     why: "Change the Audience when your honest excitement is low — maybe you're building for the wrong people, including yourself"
   - id: TF-105
-    why: "Find the Quality Without a Name to articulate what's missing when excitement is low but you can't say why"
+    why: "Does It Feel Alive to articulate what's missing when excitement is low but you can't say why"
   - id: TF-059
     why: "Calibrate Your Confidence to check whether your excitement (or lack of it) is well-calibrated or just mood"
 ---

@@ -30,21 +30,10 @@ export function selectMove(
   opts: {
     mode: string;
     exclude?: string[];
-    style?: "matched" | "random" | "oblique";
+    style?: "matched" | "random";
   }
 ): ResolvedMove | null {
-  const style = opts.style ?? "matched";
-
-  let filtered: Move[];
-  if (style === "oblique") {
-    const otherModes = ["plan", "explore", "stuck", "evaluate"].filter(
-      (m) => m !== opts.mode
-    );
-    const otherMode = pickRandom(otherModes);
-    filtered = filterMoves(moves, { mode: otherMode, exclude: opts.exclude });
-  } else {
-    filtered = filterMoves(moves, { mode: opts.mode, exclude: opts.exclude });
-  }
+  let filtered = filterMoves(moves, { mode: opts.mode, exclude: opts.exclude });
 
   // Fall back to all moves minus excludes
   if (filtered.length === 0) {

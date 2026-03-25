@@ -22,7 +22,7 @@ pairs_with:
   - id: TF-094
     why: "spot the anomaly finds the surprises; this move reasons backward from them to explanations"
   - id: TF-037
-    why: "honor thy error treats surprises as gifts — this move shows you how to unwrap them"
+    why: "your error may have been intended treats surprises as gifts — this move shows you how to unwrap them"
   - id: TF-076
     why: "find a related problem where the same surprising fact has already been explained"
 ---

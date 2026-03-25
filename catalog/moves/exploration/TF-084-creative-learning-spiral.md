@@ -1,6 +1,6 @@
 ---
 id: TF-084
-name: Creative Learning Spiral
+name: Imagine, Play, Share, Reflect
 one_liner: Imagine, create, play, share, reflect, imagine again. The key step everyone skips is play.
 mode: [explore, plan]
 category: Exploration

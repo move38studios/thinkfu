@@ -20,7 +20,7 @@ variables:
     pool: random-words
 pairs_with:
   - id: TF-037
-    why: "Honor Thy Error is the philosophical cousin — use it for general openness to mistakes, then Play Into the Mistake for the specific tactical move"
+    why: "Your Error May Have Been Intended is the philosophical cousin — use it for general openness to mistakes, then Play Into the Mistake for the specific tactical move"
   - id: TF-023
     why: "Use the Problem as the Solution applies the same judo logic to problems, not just mistakes"
   - id: TF-047

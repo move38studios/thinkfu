@@ -20,7 +20,7 @@ variables:
     max: 5
 pairs_with:
   - id: TF-037
-    why: "Honor Thy Error treats failures as creative prompts — Near Miss Detector systematically mines them"
+    why: "Your Error May Have Been Intended treats failures as creative prompts — Near Miss Detector systematically mines them"
   - id: TF-050
     why: "Second Right Answer helps you see that the near miss might be an answer to a different question"
   - id: TF-001

@@ -140,6 +140,35 @@ details.more summary:hover { color: var(--text-dim); }
 /* Swipe hint */
 .swipe-hint { color: var(--text-faint); font-size: 0.75rem; text-align: center; margin-top: 2rem; }
 
+/* Match form */
+.match-form { margin: 2rem 0 0; }
+.match-form label { display: block; color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.5rem; }
+.match-form textarea {
+  width: 100%;
+  background: var(--pre-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem;
+  font: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+.match-form textarea:focus { outline: none; border-color: var(--text-dim); }
+.match-form button {
+  margin-top: 0.5rem;
+  background: none;
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 0.25rem 0;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.match-form button:hover { color: var(--text-strong); border-color: var(--link-hover); }
+
 /* Theme toggle */
 .theme-toggle {
   position: fixed;
@@ -193,7 +222,7 @@ function layout(title: string, content: string): string {
   <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">light</button>
   <main>${content}</main>
   <footer>
-    <a href="/">think-fu.org</a> by <a href="https://move38.org">move38</a>
+    <a href="/">think-fu.org</a> &middot; <a href="/credits">credits</a> &middot; <a href="https://move38.org">move38</a>
   </footer>
   <script>
     // Theme
@@ -282,8 +311,14 @@ export function renderHumans(totalMoves: number): string {
       <h1>ThinkFu for humans</h1>
       <p>${totalMoves} thinking moves. ~548 billion unique draws.</p>
       <p>Each move is a concrete procedure — not advice, not a pep talk. A mechanical operation you can follow to break fixation, challenge your framing, or catch the clich&eacute; before it ships.</p>
-      <p>Every draw injects random variables and a seed word that subtly shift interpretation. The same move, drawn twice, produces different thinking. The randomness is the mechanism.</p>
-      <p style="margin-top: 2rem;"><a href="/random">Draw a move</a></p>
+
+      <form class="match-form" action="/match" method="get" onsubmit="sessionStorage.setItem('thinkfu-query', this.q.value); sessionStorage.setItem('thinkfu-excludes', '[]');">
+        <label for="q">Describe your problem</label>
+        <textarea id="q" name="q" rows="3" placeholder="What are you working on? Where are you stuck?"></textarea>
+        <button type="submit">Find a move</button>
+      </form>
+
+      <p style="margin-top: 1.5rem;">or <a href="/random" onclick="sessionStorage.removeItem('thinkfu-query'); sessionStorage.removeItem('thinkfu-excludes');">draw a random move</a></p>
       <p><a href="/setup">Give ThinkFu to your AI</a> &mdash; step-by-step setup for Claude Code, Claude Desktop, ChatGPT and others</p>
     </div>
   `);
@@ -297,9 +332,9 @@ export function renderWhy(): string {
       <p>Like any martial art, it doesn't come naturally. You don't invent a new kick in every fight. You learn named moves. You practice them until they're reflexive. You develop the judgment to pick the right one at the right moment.</p>
       <p>This is especially hard for LLMs. They've been trained on the entire internet, which means they've been trained to produce the average of everything. The most likely completion. The clich&eacute;. The first thing everyone would think of.</p>
       <p>Without deliberate intervention, "most likely" is all you get.</p>
-      <p>ThinkFu is that deliberate intervention. A library of 205 named thinking moves &mdash; drawn from TRIZ, Oblique Strategies, Design Thinking, systems thinking, and metacognitive research &mdash; reformulated as <em>mechanical procedures</em> that work whether you feel creative or not.</p>
+      <p>ThinkFu is that deliberate intervention. A library of 200+ named thinking moves &mdash; drawn from TRIZ, Oblique Strategies, Design Thinking, systems thinking, and metacognitive research &mdash; reformulated as <em>mechanical procedures</em> that work whether you feel creative or not.</p>
       <p>Each move includes random variables and a seed word that inject noise into the process. Not random noise &mdash; strategic noise. The kind that breaks fixation, forces unexpected connections, and makes the same move produce different thinking every time you draw it.</p>
-      <p>~548 billion unique draws from 205 moves. Half a trillion different nudges to think differently.</p>
+      <p>~548 billion unique draws from 200+ moves. Half a trillion different nudges to think differently.</p>
       <p>For humans. For AI agents. For anyone doing hard thinking under pressure.</p>
       <p style="margin-top: 2rem;"><a href="/random">Try it</a></p>
     </div>
@@ -315,7 +350,7 @@ export function renderSetup(): string {
       <p>The fastest path. Install the ThinkFu plugin:</p>
       <pre><code>/plugin marketplace add move38studios/thinkfu
 /plugin install thinkfu@move38-thinkfu</code></pre>
-      <p>Your agent now has access to 205 thinking moves via MCP tools. The SKILL.md teaches it when and how to use them.</p>
+      <p>Your agent now has access to 200+ thinking moves via MCP tools. The SKILL.md teaches it when and how to use them.</p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Desktop</h3>
       <p>Add ThinkFu as an MCP server. Edit your Claude Desktop config (Settings &rarr; Developer &rarr; Edit Config):</p>
@@ -348,11 +383,46 @@ Let it change your approach.</code></pre>
   `);
 }
 
+export function renderCredits(): string {
+  return layout("Credits — ThinkFu", `
+    <div class="page">
+      <h1>Credits &amp; Intellectual Traditions</h1>
+      <p>ThinkFu draws on ideas, principles, and methods from established traditions in metacognition, systematic innovation, creativity research, and design. Each move attributes its intellectual origins in its frontmatter.</p>
+      <p>No copyrighted text is reproduced in the catalog. Where a move is inspired by a specific technique, principle, or framework, ThinkFu provides its own original procedures, examples, and framing. The ideas are credited; the expression is ours.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Traditions &amp; Sources</h3>
+      <ul>
+        <li><strong>TRIZ</strong> (Genrich Altshuller, 1956&ndash;1984) &mdash; systematic innovation principles and contradiction resolution</li>
+        <li><strong>Oblique Strategies</strong> (Brian Eno &amp; Peter Schmidt, 1975) &mdash; creative perturbation through indirect prompts</li>
+        <li><strong>Lateral Thinking</strong> (Edward de Bono) &mdash; techniques for breaking fixation and generating alternatives</li>
+        <li><strong>Design Thinking</strong> &mdash; human-centered problem-solving methodology</li>
+        <li><strong>Systems Thinking</strong> (Donella Meadows, Peter Senge) &mdash; feedback loops, leverage points, system archetypes</li>
+        <li><strong>Metacognition research</strong> (John Flavell, Gregory Schraw) &mdash; thinking about thinking</li>
+        <li><strong>Classical philosophy</strong> (Socrates, Plato, Hegel) &mdash; dialectic, elenchus, and the synthesis of opposites</li>
+        <li><strong>Argumentation theory</strong> (Mercier &amp; Sperber, Charlan Nemeth) &mdash; reasoning as social exchange, authentic dissent</li>
+        <li><strong>Improv theater</strong> (Keith Johnstone, Viola Spolin) &mdash; spontaneity, status, offers and blocks</li>
+        <li><strong>Christopher Alexander</strong> &mdash; pattern languages, wholeness, and the nature of living structure</li>
+        <li><strong>Cognitive science</strong> (Daniel Kahneman, Gary Klein, Marin Kapur) &mdash; heuristics, recognition-primed decision making, productive failure</li>
+        <li><strong>Writing craft</strong> &mdash; editing principles from a long tradition of practitioners</li>
+        <li><strong>Constructionism</strong> (Seymour Papert, Mitch Resnick) &mdash; learning through making, tinkering, and play</li>
+        <li><strong>Zen Buddhism</strong> &mdash; koan practice and contemplative inquiry</li>
+        <li><strong>Music &amp; performance</strong> (John Cage, Miles Davis, Claude Debussy) &mdash; silence, accident, and constraint as creative forces</li>
+      </ul>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Ideas vs. Expression</h3>
+      <p>Copyright protects expression, not ideas. You cannot copyright a thinking technique, a problem-solving principle, or a cognitive strategy. ThinkFu's catalog consists of original procedures built on ideas that belong to the intellectual commons &mdash; many of them centuries old, all of them enriched by the practitioners listed above.</p>
+      <p>We credit them because we stand on their shoulders, not because we reproduce their words.</p>
+
+      <p style="margin-top: 2rem;"><a href="/">home</a></p>
+    </div>
+  `);
+}
+
 export function renderAgents(): string {
   return layout("ThinkFu — For Agents", `
     <div class="page">
       <h1>ThinkFu</h1>
-      <p>You are reading the ThinkFu agent integration guide. ThinkFu is a metacognition-as-a-service library of 200+ thinking moves (~548 billion unique draws via random variables and seed injection) you can call when you are stuck, on autopilot, or about to produce the obvious answer.</p>
+      <p>You are reading the ThinkFu agent integration guide. ThinkFu is a metacognition-as-a-service library of 200+ thinking moves (~500 billion+ unique draws via random variables and seed injection) you can call when you are stuck, on autopilot, or about to produce the obvious answer.</p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Code plugin</h3>
       <pre><code>/plugin marketplace add move38studios/thinkfu
@@ -394,10 +464,39 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
       <a href="#" onclick="goNext(); return false;">next</a>
       <a href="/random?id=${esc(m.id)}">re-roll</a>
       <button onclick="navigator.clipboard.writeText(window.location.origin + '${shareUrl}').then(() => this.textContent = 'copied')">share</button>
+      <a href="#" id="clear-link" style="display:none" onclick="clearProblem(); return false;">clear problem</a>
       <a href="/">home</a>
     </div>
-    <p class="swipe-hint">&larr; back &middot; next &rarr;</p>
+    <p class="swipe-hint" id="swipe-hint">&larr; back &middot; next &rarr;</p>
     <script>
+      // Active problem tracking
+      const query = sessionStorage.getItem('thinkfu-query');
+      const currentId = '${esc(m.id)}';
+
+      // Track excludes for matched mode
+      if (query) {
+        let excludes = JSON.parse(sessionStorage.getItem('thinkfu-excludes') || '[]');
+        if (!excludes.includes(currentId)) excludes.push(currentId);
+        sessionStorage.setItem('thinkfu-excludes', JSON.stringify(excludes));
+        // Show clear link and update hint
+        document.getElementById('clear-link').style.display = '';
+        document.getElementById('swipe-hint').innerHTML = 'matched to your problem &middot; &larr; back &middot; next &rarr;';
+      }
+
+      function getNextUrl() {
+        if (query) {
+          const excludes = JSON.parse(sessionStorage.getItem('thinkfu-excludes') || '[]');
+          return '/match?q=' + encodeURIComponent(query) + '&exclude=' + excludes.join(',');
+        }
+        return '/random';
+      }
+
+      function clearProblem() {
+        sessionStorage.removeItem('thinkfu-query');
+        sessionStorage.removeItem('thinkfu-excludes');
+        window.location.href = '/random';
+      }
+
       // History as array + cursor index (like browser back/forward)
       const H_KEY = 'thinkfu-history';
       const I_KEY = 'thinkfu-index';
@@ -413,7 +512,6 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
       let history = getHistory();
       let index = getIndex();
       if (history[index] !== here) {
-        // Navigated to a new page (not via back/forward) — truncate forward history
         history = history.slice(0, index + 1);
         history.push(here);
         index = history.length - 1;
@@ -422,19 +520,16 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
 
       function goNext() {
         if (index < history.length - 1) {
-          // There's forward history — go there
           index++;
           save(history, index);
           window.location.href = history[index];
         } else {
-          // At the end — draw new random
-          window.location.href = '/random';
+          window.location.href = getNextUrl();
         }
       }
       function goBack() {
         if (index > 0) {
           index--;
-          save(history, index);
           window.location.href = history[index];
         }
       }

@@ -96,7 +96,7 @@ The smart route. Surfaces the most relevant move based on context and metacognit
   "stuck_on": "Where specifically are you stuck? (optional, for stuck mode)",
   "context": "Any additional free-form context (optional)",
   "exclude": ["TF-001", "TF-003"],
-  "style": "matched | random | oblique"
+  "style": "matched | random"
 }
 ```
 
@@ -109,14 +109,10 @@ The `mode` field maps to metacognitive phases (see Theoretical Foundations):
 The `exclude` array lists move IDs already tried in this session. The server will not return these.
 
 The `style` field controls the routing strategy:
-- **`matched`** (default) — best move for this context, using problem signatures and mode
-- **`random`** — pure random draw (mode-filtered). Sometimes the wrong move is the most useful one.
-- **`oblique`** — deliberately tangential. Returns a move from a *different* mode or category than expected. Designed to break fixation through surprise.
+- **`matched`** (default) — smart routing: embed context → 3 similar + 2 random candidates → LLM selects move and chooses contextually appropriate variables from pools. ~300ms, all on Cloudflare edge.
+- **`random`** — pure random, mode-filtered. No intelligence.
 
-Returns a ThinkFu move. Backend logic for `matched` (progressive):
-- **v0 (current):** Random selection (mode-filtered)
-- **v1:** Embed context → top 3 by vector similarity + 2 random → 1B LLM picks the most *unexpectedly useful* one. All on Cloudflare edge, ~250ms, no external API calls.
-- **v2:** Fine-tuned classifier trained on rating data
+The LLM never controls the seed word — that stays random always as non-negotiable cognitive perturbation.
 
 #### `POST /rate`
 

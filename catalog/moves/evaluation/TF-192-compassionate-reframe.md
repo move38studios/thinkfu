@@ -24,7 +24,7 @@ pairs_with:
   - id: TF-098
     why: "Error-Proof by Design eliminates mistakes mechanically; Compassionate Reframe reveals which mistakes matter most to prevent"
   - id: TF-085
-    why: "Low Floor High Ceiling Wide Walls designs for range; Compassionate Reframe designs for the lowest point in that range"
+    why: "Easy Start, Expert Depth, Many Paths designs for range; Compassionate Reframe designs for the lowest point in that range"
 ---
 
 ## The Move

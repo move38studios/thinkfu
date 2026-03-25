@@ -24,7 +24,7 @@ pairs_with:
   - id: TF-015
     why: "red team the design after the silence test — stress-test what remains, not what you removed"
   - id: TF-085
-    why: "low floor high ceiling wide walls evaluates design quality; the silence test evaluates design necessity"
+    why: "Easy Start, Expert Depth, Many Paths evaluates design quality; the silence test evaluates design necessity"
 ---
 
 ## The Move

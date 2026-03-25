@@ -18,7 +18,7 @@ pairs_with:
   - id: TF-012
     why: "reduce to simplest case if the deadline is too tight for a real break"
   - id: TF-037
-    why: "honor thy error turns the frustration itself into raw material instead of walking away from it"
+    why: "your error may have been intended turns the frustration itself into raw material instead of walking away from it"
 ---
 
 ## The Move
