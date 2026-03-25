@@ -42,28 +42,6 @@ app.get("/og-image.png", (c) => {
 });
 
 // OG image as HTML — screenshot this once to create og-image.png
-app.get("/og", (c) => {
-  return c.html(`<!DOCTYPE html>
-<html><head><style>
-  * { margin: 0; padding: 0; }
-  body {
-    width: 1200px; height: 630px;
-    background: #111;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    color: #ccc;
-  }
-  h1 { font-size: 80px; color: #fff; letter-spacing: -2px; margin-bottom: 8px; }
-  p { font-size: 24px; color: #666; margin-bottom: 40px; }
-  .stats { font-size: 20px; color: #444; }
-</style></head><body>
-  <h1>ThinkFu</h1>
-  <p>metacognition as a service</p>
-  <div class="stats">${moves.length} moves &middot; 500 billion+ unique draws &middot; thinkfu.org</div>
-</body></html>`);
-});
-
 // --- Rate limiting ---
 
 function rateLimit(getLimiter: (env: Bindings) => any) {
