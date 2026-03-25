@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"${CLAUDE_PLUGIN_ROOT}/mcp\" && (test -d node_modules || npm install --no-audit --no-fund --silent)"
+          }
+        ]
+      }
+    ]
+  }
+}

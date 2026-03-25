@@ -140,6 +140,26 @@ details.more summary:hover { color: var(--text-dim); }
 /* Swipe hint */
 .swipe-hint { color: var(--text-faint); font-size: 0.75rem; text-align: center; margin-top: 2rem; }
 
+/* Side arrows (desktop) */
+.side-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: var(--text-faint);
+  cursor: pointer;
+  padding: 2rem 1rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 10;
+  user-select: none;
+}
+.side-arrow:hover { color: var(--text-muted); }
+body:hover .side-arrow { opacity: 1; }
+.side-arrow.left { left: 0; }
+.side-arrow.right { right: 0; }
+@media (max-width: 600px) { .side-arrow { display: none; } }
+
 /* Match form */
 .match-form { margin: 2rem 0 0; }
 .match-form label { display: block; color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.5rem; }
@@ -500,6 +520,8 @@ GET  /catalog             — full catalog</code></pre>
 
 export function renderMove(m: ResolvedMove, shareUrl: string): string {
   return layout(`${m.name} — ThinkFu`, `
+    <div class="side-arrow left" onclick="goBack()">&lsaquo;</div>
+    <div class="side-arrow right" onclick="goNext()">&rsaquo;</div>
     ${renderMoveContent(m)}
     <div class="actions">
       <a href="#" onclick="goBack(); return false;">back</a>
@@ -514,7 +536,7 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
       <span onclick="rateMove(true, this)">yes</span>
       <span onclick="rateMove(false, this)">no</span>
     </div>
-    <p class="swipe-hint" id="swipe-hint">&larr; back &middot; next &rarr;</p>
+    <p class="swipe-hint" id="swipe-hint"><span onclick="goBack()" style="cursor:pointer">&larr; back</span> &middot; <span onclick="goNext()" style="cursor:pointer">next &rarr;</span></p>
     <script>
       // Active problem tracking
       const query = sessionStorage.getItem('thinkfu-query');
@@ -528,7 +550,7 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
         // Show clear link, rating, and update hint
         document.getElementById('clear-link').style.display = '';
         document.getElementById('rating-ui').style.display = '';
-        document.getElementById('swipe-hint').innerHTML = 'matched to your problem &middot; &larr; back &middot; next &rarr;';
+        document.getElementById('swipe-hint').innerHTML = 'matched to your problem &middot; <span onclick="goBack()" style="cursor:pointer">&larr; back</span> &middot; <span onclick="goNext()" style="cursor:pointer">next &rarr;</span>';
       }
 
       function getNextUrl() {
