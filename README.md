@@ -287,19 +287,7 @@ Pools are shared YAML files in `catalog/pools/`:
 
 ### The Seed
 
-Every move response — static or dynamic — includes a **seed**: a random concrete noun drawn from `random-words.yaml`.
-
-```json
-{
-  "_seed": "corrosion",
-  "_instance": "TF-001-x8k2m",
-  "move": { ... }
-}
-```
-
-The seed is **visible in the response**, not hidden metadata. It must be in the LLM's processing window because its purpose is to subtly shift interpretation. The same move, served twice with different seeds, activates different reasoning paths — even if the move content is identical.
-
-The word pool should be concrete nouns with strong sensory associations — "lighthouse", "fermentation", "cartilage", "avalanche", "loom" — not abstract words like "synergy" or "paradigm" that are already overrepresented in the LLM's default vocabulary.
+Every move response includes a **seed** — a random concrete noun drawn from `random-words.yaml`, appended quietly at the end of the response. The seed is not labeled or explained to the agent. Its purpose is subtle cognitive perturbation: the word is present in the LLM's processing window and influences interpretation without the agent explicitly fixating on it. Concrete nouns with strong sensory associations work best ("lighthouse", "fermentation", "cartilage") — not abstract words already overrepresented in the LLM's vocabulary.
 
 ### Frontmatter Fields
 

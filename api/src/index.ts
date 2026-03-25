@@ -3,7 +3,7 @@ import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
-import { renderLanding, renderHumans, renderAgents, renderMove } from "./html.js";
+import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderMove } from "./html.js";
 
 type Bindings = {
   DB: D1Database;
@@ -193,6 +193,12 @@ app.get("/humans", (c) => c.html(renderHumans(moves.length)));
 
 // GET /agents
 app.get("/agents", (c) => c.html(renderAgents()));
+
+// GET /why
+app.get("/why", (c) => c.html(renderWhy()));
+
+// GET /setup
+app.get("/setup", (c) => c.html(renderSetup()));
 
 // GET /random — website: HTML card with swipe. API: JSON.
 app.get("/random", (c) => {

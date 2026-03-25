@@ -46,8 +46,7 @@ function formatMove(resolved: ResolvedMove): string {
     "",
     `> ${resolved.one_liner}`,
     "",
-    `**Mode:** ${resolved.mode.join(", ")} | **Effort:** ${resolved.effort} | **Category:** ${resolved.category}`,
-    `**Seed:** ${resolved._seed} | **Instance:** ${resolved._instance}`,
+    `${resolved.mode.join(", ")} · ${resolved.effort} · ${resolved.category}`,
     "",
     resolved.body,
   ];
@@ -58,6 +57,13 @@ function formatMove(resolved: ResolvedMove): string {
       lines.push(`- **${pair.id}**: ${pair.why}`);
     }
   }
+
+  // Seed is present but not labeled — subtle cognitive perturbation, not an instruction
+  lines.push("", `— ${resolved._seed}`);
+  // Instance ID for rating
+  lines.push("", `[${resolved._instance}]`);
+  // Reminder to rate
+  lines.push("", `After applying this move, call submit_thinkfu_rating with move_id "${resolved.id}" and instance_id "${resolved._instance}".`);
 
   return lines.join("\n");
 }
@@ -77,29 +83,37 @@ const server = new FastMCP({
 server.addTool({
   name: "list_thinkfu_moves",
   description:
-    "List available ThinkFu thinking moves. Optionally filter by metacognitive mode (plan, explore, stuck, evaluate) or category (Planning, Exploration, Unsticking, Evaluation, Meta).",
+    "List available ThinkFu thinking moves. Returns move names grouped by category. You do NOT need to call this before get_thinkfu_move — just call get_thinkfu_move directly with your mode and context.",
   parameters: z.object({
     mode: z.enum(["plan", "explore", "stuck", "evaluate"]).optional().describe("Filter by metacognitive mode"),
     category: z.string().optional().describe("Filter by category name"),
   }),
   execute: async (args) => {
     const filtered = filterMoves(args.mode, args.category);
-    const summaries = filtered.map((m) => ({
-      id: m.frontmatter.id,
-      name: m.frontmatter.name,
-      one_liner: m.frontmatter.one_liner,
-      mode: m.frontmatter.mode,
-      category: m.frontmatter.category,
-      effort: m.frontmatter.effort,
-    }));
-    return JSON.stringify(summaries, null, 2);
+
+    // Group by category, compact format
+    const grouped: Record<string, string[]> = {};
+    for (const m of filtered) {
+      const cat = m.frontmatter.category;
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(`${m.frontmatter.id} ${m.frontmatter.name}`);
+    }
+
+    const lines: string[] = [`${filtered.length} moves available.`, ""];
+    for (const [cat, ids] of Object.entries(grouped)) {
+      lines.push(`${cat}:`);
+      for (const id of ids) lines.push(`  ${id}`);
+      lines.push("");
+    }
+    lines.push("Call get_thinkfu_move with a mode and your context to draw a move. You don't need to pick one from this list.");
+    return lines.join("\n");
   },
 });
 
 server.addTool({
   name: "get_thinkfu_move",
   description:
-    "Get a ThinkFu thinking move. Use this when planning, exploring, stuck, or evaluating your work. Returns a full move with a concrete procedure to shift your thinking. Every response includes a random seed word for cognitive perturbation.",
+    "Get a ThinkFu thinking move. Use this when planning, exploring, stuck, or evaluating your work. Returns a concrete procedure to shift your thinking. IMPORTANT: After applying the move and producing output, you MUST call submit_thinkfu_rating.",
   parameters: z.object({
     mode: z.enum(["plan", "explore", "stuck", "evaluate"]).describe("Your metacognitive mode: plan (before starting), explore (while working), stuck (blocked), evaluate (think you are done)"),
     goal: z.string().describe("What are you trying to achieve?"),

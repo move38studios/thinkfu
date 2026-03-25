@@ -109,7 +109,7 @@ main { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem; }
 .the-move p { color: var(--move-text); }
 
 /* Mermaid */
-.mermaid { background: var(--mermaid-bg); border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+.mermaid { background: var(--mermaid-bg); border-radius: 4px; padding: 1rem; margin: 1rem 0; text-align: center; }
 
 /* Details toggle */
 details.more { margin-top: 1.5rem; }
@@ -270,6 +270,7 @@ export function renderLanding(): string {
       <div class="paths">
         <a href="/humans">I'm a human</a>
         <a href="/agents">I'm an agent</a>
+        <a href="/why">why?</a>
       </div>
     </div>
   `);
@@ -282,8 +283,67 @@ export function renderHumans(totalMoves: number): string {
       <p>${totalMoves} thinking moves. ~548 billion unique draws.</p>
       <p>Each move is a concrete procedure — not advice, not a pep talk. A mechanical operation you can follow to break fixation, challenge your framing, or catch the clich&eacute; before it ships.</p>
       <p>Every draw injects random variables and a seed word that subtly shift interpretation. The same move, drawn twice, produces different thinking. The randomness is the mechanism.</p>
-      <p>Sources: TRIZ, Oblique Strategies, Design Thinking, systems thinking, metacognitive research. Reformulated as executable procedures for humans and AI agents.</p>
       <p style="margin-top: 2rem;"><a href="/random">Draw a move</a></p>
+      <p><a href="/setup">Give ThinkFu to your AI</a> &mdash; step-by-step setup for Claude Code, Claude Desktop, ChatGPT and others</p>
+    </div>
+  `);
+}
+
+export function renderWhy(): string {
+  return layout("Why ThinkFu?", `
+    <div class="page">
+      <h1>Why ThinkFu?</h1>
+      <p>Thinking is an art. Thinking well &mdash; originally, creatively, methodically &mdash; is a martial art.</p>
+      <p>Like any martial art, it doesn't come naturally. You don't invent a new kick in every fight. You learn named moves. You practice them until they're reflexive. You develop the judgment to pick the right one at the right moment.</p>
+      <p>This is especially hard for LLMs. They've been trained on the entire internet, which means they've been trained to produce the average of everything. The most likely completion. The clich&eacute;. The first thing everyone would think of.</p>
+      <p>Without deliberate intervention, "most likely" is all you get.</p>
+      <p>ThinkFu is that deliberate intervention. A library of 205 named thinking moves &mdash; drawn from TRIZ, Oblique Strategies, Design Thinking, systems thinking, and metacognitive research &mdash; reformulated as <em>mechanical procedures</em> that work whether you feel creative or not.</p>
+      <p>Each move includes random variables and a seed word that inject noise into the process. Not random noise &mdash; strategic noise. The kind that breaks fixation, forces unexpected connections, and makes the same move produce different thinking every time you draw it.</p>
+      <p>~548 billion unique draws from 205 moves. Half a trillion different nudges to think differently.</p>
+      <p>For humans. For AI agents. For anyone doing hard thinking under pressure.</p>
+      <p style="margin-top: 2rem;"><a href="/random">Try it</a></p>
+    </div>
+  `);
+}
+
+export function renderSetup(): string {
+  return layout("Set Up ThinkFu", `
+    <div class="page">
+      <h1>Give ThinkFu to your AI</h1>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Code</h3>
+      <p>The fastest path. Install the ThinkFu plugin:</p>
+      <pre><code>/plugin marketplace add move38studios/thinkfu
+/plugin install thinkfu@move38-thinkfu</code></pre>
+      <p>Your agent now has access to 205 thinking moves via MCP tools. The SKILL.md teaches it when and how to use them.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Desktop</h3>
+      <p>Add ThinkFu as an MCP server. Edit your Claude Desktop config (Settings &rarr; Developer &rarr; Edit Config):</p>
+      <pre><code>{
+  "mcpServers": {
+    "thinkfu": {
+      "command": "npx",
+      "args": ["-y", "thinkfu-mcp"]
+    }
+  }
+}</code></pre>
+      <p>(npm package coming soon &mdash; for now, clone the <a href="https://github.com/move38studios/thinkfu">repo</a> and point to <code>plugin/mcp/start.sh</code>)</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">ChatGPT / other LLMs</h3>
+      <p>Paste this into your system prompt or custom instructions:</p>
+      <pre><code>When you are stuck, on autopilot, or about to deliver
+an obvious answer, draw a thinking move from ThinkFu:
+
+  curl -s https://api.think-fu.org/random?format=md
+
+Apply the move. Work through it step by step.
+Let it change your approach.</code></pre>
+      <p>Or give your LLM the full API: <code>https://api.think-fu.org</code></p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Any MCP-compatible client</h3>
+      <p>ThinkFu exposes three tools: <code>list_thinkfu_moves</code>, <code>get_thinkfu_move</code>, <code>submit_thinkfu_rating</code>. Point your MCP client at the plugin's server or use the REST API directly.</p>
+
+      <p style="margin-top: 2rem;"><a href="/random">Start drawing</a> &middot; <a href="/">home</a></p>
     </div>
   `);
 }
@@ -295,7 +355,7 @@ export function renderAgents(): string {
       <p>You are reading the ThinkFu agent integration guide. ThinkFu is a metacognition-as-a-service library of 200+ thinking moves (~548 billion unique draws via random variables and seed injection) you can call when you are stuck, on autopilot, or about to produce the obvious answer.</p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Code plugin</h3>
-      <pre><code>/plugin marketplace add move38/thinkfu
+      <pre><code>/plugin marketplace add move38studios/thinkfu
 /plugin install thinkfu@move38-thinkfu</code></pre>
       <p>Once installed, you have access to three MCP tools:</p>
       <pre><code>list_thinkfu_moves  — browse available moves, filter by mode or category
@@ -321,7 +381,7 @@ POST /suggest             — context-aware selection
 POST /rate                — submit feedback
 GET  /catalog             — full catalog</code></pre>
 
-      <p style="margin-top:2rem;"><a href="https://github.com/move38/thinkfu">Source: github.com/move38/thinkfu</a></p>
+      <p style="margin-top:2rem;"><a href="https://github.com/move38studios/thinkfu">Source: github.com/move38studios/thinkfu</a></p>
     </div>
   `);
 }
@@ -385,13 +445,20 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
         if (e.key === 'ArrowLeft') goBack();
       });
 
-      // Touch swipe
-      let startX = 0;
-      document.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+      // Touch swipe — horizontal only, ignore diagonal/vertical scrolling
+      let startX = 0, startY = 0;
+      document.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      });
       document.addEventListener('touchend', (e) => {
         const dx = e.changedTouches[0].clientX - startX;
-        if (dx < -60) goNext();   // swipe left = next
-        if (dx > 60) goBack();    // swipe right = back
+        const dy = e.changedTouches[0].clientY - startY;
+        // Must be clearly horizontal: >100px and at least 2x the vertical movement
+        if (Math.abs(dx) > 100 && Math.abs(dx) > Math.abs(dy) * 2) {
+          if (dx < 0) goNext();
+          if (dx > 0) goBack();
+        }
       });
     </script>
   `);

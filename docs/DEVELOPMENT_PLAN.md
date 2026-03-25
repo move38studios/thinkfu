@@ -100,7 +100,7 @@ Three tiers:
 
 ### 2.5 Publish Plugin
 - [ ] Test with `claude --plugin-dir /path/to/plugin`
-- [ ] Create marketplace repo (`move38/thinkfu` or separate)
+- [ ] Create marketplace repo (`move38studios/thinkfu` or separate)
 - [ ] Submit to official Anthropic marketplace
 - [ ] Write install instructions
 
