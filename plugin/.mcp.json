@@ -1,7 +1,10 @@
 {
   "mcpServers": {
     "thinkfu": {
-      "command": "${CLAUDE_PLUGIN_ROOT}/mcp/start.sh"
+      "command": "${CLAUDE_PLUGIN_ROOT}/mcp/start.sh",
+      "env": {
+        "THINKFU_NODE_MODULES": "${CLAUDE_PLUGIN_DATA}/node_modules"
+      }
     }
   }
 }

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd \"${CLAUDE_PLUGIN_ROOT}/mcp\" && (test -d node_modules || npm install --no-audit --no-fund --silent)"
+            "command": "diff -q \"${CLAUDE_PLUGIN_ROOT}/mcp/package.json\" \"${CLAUDE_PLUGIN_DATA}/package.json\" >/dev/null 2>&1 || (cd \"${CLAUDE_PLUGIN_DATA}\" && cp \"${CLAUDE_PLUGIN_ROOT}/mcp/package.json\" . && npm install --no-audit --no-fund --silent) || rm -f \"${CLAUDE_PLUGIN_DATA}/package.json\""
           }
         ]
       }
