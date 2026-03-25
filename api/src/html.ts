@@ -569,6 +569,7 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
           save(history, index);
           window.location.href = history[index];
         } else {
+          document.getElementById('swipe-hint').textContent = 'finding the right move...';
           window.location.href = getNextUrl();
         }
       }
