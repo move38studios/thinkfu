@@ -3,4 +3,7 @@ dist/
 *.jsonl
 .DS_Store
 api/catalog-bundle.json
+api/vectorize-upload.ndjson
 .wrangler/
+plugin/mcp/data/
+plugin/data/
