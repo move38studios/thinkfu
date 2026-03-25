@@ -410,16 +410,30 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 ---
 
+## Building & Deploying
+
+```bash
+pnpm validate          # check all moves for errors
+pnpm build:catalog     # rebuild JSON catalog bundle
+pnpm build:embeddings  # re-embed all moves (calls live API)
+pnpm upload:embeddings # upload embeddings to Vectorize
+pnpm rebuild           # all of the above
+pnpm run deploy        # rebuild + deploy (must use 'run' — pnpm reserves 'deploy')
+```
+
+After adding or editing moves, run `pnpm run deploy`. This validates, rebuilds the catalog bundle, re-embeds moves, uploads to Vectorize, and deploys the Worker.
+
+---
+
 ## Development Plan
 
 See [docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md) for the full phased plan. Summary:
 
-- **Phase 0** — Catalog & local tooling — **done** (200 moves, 9 pools, local MCP server, validator)
-- **Phase 1** — Validate with real agents — **in progress** (testing with Claude Code)
-- **Phase 1.5** — Claude Code plugin — **built** (packaging for marketplace distribution)
-- **Phase 2** — API on Cloudflare — **built** (Hono + D1, all endpoints working locally)
-- **Phase 3** — Website (think-fu.org)
-- **Phase 4** — Smart routing (LLM-based, then classifier)
+- **Phase 0** — Catalog & local tooling — **done** (208 moves, 10 pools, validator)
+- **Phase 1** — Validate with real agents — **done** (iterated on seed visibility, rating quality, SKILL.md)
+- **Phase 2** — API + Plugin — **deployed** (api.think-fu.org, plugin built with rating opt-in + PII scrubbing)
+- **Phase 3** — Smart router — **deployed** (embeddings + Vectorize + LLM on Cloudflare edge)
+- **Phase 4** — Website — **deployed** (think-fu.org with matched mode + random + swipe navigation)
 
 ---
 

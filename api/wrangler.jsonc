@@ -5,10 +5,6 @@
   "account_id": "a7b1e373a9581b6f04e2a48d3abc9aa3", // move38 account
   "workers_dev": true,
 
-  "build": {
-    "command": "cd .. && pnpm build:catalog"
-  },
-
   "routes": [
     { "pattern": "think-fu.org", "custom_domain": true },
     { "pattern": "api.think-fu.org", "custom_domain": true }
