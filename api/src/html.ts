@@ -228,7 +228,7 @@ function layout(title: string, content: string): string {
   <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">light</button>
   <main>${content}</main>
   <footer>
-    <a href="/">think-fu.org</a> &middot; <a href="/credits">credits</a> &middot; <a href="/terms">terms</a> &middot; <a href="https://move38.org">move38</a>
+    <a href="/">thinkfu.org</a> &middot; <a href="/credits">credits</a> &middot; <a href="/terms">terms</a> &middot; <a href="https://move38.org">move38</a>
   </footer>
   <script>
     // Theme
@@ -375,11 +375,11 @@ export function renderSetup(): string {
       <pre><code>When you are stuck, on autopilot, or about to deliver
 an obvious answer, draw a thinking move from ThinkFu:
 
-  curl -s https://api.think-fu.org/random?format=md
+  curl -s https://api.thinkfu.org/random?format=md
 
 Apply the move. Work through it step by step.
 Let it change your approach.</code></pre>
-      <p>Or give your LLM the full API: <code>https://api.think-fu.org</code></p>
+      <p>Or give your LLM the full API: <code>https://api.thinkfu.org</code></p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Any MCP-compatible client</h3>
       <p>ThinkFu exposes three tools: <code>list_thinkfu_moves</code>, <code>get_thinkfu_move</code>, <code>submit_thinkfu_rating</code>. Point your MCP client at the plugin's server or use the REST API directly.</p>
@@ -461,7 +461,7 @@ mode: "evaluate" — before delivering. Stress-test your output.</code></pre>
       <p>Apply each move fully before drawing another. Rate every move you draw.</p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">REST API</h3>
-      <pre><code>Base: https://api.think-fu.org
+      <pre><code>Base: https://api.thinkfu.org
 
 GET  /random              — random move (JSON)
 GET  /random?format=md    — random move (markdown)

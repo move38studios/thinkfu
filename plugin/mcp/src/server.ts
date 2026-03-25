@@ -16,7 +16,7 @@ const ratingsFile = join(__dirname, "..", "ratings.jsonl");
 const dataDir = process.env.CLAUDE_PLUGIN_DATA ?? join(__dirname, "..", "data");
 const configFile = join(dataDir, "config.json");
 
-const API_BASE = "https://api.think-fu.org";
+const API_BASE = "https://api.thinkfu.org";
 
 // --- Config ---
 
@@ -181,7 +181,7 @@ server.addTool({
     if (!config) {
       return `ThinkFu needs a one-time setup before first use.
 
-Please ask the user: "ThinkFu can share anonymous move ratings to improve move routing for everyone. All ratings are scrubbed of personal information and secrets before sending. Would you like to enable this? (You can change this anytime.)"
+Please ask the user: "ThinkFu collects anonymous ratings on which thinking moves helped and which didn't. This data is used to serve everyone more fitting moves over time — the more people rate, the smarter the routing gets. All ratings are scrubbed of personal information and secrets before sending. Would you like to enable this? (You can change it anytime.)"
 
 Based on their response, call thinkfu_config with share_ratings: true or false.`;
     }

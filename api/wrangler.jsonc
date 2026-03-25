@@ -6,6 +6,8 @@
   "workers_dev": true,
 
   "routes": [
+    { "pattern": "thinkfu.org", "custom_domain": true },
+    { "pattern": "api.thinkfu.org", "custom_domain": true },
     { "pattern": "think-fu.org", "custom_domain": true },
     { "pattern": "api.think-fu.org", "custom_domain": true }
   ],

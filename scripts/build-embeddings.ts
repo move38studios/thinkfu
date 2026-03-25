@@ -16,7 +16,7 @@ const catalogDir = join(__dirname, "..", "catalog");
 const movesDir = join(catalogDir, "moves");
 const outFile = join(__dirname, "..", "api", "vectorize-upload.ndjson");
 
-const API_BASE = process.env.THINKFU_API ?? "https://api.think-fu.org";
+const API_BASE = process.env.THINKFU_API ?? "https://api.thinkfu.org";
 
 interface MoveEntry {
   id: string;

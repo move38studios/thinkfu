@@ -77,10 +77,10 @@ Catalog bundled at build time. Variable resolution + seed injection at serve tim
 ### 2.2 Deploy to Cloudflare ✅
 - [x] D1 database created (thinkfu-ratings)
 - [x] Schema migrated (ratings table + indexes)
-- [x] think-fu.org + api.think-fu.org custom domains configured
+- [x] thinkfu.org + api.thinkfu.org custom domains configured
 - [x] Deployed via `pnpm wrangler deploy`
 - [x] Website live: landing, /humans, /agents, /random, /move/:id
-- [x] API live: all endpoints returning JSON on api.think-fu.org
+- [x] API live: all endpoints returning JSON on api.thinkfu.org
 
 ### 2.3 Claude Code Plugin ✅ (built, not published)
 Plugin structure complete:
@@ -94,7 +94,7 @@ Plugin structure complete:
 - **First-use config flow:** first call to `get_thinkfu_move` triggers setup — agent asks user about sharing, calls `thinkfu_config`
 - **Default: sharing ON** (informed default, user can opt out anytime via `thinkfu_config`)
 - **Local:** always written to `plugin/mcp/ratings.jsonl` (scrubbed)
-- **Remote:** when sharing enabled, POSTs scrubbed ratings to `api.think-fu.org/rate` → D1
+- **Remote:** when sharing enabled, POSTs scrubbed ratings to `api.thinkfu.org/rate` → D1
 - **PII/secret scrubber:** regex-based, catches emails, phones, API keys (sk-, ghp_, AKIA, etc.), URLs with tokens, env var assignments, credit cards, SSNs, addresses
 - **Agent instructed** to not include PII in context fields + to resubmit ratings when user reaction changes initial assessment
 
@@ -105,7 +105,7 @@ Plugin structure complete:
 - [ ] Write install instructions
 
 ### Phase 2 Deliverables
-- [x] API live at api.think-fu.org
+- [x] API live at api.thinkfu.org
 - [ ] Plugin installable via marketplace
 - [x] Rating opt-in working (first-use config, PII scrubbing, remote sync)
 
@@ -264,7 +264,7 @@ Entire routing stack on the edge.
 
 ## Phase 4 — Website ✅
 
-**Status: DEPLOYED** at think-fu.org
+**Status: DEPLOYED** at thinkfu.org
 
 - [x] Landing page: `/` with human / agent / why paths
 - [x] `/humans` — description + "describe your problem" textarea (calls smart router) + random draw

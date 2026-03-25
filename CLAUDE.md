@@ -7,7 +7,7 @@ Metacognition as a service — a catalog of thinking moves for AI agents and hum
 - `catalog/moves/` — move files organized by category (planning, exploration, unsticking, evaluation, meta)
 - `catalog/pools/` — variable pools (domains, personas, random-words, etc.)
 - `lib/src/` — shared library (types, parser, resolver, helpers) — portable, works in Workers + Node
-- `api/` — Cloudflare Worker (Hono + D1 + Workers AI + Vectorize) — REST API + website at think-fu.org
+- `api/` — Cloudflare Worker (Hono + D1 + Workers AI + Vectorize) — REST API + website at thinkfu.org
 - `plugin/` — Claude Code plugin (MCP server + catalog + SKILL.md). Also used for local dev in this project.
 - `scripts/` — build scripts (catalog bundler, embeddings, validator)
 - `docs/` — development plan

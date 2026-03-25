@@ -16,6 +16,18 @@ type Bindings = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+// --- Redirect old domain ---
+app.use("*", async (c, next) => {
+  const host = c.req.header("host") ?? "";
+  if (host.includes("think-fu.org")) {
+    const newHost = host.replace("think-fu.org", "thinkfu.org");
+    const url = new URL(c.req.url);
+    url.host = newHost;
+    return c.redirect(url.toString(), 301);
+  }
+  return next();
+});
+
 // --- Rate limiting ---
 
 function rateLimit(getLimiter: (env: Bindings) => any) {

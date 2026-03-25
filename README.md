@@ -65,7 +65,7 @@ Sources drawn from:
 - Lateral thinking (de Bono)
 - Systems thinking (Meadows, Senge)
 - Metacognition research (Flavell, Schraw)
-- Classical philosophy, improv theater, Zen, cognitive science, and more (see [credits](https://think-fu.org/credits))
+- Classical philosophy, improv theater, Zen, cognitive science, and more (see [credits](https://thinkfu.org/credits))
 
 ### 2. The REST API
 
@@ -178,7 +178,7 @@ The MCP layer is thin by design. All logic lives in the API.
 
 ### 4. The Website
 
-**think-fu.org** — served by the same Worker.
+**thinkfu.org** — served by the same Worker.
 
 - `/` — landing page (human / agent / why)
 - `/humans` — description + "describe your problem" (smart-routed) + random draw
@@ -391,7 +391,7 @@ Random perturbation breaks fixation. When stuck in a local optimum, even an irre
 
 - **Catalog:** 200+ moves, 10+ pools — YAML+MD flat files
 - **Shared lib:** TypeScript — portable types, parser, resolver, helpers
-- **API + Website:** Cloudflare Worker (Hono) — REST API + HTML at think-fu.org
+- **API + Website:** Cloudflare Worker (Hono) — REST API + HTML at thinkfu.org
 - **Smart router:** embeddinggemma-300m + Vectorize + llama-3.1-8b-instruct — all on Cloudflare edge, no external API calls
 - **Plugin:** Claude Code plugin — MCP server + catalog + SKILL.md, calls smart router API
 - **Ratings:** Cloudflare D1 (remote, opt-in with PII scrubbing) + local JSONL
