@@ -5,6 +5,8 @@ import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkf
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
 import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderCredits, renderTerms, renderMove } from "./html.js";
 import { routeMove } from "./router.js";
+import { FAVICON_SVG } from "./favicon.js";
+import { OG_IMAGE_BASE64 } from "./og-image.js";
 
 type Bindings = {
   DB: D1Database;
@@ -26,6 +28,40 @@ app.use("*", async (c, next) => {
     return c.redirect(url.toString(), 301);
   }
   return next();
+});
+
+// --- Static assets ---
+
+app.get("/favicon.svg", (c) => {
+  return new Response(FAVICON_SVG, { headers: { "Content-Type": "image/svg+xml", "Cache-Control": "public, max-age=86400" } });
+});
+
+app.get("/og-image.png", (c) => {
+  const bytes = Uint8Array.from(atob(OG_IMAGE_BASE64), (ch) => ch.charCodeAt(0));
+  return new Response(bytes, { headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=86400" } });
+});
+
+// OG image as HTML — screenshot this once to create og-image.png
+app.get("/og", (c) => {
+  return c.html(`<!DOCTYPE html>
+<html><head><style>
+  * { margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 630px;
+    background: #111;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: #ccc;
+  }
+  h1 { font-size: 80px; color: #fff; letter-spacing: -2px; margin-bottom: 8px; }
+  p { font-size: 24px; color: #666; margin-bottom: 40px; }
+  .stats { font-size: 20px; color: #444; }
+</style></head><body>
+  <h1>ThinkFu</h1>
+  <p>metacognition as a service</p>
+  <div class="stats">${moves.length} moves &middot; 500 billion+ unique draws &middot; thinkfu.org</div>
+</body></html>`);
 });
 
 // --- Rate limiting ---

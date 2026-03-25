@@ -1,0 +1,27 @@
+{
+  "name": "move38studios-thinkfu",
+  "owner": {
+    "name": "move38 B.V.",
+    "email": "thinkfu@move38.org"
+  },
+  "metadata": {
+    "description": "ThinkFu — metacognition as a service. 200+ thinking moves for AI agents and humans."
+  },
+  "plugins": [
+    {
+      "name": "thinkfu",
+      "source": "./plugin",
+      "description": "Thinking moves that improve creative and strategic work. Use when brainstorming, designing, writing, problem-solving, or any task where the obvious answer isn't good enough.",
+      "version": "0.1.0",
+      "author": {
+        "name": "George Strakhov",
+        "email": "thinkfu@move38.org"
+      },
+      "homepage": "https://thinkfu.org",
+      "repository": "https://github.com/move38studios/thinkfu",
+      "license": "PolyForm-Small-Business-1.0.0",
+      "keywords": ["metacognition", "thinking", "creativity", "brainstorming", "strategy"],
+      "category": "productivity"
+    }
+  ]
+}

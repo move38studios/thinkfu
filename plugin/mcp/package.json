@@ -2,6 +2,7 @@
   "name": "thinkfu-mcp",
   "version": "0.1.0",
   "description": "ThinkFu MCP server — metacognition as a service",
+  "author": "George Strakhov <thinkfu@move38.org>",
   "type": "module",
   "scripts": {
     "dev": "npx fastmcp dev src/server.ts",

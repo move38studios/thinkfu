@@ -1,5 +1,7 @@
 # ThinkFu
 
+![ThinkFu — metacognition as a service](og.png)
+
 > *Metacognition as a service. A catalog of thinking moves for AI agents — and the humans working alongside them.*
 
 ---

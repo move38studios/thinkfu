@@ -215,13 +215,34 @@ footer a { color: var(--text-faint); }
 }
 `;
 
-function layout(title: string, content: string): string {
+const DEFAULT_OG_DESC = "200+ thinking moves for AI agents and humans. Metacognition as a service.";
+const OG_IMAGE = "https://thinkfu.org/og-image.png";
+
+interface LayoutMeta {
+  description?: string;
+  url?: string;
+}
+
+function layout(title: string, content: string, meta?: LayoutMeta): string {
+  const desc = meta?.description ?? DEFAULT_OG_DESC;
+  const url = meta?.url ?? "https://thinkfu.org";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
+  <meta name="description" content="${esc(desc)}">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(desc)}">
+  <meta property="og:image" content="${OG_IMAGE}">
+  <meta property="og:url" content="${esc(url)}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:description" content="${esc(desc)}">
+  <meta name="twitter:image" content="${OG_IMAGE}">
   <style>${CSS}</style>
 </head>
 <body>
@@ -355,7 +376,7 @@ export function renderSetup(): string {
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Code</h3>
       <p>The fastest path. Install the ThinkFu plugin:</p>
       <pre><code>/plugin marketplace add move38studios/thinkfu
-/plugin install thinkfu@move38-thinkfu</code></pre>
+/plugin install thinkfu@move38studios-thinkfu</code></pre>
       <p>Your agent now has access to 200+ thinking moves via MCP tools. The SKILL.md teaches it when and how to use them.</p>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Desktop</h3>
@@ -447,7 +468,7 @@ export function renderAgents(): string {
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Claude Code plugin</h3>
       <pre><code>/plugin marketplace add move38studios/thinkfu
-/plugin install thinkfu@move38-thinkfu</code></pre>
+/plugin install thinkfu@move38studios-thinkfu</code></pre>
       <p>Once installed, you have access to three MCP tools:</p>
       <pre><code>list_thinkfu_moves  — browse available moves, filter by mode or category
 get_thinkfu_move    — draw a move (provide mode, goal, current_approach, stuck_on)
@@ -602,5 +623,5 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
         }
       });
     </script>
-  `);
+  `, { description: m.one_liner, url: `https://thinkfu.org${shareUrl}` });
 }
