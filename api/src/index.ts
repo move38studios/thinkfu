@@ -3,7 +3,7 @@ import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
-import { renderLanding, renderHumans, renderAgents, renderWhy, renderSetup, renderCredits, renderTerms, renderMove } from "./html.js";
+import { renderLanding, renderHumans, renderAgents, renderWhy, renderHow, renderSetup, renderCredits, renderTerms, renderMove } from "./html.js";
 import { routeMove } from "./router.js";
 import { FAVICON_SVG } from "./favicon.js";
 import { OG_IMAGE_BASE64 } from "./og-image.js";
@@ -241,6 +241,9 @@ app.get("/agents", (c) => c.html(renderAgents()));
 
 // GET /why
 app.get("/why", (c) => c.html(renderWhy()));
+
+// GET /how
+app.get("/how", (c) => c.html(renderHow()));
 
 // GET /setup
 app.get("/setup", (c) => c.html(renderSetup()));

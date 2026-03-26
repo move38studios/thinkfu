@@ -98,11 +98,12 @@ Plugin structure complete:
 - **PII/secret scrubber:** regex-based, catches emails, phones, API keys (sk-, ghp_, AKIA, etc.), URLs with tokens, env var assignments, credit cards, SSNs, addresses
 - **Agent instructed** to not include PII in context fields + to resubmit ratings when user reaction changes initial assessment
 
-### 2.5 Publish Plugin
+### 2.5 Publish Plugin ✅
 - [x] Test with `claude --plugin-dir /path/to/plugin`
-- [ ] Create marketplace repo (move38studios/thinkfu)
+- [x] Create marketplace repo (move38studios/thinkfu)
+- [x] SessionStart hook installs deps to CLAUDE_PLUGIN_DATA
+- [x] Working marketplace install: `/plugin marketplace add move38studios/thinkfu`
 - [ ] Submit to official Anthropic marketplace
-- [ ] Write install instructions
 
 ### Phase 2 Deliverables
 - [x] API live at api.thinkfu.org
@@ -312,9 +313,10 @@ Entire routing stack on the edge.
 
 ### Immediate
 - [x] **Rating opt-in in plugin** — first-use config, PII scrubbing, remote sync to D1
-- [ ] **Publish Claude Code plugin** — create marketplace repo, submit to official marketplace
-- [ ] **MCP plugin uses smart router** — plugin calls API `/suggest?style=matched` instead of local random
-- [ ] **Remove test endpoints** — `/__test/*` routes in the API
+- [x] **Publish Claude Code plugin** — marketplace repo live, installable via `/plugin marketplace add move38studios/thinkfu`
+- [x] **MCP plugin uses smart router** — plugin calls API `/suggest?style=matched`, falls back to local random
+- [x] **Remove test endpoints** — `/__test/*` replaced with `/_internal/embed` (used by build scripts only)
+- [ ] **Submit to official Anthropic marketplace** — claude.ai/settings/plugins/submit
 
 ### Soon
 - [ ] Rating-informed routing — weight results by historical performance
