@@ -420,12 +420,12 @@ export function renderHumans(totalMoves: number): string {
     "ThinkFu — For Humans",
     `
     <div class="page">
-      <p>Thinking is an art. Thinking well -originally, creatively, methodically -is a martial art.</p>
+      <p>Thinking is an art. Thinking well - originally, creatively, methodically - is a martial art.</p>
 
       <p>And like any martial art - it requires practice, discipline, and a library of moves to master.</p>
 
       <p>ThinkFu.org is such a library. We've collected ${totalMoves} thinking moves and created an easy way for your AI (or you?) to break out of the black hole of cliche thinking.</p>
-      <p><a href="/setup">Set up ThinkFu for your AI</a> -Claude Code, Claude Desktop, ChatGPT and others.</p>
+      <p><a href="/setup">Set up ThinkFu for your AI</a> - Claude Code, Claude Desktop, ChatGPT and others.</p>
 
       <h1 style="margin-top: 2rem;">Or try it yourself</h1>
       <p>Describe what you're working on and ThinkFu will find the right move for you.</p>
@@ -450,7 +450,7 @@ export function renderWhy(): string {
       <p>Thinking is an art. Thinking well - originally, creatively, methodically - is a martial art.</p>
       <p>This art is especially hard for LLMs because they've been trained to produce the average of everything. The most likely completion. The clich&eacute;. The middle of the average that would affect nobody, but say nothing interesting.</p>
       <p>So it's no surprise that without deliberate intervention, "most likely" is all you get from LLMs.</p>
-      <p>ThinkFu is that deliberate intervention. A library of 200+ named thinking moves -drawn from TRIZ, oblique strategies, design thinking, systems thinking, and metacognitive research - reformulated as <em>mechanical procedures</em> and spiced up with a clever use of chance operations (hello, John Cage!)</p>
+      <p>ThinkFu is that deliberate intervention. A library of 200+ named thinking moves - drawn from TRIZ, oblique strategies, design thinking, systems thinking, and metacognitive research - reformulated as <em>mechanical procedures</em> and spiced up with a clever use of chance operations (hello, John Cage!)</p>
       <p>So if you install ThinkFu, you give your AI access to ~548 billion unique draws from 200+ metacognitive moves. Half a trillion different nudges to think differently. And next time you try to brainstorm with it... you just might get something interesting.</p>
       <p style="margin-top: 2rem;"><a href="/setup">Set up ThinkFu for your AI</a> · <a href="/humans">Try it yourself</a></p>
     </div>
@@ -548,25 +548,25 @@ export function renderCredits(): string {
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Traditions &amp; Sources</h3>
       <ul>
-        <li><strong>TRIZ</strong> (Genrich Altshuller, 1956&ndash;1984) -systematic innovation principles and contradiction resolution</li>
-        <li><strong>Oblique Strategies</strong> (Brian Eno &amp; Peter Schmidt, 1975) -creative perturbation through indirect prompts</li>
-        <li><strong>Lateral Thinking</strong> (Edward de Bono) -techniques for breaking fixation and generating alternatives</li>
-        <li><strong>Design Thinking</strong> -human-centered problem-solving methodology</li>
-        <li><strong>Systems Thinking</strong> (Donella Meadows, Peter Senge) -feedback loops, leverage points, system archetypes</li>
-        <li><strong>Metacognition research</strong> (John Flavell, Gregory Schraw) -thinking about thinking</li>
-        <li><strong>Classical philosophy</strong> (Socrates, Plato, Hegel) -dialectic, elenchus, and the synthesis of opposites</li>
-        <li><strong>Argumentation theory</strong> (Mercier &amp; Sperber, Charlan Nemeth) -reasoning as social exchange, authentic dissent</li>
-        <li><strong>Improv theater</strong> (Keith Johnstone, Viola Spolin) -spontaneity, status, offers and blocks</li>
-        <li><strong>Christopher Alexander</strong> -pattern languages, wholeness, and the nature of living structure</li>
-        <li><strong>Cognitive science</strong> (Daniel Kahneman, Gary Klein, Marin Kapur) -heuristics, recognition-primed decision making, productive failure</li>
-        <li><strong>Writing craft</strong> -editing principles from a long tradition of practitioners</li>
-        <li><strong>Constructionism</strong> (Seymour Papert, Mitch Resnick) -learning through making, tinkering, and play</li>
-        <li><strong>Zen Buddhism</strong> -koan practice and contemplative inquiry</li>
-        <li><strong>Music &amp; performance</strong> (John Cage, Miles Davis, Claude Debussy) -silence, accident, and constraint as creative forces</li>
+        <li><strong>TRIZ</strong> (Genrich Altshuller, 1956&ndash;1984) - systematic innovation principles and contradiction resolution</li>
+        <li><strong>Oblique Strategies</strong> (Brian Eno &amp; Peter Schmidt, 1975) - creative perturbation through indirect prompts</li>
+        <li><strong>Lateral Thinking</strong> (Edward de Bono) - techniques for breaking fixation and generating alternatives</li>
+        <li><strong>Design Thinking</strong> - human-centered problem-solving methodology</li>
+        <li><strong>Systems Thinking</strong> (Donella Meadows, Peter Senge) - feedback loops, leverage points, system archetypes</li>
+        <li><strong>Metacognition research</strong> (John Flavell, Gregory Schraw) - thinking about thinking</li>
+        <li><strong>Classical philosophy</strong> (Socrates, Plato, Hegel) - dialectic, elenchus, and the synthesis of opposites</li>
+        <li><strong>Argumentation theory</strong> (Mercier &amp; Sperber, Charlan Nemeth) - reasoning as social exchange, authentic dissent</li>
+        <li><strong>Improv theater</strong> (Keith Johnstone, Viola Spolin) - spontaneity, status, offers and blocks</li>
+        <li><strong>Christopher Alexander</strong> - pattern languages, wholeness, and the nature of living structure</li>
+        <li><strong>Cognitive science</strong> (Daniel Kahneman, Gary Klein, Marin Kapur) - heuristics, recognition-primed decision making, productive failure</li>
+        <li><strong>Writing craft</strong> - editing principles from a long tradition of practitioners</li>
+        <li><strong>Constructionism</strong> (Seymour Papert, Mitch Resnick) - learning through making, tinkering, and play</li>
+        <li><strong>Zen Buddhism</strong> - koan practice and contemplative inquiry</li>
+        <li><strong>Music &amp; performance</strong> (John Cage, Miles Davis, Claude Debussy) - silence, accident, and constraint as creative forces</li>
       </ul>
 
       <h3 style="color:var(--text-strong); margin-top:2rem;">Ideas vs. Expression</h3>
-      <p>Copyright protects expression, not ideas. You cannot copyright a thinking technique, a problem-solving principle, or a cognitive strategy. ThinkFu's catalog consists of original procedures built on ideas that belong to the intellectual commons -many of them centuries old, all of them enriched by the practitioners listed above.</p>
+      <p>Copyright protects expression, not ideas. You cannot copyright a thinking technique, a problem-solving principle, or a cognitive strategy. ThinkFu's catalog consists of original procedures built on ideas that belong to the intellectual commons - many of them centuries old, all of them enriched by the practitioners listed above.</p>
       <p>We credit them because we stand on their shoulders, not because we reproduce their words.</p>
 
       <p style="margin-top: 2rem;"><a href="/">home</a></p>
