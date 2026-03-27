@@ -644,7 +644,6 @@ export function renderMove(m: ResolvedMove, shareUrl: string): string {
     <div class="actions">
       <a href="#" onclick="goBack(); return false;">back</a>
       <a href="#" onclick="goNext(); return false;">next</a>
-      <a href="/random?id=${esc(m.id)}">re-roll</a>
       <button onclick="navigator.clipboard.writeText(window.location.origin + '${shareUrl}').then(() => this.textContent = 'copied')">share</button>
       <a href="#" id="clear-link" style="display:none" onclick="clearProblem(); return false;">clear problem</a>
       <a href="/">home</a>
