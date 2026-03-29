@@ -4,7 +4,7 @@ import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
 import type { ResolvedMove } from "@thinkfu/lib/resolver.js";
-import { renderLanding, renderHumans, renderAgents, renderWhy, renderHow, renderSetup, renderCredits, renderTerms, renderMove } from "./html.js";
+import { renderLanding, renderHumans, renderAgents, renderWhy, renderHow, renderSetup, renderCredits, renderTerms, renderPrivacy, renderMove } from "./html.js";
 import { routeMove } from "./router.js";
 import { FAVICON_SVG } from "./favicon.js";
 import { OG_IMAGE_BASE64 } from "./og-image.js";
@@ -305,6 +305,9 @@ app.get("/credits", (c) => c.html(renderCredits()));
 
 // GET /terms
 app.get("/terms", (c) => c.html(renderTerms()));
+
+// GET /privacy
+app.get("/privacy", (c) => c.html(renderPrivacy()));
 
 // GET /match?q=...&exclude=... — smart-routed move for humans, redirects to pinned URL
 app.get("/match", async (c) => {

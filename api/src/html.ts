@@ -587,7 +587,41 @@ export function renderTerms(): string {
       <p><strong>Ratings.</strong> When you rate a move on this website (or via the plugin with sharing enabled), your anonymous feedback is stored and used to improve move routing and train models. No personal information is collected. Ratings cannot be attributed to any individual. By submitting a rating, you agree that move38 may use this data to improve ThinkFu, including training proprietary routing models.</p>
       <p><strong>Software license.</strong> The ThinkFu codebase and catalog are released under the <a href="https://github.com/move38studios/thinkfu/blob/main/LICENSE.md">PolyForm Small Business License 1.0.0</a> -free for individuals and companies under $1M USD annual revenue.</p>
       <p>Contact: thinkfu@move38.org</p>
-      <p style="margin-top: 2rem;"><a href="/">home</a></p>
+      <p style="margin-top: 2rem;"><a href="/privacy">privacy</a> · <a href="/">home</a></p>
+    </div>
+  `,
+  );
+}
+
+export function renderPrivacy(): string {
+  return layout(
+    "Privacy Policy — ThinkFu",
+    `
+    <div class="page">
+      <h1>Privacy Policy</h1>
+      <p><em>Last updated: 29 March 2026</em></p>
+      <p>ThinkFu is operated by move38 B.V. This policy explains what data we collect and how we use it.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">What we collect</h3>
+      <p><strong>Move ratings.</strong> When you rate a move (via the website or the Claude Code plugin with sharing enabled), we store the move ID, whether it was helpful, and an optional free-text note. Ratings are anonymous — we do not collect your name, email, IP address, or any account identifier.</p>
+      <p><strong>API request metadata.</strong> Standard HTTP logs (IP address, timestamp, path) are retained by our infrastructure provider (Cloudflare) for operational purposes such as rate limiting and abuse prevention. We do not combine these logs with rating data or use them to identify individuals.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">What we do not collect</h3>
+      <p>We do not collect personal information, authentication tokens, cookies, analytics trackers, or any content from your conversations with AI assistants. The Claude Code plugin sends only mode, goal context, and approach descriptions to select relevant moves — these are processed in-memory and not stored.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">How we use data</h3>
+      <p>Anonymous ratings are used to improve move routing and selection quality. We may use aggregated rating data to train proprietary routing models. No individual can be identified from this data.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Third parties</h3>
+      <p>ThinkFu runs on Cloudflare Workers. Move routing uses Cloudflare Workers AI for embeddings and selection. No data is shared with any other third party.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Data retention</h3>
+      <p>Ratings are retained indefinitely. Cloudflare infrastructure logs are retained per Cloudflare's standard policies.</p>
+
+      <h3 style="color:var(--text-strong); margin-top:2rem;">Contact</h3>
+      <p>Questions about this policy: <a href="mailto:thinkfu@move38.org">thinkfu@move38.org</a></p>
+
+      <p style="margin-top: 2rem;"><a href="/terms">terms</a> · <a href="/">home</a></p>
     </div>
   `,
   );
