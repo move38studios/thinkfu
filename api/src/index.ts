@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { z } from "zod/v4";
 import { moves, pools } from "./catalog-data.js";
 import { selectMove, filterMoves, formatMoveAsMarkdown, pickRandom } from "@thinkfu/lib/helpers.js";
 import { resolveMove, resolvedMoveToQuery, queryToResolveOptions } from "@thinkfu/lib/resolver.js";
@@ -8,12 +9,49 @@ import { routeMove } from "./router.js";
 import { FAVICON_SVG } from "./favicon.js";
 import { OG_IMAGE_BASE64 } from "./og-image.js";
 
+// --- Input validation schemas ---
+
+const MODES = ["plan", "explore", "stuck", "evaluate"] as const;
+const MAX_TEXT = 2000;
+
+const suggestSchema = z.object({
+  mode: z.enum(MODES).optional(),
+  goal: z.string().max(MAX_TEXT).optional(),
+  current_approach: z.string().max(MAX_TEXT).optional(),
+  stuck_on: z.string().max(MAX_TEXT).optional(),
+  context: z.string().max(MAX_TEXT).optional(),
+  exclude: z.array(z.string().max(20)).max(50).optional(),
+  style: z.enum(["matched", "random"]).optional(),
+});
+
+const moveIdPattern = /^TF-\d{1,4}$/;
+
+const rateSchema = z.object({
+  move_id: z.string().regex(moveIdPattern),
+  instance_id: z.string().max(100).optional(),
+  seed: z.number().optional(),
+  resolved_variables: z.record(z.string(), z.array(z.string().max(200))).optional(),
+  useful: z.boolean().optional(),
+  changed_approach: z.boolean().optional(),
+  user_reaction: z.string().max(100).optional(),
+  note: z.string().max(MAX_TEXT).optional(),
+  original_request: z.object({
+    mode: z.string().max(50).optional(),
+    goal: z.string().max(MAX_TEXT).optional(),
+    current_approach: z.string().max(MAX_TEXT).optional(),
+    stuck_on: z.string().max(MAX_TEXT).optional(),
+    context: z.string().max(MAX_TEXT).optional(),
+  }).optional(),
+  retry: z.boolean().optional(),
+});
+
 type Bindings = {
   DB: D1Database;
   AI: any;
   VECTORIZE: any;
   RATE_LIMIT_READ: any;
   RATE_LIMIT_WRITE: any;
+  EMBED_SECRET?: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -28,6 +66,14 @@ app.use("*", async (c, next) => {
     return c.redirect(url.toString(), 301);
   }
   return next();
+});
+
+// --- Security headers ---
+app.use("*", async (c, next) => {
+  await next();
+  c.res.headers.set("X-Content-Type-Options", "nosniff");
+  c.res.headers.set("X-Frame-Options", "DENY");
+  c.res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 });
 
 // --- Static assets ---
@@ -53,8 +99,8 @@ function rateLimit(getLimiter: (env: Bindings) => any) {
         const { success } = await limiter.limit({ key: ip });
         if (!success) return c.json({ error: "Rate limit exceeded" }, 429);
       }
-    } catch {
-      // Rate limiting unavailable — proceed without it
+    } catch (e) {
+      console.warn("Rate limiting unavailable:", e);
     }
     return next();
   };
@@ -130,7 +176,10 @@ app.get("/catalog", (c) => {
 
 // POST /suggest
 app.post("/suggest", async (c) => {
-  const body = await c.req.json();
+  const raw = await c.req.json();
+  const parsed = suggestSchema.safeParse(raw);
+  if (!parsed.success) return c.json({ error: "Invalid request", details: parsed.error.issues }, 400);
+  const body = parsed.data;
   const format = c.req.query("format") ?? "json";
 
   const mode = body.mode ?? "explore";
@@ -164,7 +213,10 @@ app.post("/suggest", async (c) => {
 
 // POST /rate
 app.post("/rate", async (c) => {
-  const body = await c.req.json();
+  const raw = await c.req.json();
+  const parsed = rateSchema.safeParse(raw);
+  if (!parsed.success) return c.json({ error: "Invalid request", details: parsed.error.issues }, 400);
+  const body = parsed.data;
 
   const stmt = c.env.DB.prepare(
     `INSERT INTO ratings (id, instance_id, move_id, seed, resolved_variables, useful, note, original_request, created_at)
@@ -342,18 +394,22 @@ app.get("/move/:id", (c) => {
   return c.html(renderMove(resolved, `/move/${resolved.id}?${shareQuery}`));
 });
 
-// --- Test endpoints for router development (remove before production) ---
+// --- Internal endpoints (build scripts only, secret-protected) ---
 
-// --- Internal endpoints (used by build scripts) ---
+app.use("/_internal/*", async (c, next) => {
+  const secret = c.env.EMBED_SECRET;
+  if (!secret) return c.json({ error: "Not configured" }, 503);
+  const auth = c.req.header("Authorization");
+  if (auth !== `Bearer ${secret}`) return c.json({ error: "Unauthorized" }, 401);
+  return next();
+});
 
-// Single embedding (fallback for build-embeddings.ts)
 app.post("/_internal/embed", async (c) => {
   const { text } = await c.req.json();
   const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: [text] });
   return c.json({ embedding: result.data[0] });
 });
 
-// Batch embedding (used by build-embeddings.ts)
 app.post("/_internal/embed-batch", async (c) => {
   const { texts } = await c.req.json();
   const result = await c.env.AI.run("@cf/google/embeddinggemma-300m", { text: texts });

@@ -39,7 +39,7 @@ function mdToHtml(md: string): string {
         html += "</ul>";
         inList = false;
       }
-      html += `<h3>${line.slice(3)}</h3>`;
+      html += `<h3>${esc(line.slice(3))}</h3>`;
     } else if (line.startsWith("- ")) {
       if (!inList) {
         html += "<ul>";
@@ -66,9 +66,9 @@ function mdToHtml(md: string): string {
 
 function inline(s: string): string {
   return s
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/`(.+?)`/g, "<code>$1</code>");
+    .replace(/\*\*(.+?)\*\*/g, (_, g) => `<strong>${esc(g)}</strong>`)
+    .replace(/\*(.+?)\*/g, (_, g) => `<em>${esc(g)}</em>`)
+    .replace(/`(.+?)`/g, (_, g) => `<code>${esc(g)}</code>`);
 }
 
 const CSS = `

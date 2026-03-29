@@ -5,5 +5,6 @@ dist/
 api/catalog-bundle.json
 api/vectorize-upload.ndjson
 .wrangler/
+.dev.vars
 plugin/mcp/data/
 plugin/data/

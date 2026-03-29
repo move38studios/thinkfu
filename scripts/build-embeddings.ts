@@ -17,6 +17,15 @@ const movesDir = join(catalogDir, "moves");
 const outFile = join(__dirname, "..", "api", "vectorize-upload.ndjson");
 
 const API_BASE = process.env.THINKFU_API ?? "https://api.thinkfu.org";
+const EMBED_SECRET = process.env.EMBED_SECRET;
+if (!EMBED_SECRET) {
+  console.error("EMBED_SECRET env var is required");
+  process.exit(1);
+}
+const AUTH_HEADERS: Record<string, string> = {
+  "Content-Type": "application/json",
+  "Authorization": `Bearer ${EMBED_SECRET}`,
+};
 
 interface MoveEntry {
   id: string;
@@ -65,7 +74,7 @@ async function main() {
 
     const resp = await fetch(`${API_BASE}/_internal/embed-batch`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: AUTH_HEADERS,
       body: JSON.stringify({ texts }),
     });
 
@@ -74,7 +83,7 @@ async function main() {
       for (const entry of batch) {
         const r = await fetch(`${API_BASE}/_internal/embed`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: AUTH_HEADERS,
           body: JSON.stringify({ text: entry.text }),
         });
         const data = (await r.json()) as any;
